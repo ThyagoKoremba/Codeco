@@ -11,11 +11,6 @@ use Inertia\Inertia;
 
 class CategoriasController extends Controller
 {
-    public function index (){
-        $categorias = Categorias::orderBy('id')->get();
-        return Inertia::render('Categoria/Index',compact('categorias'));
-    }
-
     public function create (){
         return Inertia::render('Categoria/Create');
     }
@@ -24,6 +19,11 @@ class CategoriasController extends Controller
         $data=$request->all();
         Categorias::create($data);
         return to_route('categoria.index');
+    }
+
+    public function index (){
+        $categorias = Categorias::orderBy('id')->get();
+        return Inertia::render('Categoria/Index',compact('categorias'));
     }
 
     public function edit(Categorias $categoria){

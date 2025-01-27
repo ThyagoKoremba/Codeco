@@ -47,14 +47,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
 });
 
 
-Route::prefix('categoria')->group(function () {
-    Route::get('/index',[CategoriasController::class,'index'])->name('categoria.index');
-    Route::get('/create',[CategoriasController::class,'create'])->name('categoria.create');
-    Route::post('/',[CategoriasController::class,'store'])->name('categoria.store');
-    Route::get('/edit/{categoria}',[CategoriasController::class,'edit'])->name('categoria.edit');
-    Route::put('/update/{categoria}',[CategoriasController::class,'update'])->name('categoria.update');
-    Route::get('/cambiarEstado/{categoria}',[CategoriasController::class,'cambiarEstado'])->name('categoria.cambiarEstado');
-});
+
 
 require __DIR__.'/auth.php';
- 
+require __DIR__.'/categoria.php';
