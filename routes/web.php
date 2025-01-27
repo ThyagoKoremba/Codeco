@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -43,6 +44,16 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('/contact/{contact}/edit',[ContactController::class,'edit'])->name('contact.edit');
     Route::put('contact/{contact}/store',[ContactController::class,'update'])->name('contact.update');
     Route::delete('contact/{contact}',[ContactController::class,'destroy'])->name('contact.destroy');
+});
+
+
+Route::prefix('categoria')->group(function () {
+    Route::get('/index',[CategoriasController::class,'index'])->name('categoria.index');
+    Route::get('/create',[CategoriasController::class,'create'])->name('categoria.create');
+    Route::post('/',[CategoriasController::class,'store'])->name('categoria.store');
+    Route::get('/edit/{categoria}',[CategoriasController::class,'edit'])->name('categoria.edit');
+    Route::put('/update/{categoria}',[CategoriasController::class,'update'])->name('categoria.update');
+    Route::get('/cambiarEstado/{categoria}',[CategoriasController::class,'cambiarEstado'])->name('categoria.cambiarEstado');
 });
 
 require __DIR__.'/auth.php';
