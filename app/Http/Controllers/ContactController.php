@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Contact\StoreRequest;
+use App\Http\Requests\Contact\UpdateRequest;
 use App\Models\contact;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -58,17 +60,31 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(contact $contact)
+    public function edit(Contact $contact)
     {
-        //
+        return Inertia::render('Contact/Edit', compact('contact'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, contact $contact)
+    public function update(UpdateRequest $request, contact $contact)
     {
-        //
+        $data = $request->only('name','phone','visibility');
+        if($request->hasFile('avatar')){
+            $file=$request->file('avatar');
+            $routeImage=$file->store('avatars',['disk'=>'public']);
+            $data['avatar']=$routeImage;
+            if($contact->avatar){
+                Storage::disk('public')->delete($contact->avatar);
+            }
+        }
+
+        $data['user_id']=Auth::user()->id;
+        $contact->update($data);
+
+        return to_route('contact.edit',$contact);
     }
 
     /**
@@ -76,6 +92,12 @@ class ContactController extends Controller
      */
     public function destroy(contact $contact)
     {
-        //
+        if($contact->avatar){
+            Storage::disk('public')->delete($contact->avatar);
+        }
+
+        $contact->delete();
+
+        return to_route('contact.index');
     }
 }

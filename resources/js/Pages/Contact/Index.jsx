@@ -66,7 +66,8 @@ const Index = ({ auth, contacts}) => {
                                                         <Link href={route('contact.edit',[contact])}>
                                                         Editar
                                                         </Link>
-                                                        <Link >
+                                                        <Link href={route('contact.destroy',[contact])}
+                                                            method='delete'>
                                                         Eliminar
                                                         </Link>
                                                     </div>

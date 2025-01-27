@@ -36,12 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('dashboard')->group(function(){
+Route::prefix('dashboard')->middleware('auth')->group(function(){
     Route::get('/contact',[ContactController::class,'index'])->name('contact.index');
     Route::get('/contact/create',[ContactController::class,'create'])->name('contact.create');
     Route::post('/contact',[ContactController::class,'store'])->name('contact.store');
     Route::get('/contact/{contact}/edit',[ContactController::class,'edit'])->name('contact.edit');
-
+    Route::put('contact/{contact}/store',[ContactController::class,'update'])->name('contact.update');
+    Route::delete('contact/{contact}',[ContactController::class,'destroy'])->name('contact.destroy');
 });
 
 require __DIR__.'/auth.php';
+ 

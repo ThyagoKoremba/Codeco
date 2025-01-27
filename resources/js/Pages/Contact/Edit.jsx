@@ -7,20 +7,20 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 
 
-const Create = ({ auth }) => {
+const Edit = ({ auth, contact }) => {
 
     const initialValues={
-        name:"",
+        name: contact.name,
         avatar: null,
-        phone:"",
-        visibility:"",
+        phone: contact.phone,
+        visibility: contact.visibility,
     }
 
-    const {data, errors, setData, post}=useForm(initialValues)
+    const {data, errors, setData, put}=useForm(initialValues)
 
     const submit = (e) =>{
         e.preventDefault();
-        post(route('contact.store'))
+        put(route('contact.update',contact))
         console.log(data);
     }
 
@@ -30,7 +30,7 @@ const Create = ({ auth }) => {
 
             header={
                 <div className=' flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Contacto</h2>
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Contacto</h2>
                     <Link href={route('contact.index')}>
                         Contactos
                     </Link>
@@ -51,7 +51,7 @@ const Create = ({ auth }) => {
                                         id="name"
                                         type="text"
                                         name="name"
-                                        value={data.name}
+                                        value = {data.name}
                                         className="mt-1 block w-full"
                                         onChange={(e) => setData('name', e.target.value)}
                                     />
@@ -88,6 +88,9 @@ const Create = ({ auth }) => {
                                 <div>
                                     <InputLabel htmlFor="visibility" value="Visibility" />
                                     <select 
+                                    name='visibility'
+                                    id='visibility'
+                                    defaultValue={contact.visibility}
                                     onChange={(e)=>{
                                         setData("visibility",e.target.value);
                                     }}>
@@ -99,7 +102,7 @@ const Create = ({ auth }) => {
                                 </div>
 
                                 <PrimaryButton>
-                                    Crear Contacto
+                                    Actualizar Contacto
                                 </PrimaryButton>
                             </form>
                         </div>
@@ -110,4 +113,4 @@ const Create = ({ auth }) => {
     )
 }
 
-export default Create;
+export default Edit;
