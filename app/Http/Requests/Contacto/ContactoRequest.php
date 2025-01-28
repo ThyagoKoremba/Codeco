@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Contacto;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ContactoRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class ContactoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**

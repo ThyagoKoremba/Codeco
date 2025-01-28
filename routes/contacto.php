@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\ActividadController;
 use App\Http\Controllers\ContactosController;
-use App\Models\Actividades;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('contacto')->middleware('auth')->group(function () {

@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contacto\ContactoRequest;
 use App\Http\Requests\Contacto\ContactoUpdate;
+use App\Models\condiciontributarias;
 use App\Models\contactos;
+use App\Models\Fisicojuridicos;
+use App\Models\geopais;
+use App\Models\Identidades;
 use Inertia\Inertia;
 
 class ContactosController extends Controller
 {
     public function create () {
-        return Inertia::render('/Contacto/Index');
+        $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
+        $pais=Geopais::orderBy('id')->get();
+        $identidades=Identidades::orderBy('id')->get();
+        $condicionestributarias=Condiciontributarias::orderBy('id')->get();
+        return Inertia::render('/Contacto/Craete',compact('fisicojuridico','pais','identidades','condicionestributarias'));
     }
 
     public function store (ContactoRequest $contacto) {
@@ -22,11 +30,16 @@ class ContactosController extends Controller
     }
 
     public function index () {
+        
         $contactos=contactos::orderBy('id')->get();
         return Inertia::render('/Contacto/Index',compact('contactos'));
     }
 
     public function edit (contactos $contacto) {
+        $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
+        $pais=Geopais::orderBy('id')->get();
+        $identidades=Identidades::orderBy('id')->get();
+        $condicionestributarias=Condiciontributarias::orderBy('id')->get();
         return Inertia::render('Contacto/Edit',compact('contacto'));
     }
 
@@ -39,7 +52,7 @@ class ContactosController extends Controller
     public function cambiarEstado (contactos $contacto) {
         $contacto->sn_activo=!$contacto->sn_activo;
         $contacto->save();
-        
+
         return to_route('contacto.index');
     }
 }
