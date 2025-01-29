@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react'; // Asegúrate de importar useState desde React
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-const CreateContact = ({ auth }) => {
+const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestributarias }) => {
     const initialValues = {
         id_fisicojuridico: '',
         nombrefantasia: '',
@@ -10,28 +10,33 @@ const CreateContact = ({ auth }) => {
         apellidorazonsocial: '',
         foto: null,
         id_pais: '',
-        /* domicilio: '', */
         id_personal: '',
         id_identidadtributaria: '',
         car: '',
         observacion: '',
-        /* provincia: '', */
         id_condiciontributaria: '',
-       /*  telefonoFijo: '', */
         telefonoMovil: '',
         email: '',
         codigoPostal: '',
         id_personal_dato: '',
         id_identidadtributaria_dato: '',
-       
     };
 
     const { data, errors, setData, post, reset } = useForm(initialValues);
+
+    // Definir los estados nombre, apellido y segundo
+    const [nombre, setNombre] = useState('Nombre');
+    const [apellido, setApellido] = useState('Apellido');
+    const [segundo, setSegundo] = useState('1');
 
     const submit = (e) => {
         e.preventDefault();
         post(route('contacto.store'));
     };
+
+    console.log(fisicojuridico);
+
+    debugger
 
     return (
         <AuthenticatedLayout
@@ -50,7 +55,7 @@ const CreateContact = ({ auth }) => {
                     <div className="card shadow-sm">
                         <div className="card-body">
                             <form onSubmit={submit} className="row g-3">
-                                {/* Información Personal */}
+                                {/*  Información Personal  */}
                                 <h4 className="mb-3">Información Personal</h4>
 
                                 <div className="col-md-6">
@@ -59,23 +64,37 @@ const CreateContact = ({ auth }) => {
                                         id="persona"
                                         name="persona"
                                         value={data.id_fisicojuridico}
-                                        onChange={(e) => setData('id_fisicojuridico', e.target.value)}
+                                        onChange={(e) => {
+                                            const selectedId = e.target.value;
+                                            setData('id_fisicojuridico', selectedId);
+
+                                            const selectedPersona = fisicojuridico.find(persona => persona.id == selectedId);
+                                            console.log(selectedPersona);
+                                            if (selectedPersona) {
+                                                setNombre(selectedPersona.texto_nombre);
+                                                setApellido(selectedPersona.texto_apellido);
+                                                setSegundo(selectedPersona.sn_segundonombre);  // Asigna el valor de segundo nombre
+                                                // Otros campos si son necesarios
+                                            }
+                                        }}
                                         className="form-select"
                                     >
                                         <option value="">Seleccionar</option>
-                                        <option value="fisica">Física</option>
-                                        <option value="juridica">Jurídica</option>
+                                        {fisicojuridico.map((condicion) => (
+                                            <option key={condicion.id} value={condicion.id}>
+                                                {condicion.descripcion}
+                                            </option>
+                                        ))}
                                     </select>
                                     {errors.id_fisicojuridico && <div className="text-danger mt-1">{errors.id_fisicojuridico}</div>}
                                 </div>
 
                                 <div className="col-md-6">
-                                    <label htmlFor="nombre" className="form-label">Nombre/Nombre de Fantasía</label>
+                                    <label htmlFor="nombre" className="form-label">{nombre}</label>
                                     <input
                                         id="nombre"
                                         type="text"
                                         name="nombre"
-                                    
                                         value={data.nombrefantasia}
                                         className="form-control"
                                         onChange={(e) => setData('nombrefantasia', e.target.value)}
@@ -89,15 +108,15 @@ const CreateContact = ({ auth }) => {
                                         id="segundoNombre"
                                         type="text"
                                         name="segundoNombre"
-                                        value={data.segundoNombre}
+                                        value={data.nombresegundo}
                                         className="form-control"
-                                        onChange={(e) => setData('segundoNombre', e.target.value)}
+                                        disabled={segundo === 0}  // Deshabilita si "segundo" es igual a "0"
+                                        onChange={(e) => setData('nombresegundo', e.target.value)}
                                     />
                                     {errors.segundoNombre && <div className="text-danger mt-1">{errors.segundoNombre}</div>}
                                 </div>
-
                                 <div className="col-md-6">
-                                    <label htmlFor="apellido" className="form-label">Apellido/Razón Social</label>
+                                    <label htmlFor="apellido" className="form-label">{apellido}</label>
                                     <input
                                         id="apellido"
                                         type="text"
@@ -137,8 +156,8 @@ const CreateContact = ({ auth }) => {
                                 </div>
 
                                 <hr></hr>
-
-                                {/* Condición Tributaria */}
+                                {/* 
+                                Condición Tributaria  */}
                                 <h4 className="mt-4 mb-3">Condición Tributaria</h4>
 
                                 <div className="col-md-8">
@@ -146,14 +165,18 @@ const CreateContact = ({ auth }) => {
                                     <select
                                         id="condicionTributaria"
                                         name="condicionTributaria"
-                                        value={data.condicionTributaria}
-                                        onChange={(e) => setData('condicionTributaria', e.target.value)}
+                                        value={data.id_condiciontributaria}
+                                        onChange={(e) => setData('id_condiciontributaria', e.target.value)}
                                         className="form-select"
                                     >
                                         <option value="">Seleccionar</option>
-                                        <option value="responsableInscripto">Responsable Inscripto</option>
+                                        {condicionestributarias.map((condicion) => (
+                                            <option key={condicion.id} value={condicion.id}>
+                                                {condicion.descripcion}
+                                            </option>
+                                        ))}
                                     </select>
-                                    {errors.condicionTributaria && <div className="text-danger mt-1">{errors.condicionTributaria}</div>}
+                                    {errors.id_condiciontributaria && <div className="text-danger mt-1">{errors.id_condiciontributaria}</div>}
                                 </div>
 
                                 <div className="col-md-6">
@@ -162,11 +185,11 @@ const CreateContact = ({ auth }) => {
                                         id="identidadPersonal"
                                         type="text"
                                         name="identidadPersonal"
-                                        value={data.identidadPersonal}
+                                        value={data.id_personal}
                                         className="form-control"
-                                        onChange={(e) => setData('identidadPersonal', e.target.value)}
+                                        onChange={(e) => setData('id_personal', e.target.value)}
                                     />
-                                    {errors.identidadPersonal && <div className="text-danger mt-1">{errors.identidadPersonal}</div>}
+                                    {errors.id_personal && <div className="text-danger mt-1">{errors.id_personal}</div>}
                                 </div>
 
                                 <div className="col-md-6">
@@ -175,42 +198,56 @@ const CreateContact = ({ auth }) => {
                                         id="valorIdPersona"
                                         type="text"
                                         name="valorIdPersona"
-                                        value={data.valorIdPersona}
+                                        value={data.id_personal_dato}
                                         className="form-control"
-                                        onChange={(e) => setData('valorIdPersona', e.target.value)}
+                                        onChange={(e) => setData('id_personal_dato', e.target.value)}
                                     />
-                                    {errors.valorIdPersona && <div className="text-danger mt-1">{errors.valorIdPersona}</div>}
+                                    {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
                                 </div>
-
 
                                 <div className="col-md-6">
                                     <label htmlFor="identidadTributaria" className="form-label">Identidad Tributaria</label>
                                     <select
                                         id="identidadTributaria"
                                         name="identidadTributaria"
-                                        value={data.identidadTributaria}
-                                        onChange={(e) => setData('identidadTributaria', e.target.value)}
+                                        value={data.id_identidadtributaria}
+                                        onChange={(e) => {
+                                            const selectedId = e.target.value;
+                                            setData('id_identidadtributaria', selectedId);
+
+                                            const selectedIdentidad = identidades.find(identidad => identidad.id === selectedId);
+                                            if (selectedIdentidad) {
+                                                setData('id_identidadtributaria_dato', selectedIdentidad.dato_default || '');
+                                            }
+                                        }}
                                         className="form-select"
                                     >
                                         <option value="">Seleccionar</option>
-                                        <option value="cuit">CUIT</option>
+                                        {identidades.map((identidad) => (
+                                            <option key={identidad.id} value={identidad.id}>
+                                                {identidad.descripcion}
+                                            </option>
+                                        ))}
                                     </select>
-                                    {errors.identidadTributaria && <div className="text-danger mt-1">{errors.identidadTributaria}</div>}
+                                    {errors.id_identidadtributaria && <div className="text-danger mt-1">{errors.id_identidadtributaria}</div>}
                                 </div>
 
-                                
                                 <div className="col-md-6">
                                     <label htmlFor="valorIdTributaria" className="form-label">Valor</label>
                                     <input
                                         id="valorIdTributaria"
                                         type="text"
+                                        maxLength={data.id_identidadtributaria === "3" ? 8 : 11} // Limita a 8 caracteres si el ID es 1
                                         name="valorIdTributaria"
-                                        value={data.valorIdTributaria}
+                                        value={data.id_identidadtributaria_dato}
                                         className="form-control"
-                                        onChange={(e) => setData('valorIdTributaria', e.target.value)}
+                                        onChange={(e) => setData('id_identidadtributaria_dato', e.target.value)}
+                                        disabled={data.id_identidadtributaria === "1"} // Deshabilita si el ID es 1
                                     />
-                                    {errors.valorIdTributaria && <div className="text-danger mt-1">{errors.valorIdTributaria}</div>}
+                                    {errors.id_identidadtributaria_dato && <div className="text-danger mt-1">{errors.id_identidadtributaria_dato}</div>}
                                 </div>
+
+
 
                                 <div className="col-md-6">
                                     <label htmlFor="codigoAccesoRapido" className="form-label">Código de Acceso Rápido</label>
@@ -218,14 +255,13 @@ const CreateContact = ({ auth }) => {
                                         id="codigoAccesoRapido"
                                         type="text"
                                         name="codigoAccesoRapido"
-                                        value={data.codigoAccesoRapido}
+                                        value={data.car}
                                         className="form-control"
-                                        onChange={(e) => setData('codigoAccesoRapido', e.target.value)}
+                                        onChange={(e) => setData('car', e.target.value)}
                                     />
-                                    {errors.codigoAccesoRapido && <div className="text-danger mt-1">{errors.codigoAccesoRapido}</div>}
+                                    {errors.car && <div className="text-danger mt-1">{errors.car}</div>}
                                 </div>
-                                <hr></hr>
-                                {/* Domicilio */}
+                                <hr />
                                 <h4 className="mt-4 mb-3">Domicilio</h4>
 
                                 <div className="col-md-6">
@@ -306,7 +342,6 @@ const CreateContact = ({ auth }) => {
                                     {errors.email && <div className="text-danger mt-1">{errors.email}</div>}
                                 </div>
                                 <hr></hr>
-                                {/* Observación */}
                                 <div className="col-md-12">
                                     <label htmlFor="observacion" className="form-label"><h4>Observación</h4></label>
                                     <textarea
@@ -332,5 +367,7 @@ const CreateContact = ({ auth }) => {
         </AuthenticatedLayout>
     );
 };
+
+
 
 export default CreateContact;
