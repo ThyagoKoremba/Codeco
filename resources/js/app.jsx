@@ -2,7 +2,6 @@ import './bootstrap';
 import '../css/app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import '../css/index.css';
 
 
 import { createRoot } from 'react-dom/client';
