@@ -30,7 +30,7 @@ const CreateContact = ({ auth }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('contact.store'));
+        post(route('contacto.store'));
     };
 
     return (
@@ -39,7 +39,7 @@ const CreateContact = ({ auth }) => {
             header={
                 <div className="d-flex justify-content-between align-items-center">
                     <h2 className="font-weight-bold">Crear Contacto</h2>
-                    <Link href={route('contact.index')} className="btn btn-primary">Contactos</Link>
+                    <Link href={route('contacto.index')} className="btn btn-primary">Contactos</Link>
                 </div>
             }
         >
