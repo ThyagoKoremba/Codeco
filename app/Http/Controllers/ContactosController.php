@@ -23,8 +23,10 @@ class ContactosController extends Controller
 
     public function store (ContactoRequest $contacto) {
         $data=$contacto->all();
-        $data['apellidoynombre']=$data['apellidorazonsocial'].' '.$data['nombrefansatia'].' '.$data['nombresegundo'];
-        $data['patronbusqueda']=$data['apellidoynombre'].''.$data['car'];
+        $data['apellidoynombre'] = ($data['apellidorazonsocial'] ?? '') . ' ' . 
+                                    ($data['nombrefansatia'] ?? '') . ' ' . 
+                                    ($data['nombresegundo'] ?? '');  
+        $data['patronbusqueda'] = $data['apellidoynombre'] . ' ' . $data['car'];
         contactos::create($data);
         return to_route('contacto.index');
     }
