@@ -24,7 +24,7 @@ class IdentidadesSeeder extends Seeder
             'sn_identidadtributaria'=>false,
             'sn_activo'=>true,
             'sn_registrosistema'=>true,
-            'id_pais'=>null,
+            'id_pais'=>0,
         ]);
         Identidades::create([
             'id'=>'2',

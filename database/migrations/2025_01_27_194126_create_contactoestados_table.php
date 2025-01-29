@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('contactoestados', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion',45);
-            $table->string('abeviatura',45)->nullable();
-            $table->string('abeviatura_corta',3)->nullable();
+            $table->string('abreviatura',45)->nullable();
+            $table->string('abreviatura_corta',3)->nullable();
             $table->boolean('sn_activo')->default(0)->nullable();
             $table->timestamps();
         });

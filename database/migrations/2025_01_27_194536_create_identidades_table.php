@@ -21,9 +21,8 @@ return new class extends Migration
             $table->boolean('sn_juridica')->nullable();
             $table->boolean('sn_identidadtributaria')->nullable();
             $table->boolean('sn_activo')->nullable();
-            $table->boolean('sn_registro_sistema')->nullable();
-            $table->integer('id_pais')->nullable()->index('IDX_id_pais_identidad');
-            $table->foreignId('id_pais_identidad')->constrained('geopais','id')->cascadeOnDelete();
+            $table->boolean('sn_registrosistema')->nullable();
+            $table->foreignId('id_pais')->constrained('geopais', 'id')->cascadeOnDelete()->index('IDX_id_pais_identidad')->name('FK_id_pais_identidad')->nullable();
             $table->timestamps();
         });
     }
