@@ -38,8 +38,6 @@ return new class extends Migration
             $table->string('patronbusqueda',255)->nullable()->index('IDX_patronbusqueda_contactos');
             $table->integer('id_estado')->default(1);
             $table->boolean('sn_activo')->default(1);
-            $table->bigInteger('id_user_created_at')->default(1)->index('IDX_id_user_created_at_contactos');
-            $table->bigInteger('id_user_updated_at')->default(1)->index('IDX_id_user_updated_at_contactos');
             $table->foreignId('id_condiciontributaria_contactos')->constrained('condiciontributarias', 'id')->onDelete('cascade')->name('FK_id_condiciontributaria_contactos');
             $table->foreignId('id_estado_contactos')->constrained('contactoestados', 'id')->onDelete('cascade')->name('FK_id_estado_contactos'); 
             $table->foreignId('id_fisicojuridico_contactos')->constrained('fisicosjuridicos', 'id')->onDelete('cascade')->name('FK_id_fisicojuridico_contactos'); 
@@ -47,8 +45,8 @@ return new class extends Migration
             $table->foreignId('id_nacionalidad_contactos')->constrained('geopais', 'id')->onDelete('cascade'); 
             $table->foreignId('id_personal_contactos')->constrained('identidades', 'id')->onDelete('cascade')->name('FK_id_personal_contactos'); 
             $table->foreignId('id_situacioncivil_contactos')->constrained('contactosituacionciviles', 'id')->onDelete('cascade')->name('FK_id_situacioncivil_contactos'); 
-            $table->foreignId('id_user_created_at')->constrained('users', 'id')->onDelete('cascade')->name('FK_id_user_created_at_contactos'); 
-            $table->foreignId('id_user_updated_at')->constrained('users', 'id')->onDelete('cascade')->name('FK_id_user_updated_at_contactos'); 
+            $table->foreignId('id_user_created_at')->constrained('users', 'id')->onDelete('cascade')->name('FK_id_user_created_at_contactos')->default(1)->index('IDX_id_user_created_at_contactos'); 
+            $table->foreignId('id_user_updated_at_fk')->constrained('users', 'id')->onDelete('cascade')->name('FK_id_user_updated_at_contactos')->default(1)->index('IDX_id_user_updated_at_contactos'); 
 
             $table->timestamps();
         });
