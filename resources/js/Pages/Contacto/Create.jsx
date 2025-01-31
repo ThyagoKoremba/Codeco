@@ -1,8 +1,14 @@
 import React, { useState } from 'react'; // Asegúrate de importar useState desde React
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Modal from 'react-modal';
+import './styles.css';
+Modal.setAppElement('#app');
 
-const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestributarias }) => {
+const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributarias }) => {
+
+
+
     const initialValues = {
         id_fisicojuridico: '',
         nombrefantasia: '',
@@ -20,6 +26,7 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
         codigoPostal: '',
         id_personal_dato: '',
         id_identidadtributaria_dato: '',
+
     };
 
     const { data, errors, setData, post, reset } = useForm(initialValues);
@@ -28,15 +35,67 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
     const [nombre, setNombre] = useState('Nombre');
     const [apellido, setApellido] = useState('Apellido');
     const [segundo, setSegundo] = useState('1');
+    const [mascaraTributaria, setMascaraTributaria] = useState('');
 
     const submit = (e) => {
         e.preventDefault();
         post(route('contacto.store'));
     };
 
-    console.log(fisicojuridico);
+    // Estado para el modal de búsqueda de países
+    const [isPaisModalOpen, setIsPaisModalOpen] = useState(false);
+    const [paisSearchQuery, setPaisSearchQuery] = useState('');
+    const [paisSearchResults, setPaisSearchResults] = useState([]);
+    const [paisCurrentPage, setPaisCurrentPage] = useState(1);
+    const [paisLastPage, setPaisLastPage] = useState(1);
+    const [nombrePais, setNombrePais] = useState(''); // Estado para el nombre del país
+    // Función para abrir el modal de búsqueda de países
+    const openPaisModal = () => {
+        setIsPaisModalOpen(true);
+        fetchPaisSearchResults(); // Cargar resultados iniciales
+    };
 
-    debugger
+    // Función para cerrar el modal de búsqueda de países
+    const closePaisModal = () => {
+        setIsPaisModalOpen(false);
+    };
+
+    // Función para realizar la búsqueda de países
+    const fetchPaisSearchResults = async (page = 1) => {
+        try {
+            const response = await fetch(`/contacto/search-paises?query=${paisSearchQuery}&page=${page}`);
+            const data = await response.json();
+            setPaisSearchResults(data.data);
+            setPaisCurrentPage(data.current_page);
+            setPaisLastPage(data.last_page);
+        } catch (error) {
+            console.error('Error fetching country search results:', error);
+        }
+    };
+
+
+    
+
+    // Función para manejar cambios en el campo de búsqueda de países
+    const handlePaisSearchChange = (e) => {
+        setPaisSearchQuery(e.target.value);
+        fetchPaisSearchResults(); // Realiza la búsqueda automáticamente
+    };
+
+    // Función para seleccionar un país
+    const handleSelectPais = (pais) => {
+        data.id_pais = pais.id; // Actualiza el campo del formulario
+        setNombrePais(pais.nombre) 
+        closePaisModal(); // Cierra el modal
+    };
+
+
+
+
+    /*    console.log(fisicojuridico);
+       console.log(identidades);
+       console.log(pais); */
+
 
     return (
         <AuthenticatedLayout
@@ -80,7 +139,7 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                         className="form-select"
                                     >
                                         <option value="">Seleccionar</option>
-                                        {fisicojuridico.map((condicion) => (
+                                        {fisicojuridico.slice(1).map((condicion) => (
                                             <option key={condicion.id} value={condicion.id}>
                                                 {condicion.descripcion}
                                             </option>
@@ -121,9 +180,9 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                         id="apellido"
                                         type="text"
                                         name="apellido"
-                                        value={data.apellido}
+                                        value={data.apellidorazonsocial}
                                         className="form-control"
-                                        onChange={(e) => setData('apellido', e.target.value)}
+                                        onChange={(e) => setData('apellidorazonsocial', e.target.value)}
                                     />
                                     {errors.apellido && <div className="text-danger mt-1">{errors.apellido}</div>}
                                 </div>
@@ -142,17 +201,24 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
 
                                 <div className="col-md-6">
                                     <label htmlFor="pais" className="form-label">País</label>
-                                    <select
-                                        id="pais"
-                                        name="pais"
-                                        value={data.pais}
-                                        onChange={(e) => setData('pais', e.target.value)}
-                                        className="form-select"
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        <option value="argentina">Argentina</option>
-                                    </select>
-                                    {errors.pais && <div className="text-danger mt-1">{errors.pais}</div>}
+                                    <div className="input-group">
+                                        <input
+                                            id="pais"
+                                            type="text"
+                                            name="pais"
+                                            value={nombrePais}
+                                            className="form-control"
+                                            readOnly // El campo es de solo lectura
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary"
+                                            onClick={openPaisModal}
+                                        >
+                                            Buscar
+                                        </button>
+                                    </div>
+                                    {errors.id_pais && <div className="text-danger mt-1">{errors.id_pais}</div>}
                                 </div>
 
                                 <hr></hr>
@@ -215,9 +281,9 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                             const selectedId = e.target.value;
                                             setData('id_identidadtributaria', selectedId);
 
-                                            const selectedIdentidad = identidades.find(identidad => identidad.id === selectedId);
+                                            const selectedIdentidad = identidades.find(identidad => identidad.id == selectedId);
                                             if (selectedIdentidad) {
-                                                setData('id_identidadtributaria_dato', selectedIdentidad.dato_default || '');
+                                                setMascaraTributaria(selectedIdentidad.dato_mascara);
                                             }
                                         }}
                                         className="form-select"
@@ -237,7 +303,8 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                     <input
                                         id="valorIdTributaria"
                                         type="text"
-                                        maxLength={data.id_identidadtributaria === "3" ? 8 : 11} // Limita a 8 caracteres si el ID es 1
+                                        placeholder={mascaraTributaria}
+                                        maxLength={mascaraTributaria.length} // Limita a 8 caracteres si el ID es 1
                                         name="valorIdTributaria"
                                         value={data.id_identidadtributaria_dato}
                                         className="form-control"
@@ -364,6 +431,86 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                     </div>
                 </div>
             </div>
+
+
+
+
+            {/* Modal de búsqueda de países */}
+            <Modal
+                isOpen={isPaisModalOpen}
+                onRequestClose={closePaisModal}
+                contentLabel="Buscar País"
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Buscar País</h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                onClick={closePaisModal}
+                                aria-label="Cerrar"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            <input
+                                type="text"
+                                value={paisSearchQuery}
+                                onChange={handlePaisSearchChange}
+                                placeholder="Buscar por nombre de país"
+                                className="form-control mb-3"
+                            />
+                            <table className="table">
+                                <thead>
+                                    <tr>
+
+                                        <th>Nombre</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {paisSearchResults.map((pais) => (
+                                        <tr key={pais.id}>
+
+                                            <td>{pais.nombre}</td>
+                                            <td>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-primary btn-sm"
+                                                    onClick={() => handleSelectPais(pais)}
+                                                >
+                                                    Seleccionar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="d-flex justify-content-between">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={() => fetchPaisSearchResults(paisCurrentPage - 1)}
+                                    disabled={paisCurrentPage === 1}
+                                >
+                                    Anterior
+                                </button>
+                                <span>Página {paisCurrentPage} de {paisLastPage}</span>
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={() => fetchPaisSearchResults(paisCurrentPage + 1)}
+                                    disabled={paisCurrentPage === paisLastPage}
+                                >
+                                    Siguiente
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </AuthenticatedLayout>
     );
 };

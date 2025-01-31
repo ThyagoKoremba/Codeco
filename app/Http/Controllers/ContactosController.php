@@ -10,15 +10,16 @@ use App\Models\Fisicojuridicos;
 use App\Models\geopais;
 use App\Models\Identidades;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class ContactosController extends Controller
 {
     public function create () {
         $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
-        $pais=Geopais::orderBy('id')->get();
+       
         $identidades=Identidades::orderBy('id')->get();
         $condicionestributarias=Condiciontributarias::orderBy('id')->get();
-        return Inertia::render('Contacto/Create',compact('fisicojuridico','pais','identidades','condicionestributarias'));
+        return Inertia::render('Contacto/Create',compact('fisicojuridico','identidades','condicionestributarias'));
     }
 
     public function store (ContactoRequest $contacto) {
@@ -57,4 +58,19 @@ class ContactosController extends Controller
 
         return to_route('contacto.index');
     }
+
+
+    public function searchPaises(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geopais::where('nombre', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+  
+}
 }
