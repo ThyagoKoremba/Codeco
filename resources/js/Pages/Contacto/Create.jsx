@@ -21,12 +21,15 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         car: '',
         observacion: '',
         id_condiciontributaria: '',
-        telefonoMovil: '',
+        telefono_sn_movil: '',
+        telefono_numero: '',
         email: '',
         codigoPostal: '',
         id_personal_dato: '',
         id_identidadtributaria_dato: '',
         id_region: '',
+        id_region: '',
+
 
     };
 
@@ -61,15 +64,15 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
 
     // Función para abrir el modal de búsqueda de países
     const openPaisModal = () => {
-        setIsPaisModalOpen(true); 
+        setIsPaisModalOpen(true);
     };
 
- 
+
 
     // Función para abrir el modal de búsqueda de regiones
     const openRegionModal = () => {
         setIsRegionModalOpen(true);
-      
+
     };
 
     // Función para cerrar el modal de búsqueda de regiones
@@ -87,7 +90,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         try {
             const response = await fetch(`/contacto/search-paises?query=${paisSearchQuery}&page=${page}`);
             const data = await response.json();
-         
+
             setPaisSearchResults(data.data);
             setPaisCurrentPage(data.current_page);
             setPaisLastPage(data.last_page);
@@ -101,7 +104,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         try {
             const response = await fetch(`/contacto/search-regiones?query=${regionSearchQuery}&page=${page}`);
             const data = await response.json();
-           
+
             setRegionSearchResults(data.data);
             setRegionCurrentPage(data.current_page);
             setRegionLastPage(data.last_page);
@@ -137,7 +140,9 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
     };
 
 
-debugger
+ 
+
+    debugger
 
 
     return (
@@ -171,7 +176,7 @@ debugger
                                             setData('id_fisicojuridico', selectedId);
 
                                             const selectedPersona = fisicojuridico.find(persona => persona.id == selectedId);
-                                            console.log(selectedPersona);
+                                          console.log(selectedPersona);
                                             if (selectedPersona) {
                                                 setNombre(selectedPersona.texto_nombre);
                                                 setApellido(selectedPersona.texto_apellido);
@@ -189,6 +194,19 @@ debugger
                                         ))}
                                     </select>
                                     {errors.id_fisicojuridico && <div className="text-danger mt-1">{errors.id_fisicojuridico}</div>}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label htmlFor="apellido" className="form-label">{apellido}</label>
+                                    <input
+                                        id="apellido"
+                                        type="text"
+                                        name="apellido"
+                                        value={data.apellidorazonsocial}
+                                        className="form-control"
+                                        onChange={(e) => setData('apellidorazonsocial', e.target.value)}
+                                    />
+                                    {errors.apellido && <div className="text-danger mt-1">{errors.apellido}</div>}
                                 </div>
 
                                 <div className="col-md-6">
@@ -217,21 +235,10 @@ debugger
                                     />
                                     {errors.segundoNombre && <div className="text-danger mt-1">{errors.segundoNombre}</div>}
                                 </div>
-                                <div className="col-md-6">
-                                    <label htmlFor="apellido" className="form-label">{apellido}</label>
-                                    <input
-                                        id="apellido"
-                                        type="text"
-                                        name="apellido"
-                                        value={data.apellidorazonsocial}
-                                        className="form-control"
-                                        onChange={(e) => setData('apellidorazonsocial', e.target.value)}
-                                    />
-                                    {errors.apellido && <div className="text-danger mt-1">{errors.apellido}</div>}
-                                </div>
+                              
 
                                 <div className="col-md-6">
-                                    <label htmlFor="foto" className="form-label">Foto</label>
+                                    <label htmlFor="foto" className="form-label">Foto  </label>
                                     <input
                                         id="foto"
                                         type="file"
@@ -267,10 +274,10 @@ debugger
                                 <hr></hr>
                                 {/* 
                                 Condición Tributaria  */}
-                                <h4 className="mt-4 mb-3">Condición Tributaria</h4>
+                                <h4 className="mt-4 mb-3">Información Tributaria</h4>
 
                                 <div className="col-md-8">
-                                    <label htmlFor="condicionTributaria" className="form-label">Condición Tributaria</label>
+                                    <label htmlFor="condicionTributaria" className="form-label">Condición </label>
                                     <select
                                         id="condicionTributaria"
                                         name="condicionTributaria"
@@ -288,31 +295,7 @@ debugger
                                     {errors.id_condiciontributaria && <div className="text-danger mt-1">{errors.id_condiciontributaria}</div>}
                                 </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="identidadPersonal" className="form-label">Identidad Personal</label>
-                                    <input
-                                        id="identidadPersonal"
-                                        type="text"
-                                        name="identidadPersonal"
-                                        value={data.id_personal}
-                                        className="form-control"
-                                        onChange={(e) => setData('id_personal', e.target.value)}
-                                    />
-                                    {errors.id_personal && <div className="text-danger mt-1">{errors.id_personal}</div>}
-                                </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="valorIdPersona" className="form-label">Valor</label>
-                                    <input
-                                        id="valorIdPersona"
-                                        type="text"
-                                        name="valorIdPersona"
-                                        value={data.id_personal_dato}
-                                        className="form-control"
-                                        onChange={(e) => setData('id_personal_dato', e.target.value)}
-                                    />
-                                    {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
-                                </div>
 
                                 <div className="col-md-6">
                                     <label htmlFor="identidadTributaria" className="form-label">Identidad Tributaria</label>
@@ -332,11 +315,18 @@ debugger
                                         className="form-select"
                                     >
                                         <option value="">Seleccionar</option>
-                                        {identidades.map((identidad) => (
-                                            <option key={identidad.id} value={identidad.id}>
-                                                {identidad.descripcion}
-                                            </option>
-                                        ))}
+                                        {data.id_fisicojuridico == 2
+                                            ? identidades.filter(identidad => identidad.sn_juridica == 1).map((identidad) => (
+                                                <option key={identidad.id} value={identidad.id}>
+                                                    {identidad.descripcion}
+                                                </option>
+                                            ))
+                                            : identidades.filter(identidad => identidad.sn_juridica == 0).map((identidad) => (
+                                                <option key={identidad.id} value={identidad.id}>
+                                                    {identidad.descripcion}
+                                                </option>
+                                            ))
+                                        }
                                     </select>
                                     {errors.id_identidadtributaria && <div className="text-danger mt-1">{errors.id_identidadtributaria}</div>}
                                 </div>
@@ -357,9 +347,44 @@ debugger
                                     {errors.id_identidadtributaria_dato && <div className="text-danger mt-1">{errors.id_identidadtributaria_dato}</div>}
                                 </div>
 
+                                <hr></hr>
+
+                                <h4 className="mt-4 mb-3">Información Personal</h4>
+
+                                <div className="col-md-6">
+                                    <label htmlFor="identidadPersonal" className="form-label">Identidad Personal</label>
+                                    <input
+                                        id="identidadPersonal"
+                                        type="text"
+                                        name="identidadPersonal"
+                                        value={data.id_personal}
+                                        className="form-control"
+                                        onChange={(e) => setData('id_personal', e.target.value)}
+                                        disabled={data.id_fisicojuridico == '2'} // Deshabilita si el ID es 1
+                                    />
+                                    {errors.id_personal && <div className="text-danger mt-1">{errors.id_personal}</div>}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label htmlFor="valorIdPersona" className="form-label">Valor</label>
+                                    <input
+                                        id="valorIdPersona"
+                                        type="text"
+                                        name="valorIdPersona"
+                                        value={data.id_personal_dato}
+                                        className="form-control"
+                                        onChange={(e) => setData('id_personal_dato', e.target.value)}
+                                        disabled={data.id_fisicojuridico == '2'}
+                                    />
+                                    {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
+                                </div>
 
 
                                 <div className="col-md-6">
+                                    <p>El código de acceso rápido es un número rápido e identificatorio para el contacto. Se recomienda usar los dos primeros y los tres últimos dígitos del CUIT. Por ejemplo: 20-12345678-9 = 12789</p>
+                                </div>
+
+                                <div className="col-md-4">
                                     <label htmlFor="codigoAccesoRapido" className="form-label">Código de Acceso Rápido</label>
                                     <input
                                         id="codigoAccesoRapido"
@@ -370,9 +395,56 @@ debugger
                                         onChange={(e) => setData('car', e.target.value)}
                                     />
                                     {errors.car && <div className="text-danger mt-1">{errors.car}</div>}
+
+
                                 </div>
                                 <hr />
                                 <h4 className="mt-4 mb-3">Domicilio</h4>
+                                <div className="col-md-6">
+                                    <label htmlFor="provincia" className="form-label">Provincia</label>
+                                    <div className="input-group">
+                                        <input
+                                            id="provincia"
+                                            type="text"
+                                            name="region"
+                                            value={nombreRegion}
+                                            className="form-control"
+                                            readOnly
+                                        // El campo es de solo lectura
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary"
+                                            onClick={openRegionModal}
+                                        >
+                                            Buscar
+                                        </button>
+                                    </div>
+                                    {errors.id_region && <div className="text-danger mt-1">{errors.id_region}</div>}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label htmlFor="region" className="form-label">Región</label>
+                                    <div className="input-group">
+                                        <input
+                                            id="region"
+                                            type="text"
+                                            name="region"
+                                            value={nombreRegion}
+                                            className="form-control"
+                                            readOnly
+                                        // El campo es de solo lectura
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary"
+                                            onClick={openRegionModal}
+                                        >
+                                            Buscar
+                                        </button>
+                                    </div>
+                                    {errors.id_region && <div className="text-danger mt-1">{errors.id_region}</div>}
+                                </div>
 
                                 <div className="col-md-6">
                                     <label htmlFor="domicilio" className="form-label">Domicilio</label>
@@ -387,28 +459,7 @@ debugger
                                     {errors.domicilio && <div className="text-danger mt-1">{errors.domicilio}</div>}
                                 </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="region" className="form-label">Región</label>
-                                    <div className="input-group">
-                                        <input
-                                            id="region"
-                                            type="text"
-                                            name="region"
-                                            value={nombreRegion}
-                                            className="form-control"
-                                            readOnly
-                                             // El campo es de solo lectura
-                                        />
-                                        <button
-                                            type="button"
-                                            className="btn btn-outline-secondary"
-                                            onClick={openRegionModal}
-                                        >
-                                            Buscar
-                                        </button>
-                                    </div>
-                                    {errors.id_region && <div className="text-danger mt-1">{errors.id_region}</div>}
-                                </div>
+                                
 
                                 <div className="col-md-6">
                                     <label htmlFor="codigoPostal" className="form-label">Código Postal</label>
@@ -423,31 +474,38 @@ debugger
                                     {errors.codigoPostal && <div className="text-danger mt-1">{errors.codigoPostal}</div>}
                                 </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="telefonoFijo" className="form-label">Teléfono Fijo</label>
+                                <div className="col-md-3">
+                                    <label htmlFor="telefono_numero" className="form-label">Teléfono </label>
                                     <input
-                                        id="telefonoFijo"
+                                        id="telefono_numero"
                                         type="text"
-                                        name="telefonoFijo"
-                                        value={data.telefonoFijo}
+                                        name="telefono_numero"
+                                        value={data.telefono_numero}
                                         className="form-control"
-                                        onChange={(e) => setData('telefonoFijo', e.target.value)}
+                                        onChange={(e) => setData('telefono_numero', e.target.value)}
                                     />
-                                    {errors.telefonoFijo && <div className="text-danger mt-1">{errors.telefonoFijo}</div>}
+                                    {errors.telefono_numero && <div className="text-danger mt-1">{errors.telefono_numero}</div>}
                                 </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="telefonoMovil" className="form-label">Teléfono Móvil</label>
-                                    <input
-                                        id="telefonoMovil"
-                                        type="text"
-                                        name="telefonoMovil"
-                                        value={data.telefonoMovil}
-                                        className="form-control"
-                                        onChange={(e) => setData('telefonoMovil', e.target.value)}
-                                    />
-                                    {errors.telefonoMovil && <div className="text-danger mt-1">{errors.telefonoMovil}</div>}
+                                <div className="col-md-3 mt-5">
+                                    
+                                    <div className="form-check">
+                                        <input
+                                            id="telefono_sn_movil"
+                                            type="checkbox"
+                                            name="telefono_sn_movil"
+                                            className="form-check-input"
+                                            checked={data.telefono_sn_movil}
+                                            onChange={(e) => setData('telefono_sn_movil', e.target.checked)}
+                                        />
+                                        <label className="form-check-label" htmlFor="telefono_sn_movil">
+                                            Es móvil
+                                        </label>
+                                    </div>
+                                    {errors.telefono_sn_movil && <div className="text-danger mt-1">{errors.telefono_sn_movil}</div>}
                                 </div>
+
+                             
 
                                 <div className="col-md-6">
                                     <label htmlFor="email" className="form-label">Correo Electrónico</label>
@@ -478,7 +536,7 @@ debugger
                                 <div className="col-12 d-flex justify-content-between mt-4">
                                     <button type="submit" className="btn btn-success">Guardar</button>
                                     <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
-                                   
+
                                 </div>
                             </form>
                         </div>
@@ -492,6 +550,16 @@ debugger
                 onRequestClose={closeModal}
                 contentLabel={isPaisModalOpen ? "Buscar País" : "Buscar Región"}
                 className="modal"
+                style={{
+                    content: {
+                        backgroundColor: '#ffffff',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                        padding: '20px',
+                        maxWidth: '600px',
+                        margin: '0 auto',
+                    }
+                }}
                 overlayClassName="modal-overlay"
             >
                 <div className="modal-dialog modal-lg">
@@ -501,7 +569,7 @@ debugger
                             <button
                                 type="button"
                                 className="btn-close"
-                                onClick={ closeModal }
+                                onClick={closeModal}
                                 aria-label="Cerrar"
                             ></button>
                         </div>
@@ -513,7 +581,7 @@ debugger
                                     onChange={isPaisModalOpen ? (e) => setPaisSearchQuery(e.target.value) : (e) => setRegionSearchQuery(e.target.value)}
                                     placeholder={isPaisModalOpen ? "Buscar por nombre de país" : "Buscar por nombre de región"}
                                     className="form-control"
-                                   
+
                                 />
                                 <button
                                     type="button"
@@ -523,27 +591,19 @@ debugger
                                     Buscar
                                 </button>
                             </div>
-                            <table className="table">
+                            <table className="table table-hover " style={{ cursor: 'pointer' }}>
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Acciones</th>
+                                     
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {(isPaisModalOpen ? paisSearchResults : regionSearchResults).length > 0 ? (
                                         (isPaisModalOpen ? paisSearchResults : regionSearchResults).map((item) => (
                                             <tr key={item.id}>
-                                                <td>{isPaisModalOpen ? item.nombre : item.descripcion}</td>
-                                                <td>
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-primary btn-sm"
-                                                        onClick={() => isPaisModalOpen ? handleSelectPais(item) : handleSelectRegion(item)}
-                                                    >
-                                                        Seleccionar
-                                                    </button>
-                                                </td>
+                                                <td className=' table-hover' onClick={() => isPaisModalOpen ? handleSelectPais(item) : handleSelectRegion(item) } >{isPaisModalOpen ? item.nombre : item.descripcion}</td>
+                                              
                                             </tr>
                                         ))
                                     ) : (
@@ -553,28 +613,28 @@ debugger
                                     )}
                                 </tbody>
                             </table>
-                            
+
                             {(isPaisModalOpen ? paisSearchResults : regionSearchResults).length > 0 ? (
-                            <div className="d-flex justify-content-between">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage - 1) : fetchRegionSearchResults(regionCurrentPage - 1)}
-                                    disabled={isPaisModalOpen ? paisCurrentPage === 1 : regionCurrentPage === 1}
-                                >
-                                    Anterior
-                                </button>
-                                <span>Página {isPaisModalOpen ? paisCurrentPage : regionCurrentPage} de {isPaisModalOpen ? paisLastPage : regionLastPage}</span>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage + 1) : fetchRegionSearchResults(regionCurrentPage + 1)}
-                                    disabled={isPaisModalOpen ? paisCurrentPage === paisLastPage : regionCurrentPage === regionLastPage}
-                                >
-                                    Siguiente
-                                </button>
-                            </div>
-                             ) : (
+                                <div className="d-flex justify-content-between">
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage - 1) : fetchRegionSearchResults(regionCurrentPage - 1)}
+                                        disabled={isPaisModalOpen ? paisCurrentPage === 1 : regionCurrentPage === 1}
+                                    >
+                                        Anterior
+                                    </button>
+                                    <span>Página {isPaisModalOpen ? paisCurrentPage : regionCurrentPage} de {isPaisModalOpen ? paisLastPage : regionLastPage}</span>
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage + 1) : fetchRegionSearchResults(regionCurrentPage + 1)}
+                                        disabled={isPaisModalOpen ? paisCurrentPage === paisLastPage : regionCurrentPage === regionLastPage}
+                                    >
+                                        Siguiente
+                                    </button>
+                                </div>
+                            ) : (
                                 ''
                             )}
                         </div>
