@@ -56,7 +56,7 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                         <div className="card-body">
                             <form onSubmit={submit} className="row g-3">
                                 {/*  Información Personal  */}
-                                <h4 className="mb-3">Información Personal</h4>
+                                <h4 className="mb-3">Información Contacto</h4>
 
                                 <div className="col-md-6">
                                     <label htmlFor="persona" className="form-label">Persona</label>
@@ -158,10 +158,10 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                 <hr></hr>
                                 {/* 
                                 Condición Tributaria  */}
-                                <h4 className="mt-4 mb-3">Condición Tributaria</h4>
+                                <h4 className="mt-4 mb-3">Información Tributaria</h4>
 
                                 <div className="col-md-8">
-                                    <label htmlFor="condicionTributaria" className="form-label">Condición Tributaria</label>
+                                    <label htmlFor="condicionTributaria" className="form-label">Condición </label>
                                     <select
                                         id="condicionTributaria"
                                         name="condicionTributaria"
@@ -179,31 +179,7 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                     {errors.id_condiciontributaria && <div className="text-danger mt-1">{errors.id_condiciontributaria}</div>}
                                 </div>
 
-                                <div className="col-md-6">
-                                    <label htmlFor="identidadPersonal" className="form-label">Identidad Personal</label>
-                                    <input
-                                        id="identidadPersonal"
-                                        type="text"
-                                        name="identidadPersonal"
-                                        value={data.id_personal}
-                                        className="form-control"
-                                        onChange={(e) => setData('id_personal', e.target.value)}
-                                    />
-                                    {errors.id_personal && <div className="text-danger mt-1">{errors.id_personal}</div>}
-                                </div>
-
-                                <div className="col-md-6">
-                                    <label htmlFor="valorIdPersona" className="form-label">Valor</label>
-                                    <input
-                                        id="valorIdPersona"
-                                        type="text"
-                                        name="valorIdPersona"
-                                        value={data.id_personal_dato}
-                                        className="form-control"
-                                        onChange={(e) => setData('id_personal_dato', e.target.value)}
-                                    />
-                                    {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
-                                </div>
+                               
 
                                 <div className="col-md-6">
                                     <label htmlFor="identidadTributaria" className="form-label">Identidad Tributaria</label>
@@ -247,9 +223,44 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                     {errors.id_identidadtributaria_dato && <div className="text-danger mt-1">{errors.id_identidadtributaria_dato}</div>}
                                 </div>
 
-
+                                <hr></hr>
+                          
+                                <h4 className="mt-4 mb-3">Información Personal</h4>
 
                                 <div className="col-md-6">
+                                    <label htmlFor="identidadPersonal" className="form-label">Identidad Personal</label>
+                                    <input
+                                        id="identidadPersonal"
+                                        type="text"
+                                        name="identidadPersonal"
+                                        value={data.id_personal}
+                                        className="form-control"
+                                        onChange={(e) => setData('id_personal', e.target.value)}
+                                        disabled={data.id_fisicojuridico == '2'} // Deshabilita si el ID es 1
+                                    />
+                                    {errors.id_personal && <div className="text-danger mt-1">{errors.id_personal}</div>}
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label htmlFor="valorIdPersona" className="form-label">Valor</label>
+                                    <input
+                                        id="valorIdPersona"
+                                        type="text"
+                                        name="valorIdPersona"
+                                        value={data.id_personal_dato}
+                                        className="form-control"
+                                        onChange={(e) => setData('id_personal_dato', e.target.value)}
+                                        disabled={data.id_fisicojuridico == '2'} 
+                                    />
+                                    {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
+                                </div>
+
+                               
+                                <div className="col-md-6">
+                                <p>El código de acceso rápido es un número rápido e identificatorio para el contacto. Se recomienda usar los dos primeros y los tres últimos dígitos del CUIT. Por ejemplo: 20-12345678-9 = 12789</p>
+</div>
+
+<div className="col-md-4">
                                     <label htmlFor="codigoAccesoRapido" className="form-label">Código de Acceso Rápido</label>
                                     <input
                                         id="codigoAccesoRapido"
@@ -260,6 +271,8 @@ const CreateContact = ({ auth, fisicojuridico, pais, identidades, condicionestri
                                         onChange={(e) => setData('car', e.target.value)}
                                     />
                                     {errors.car && <div className="text-danger mt-1">{errors.car}</div>}
+
+                                   
                                 </div>
                                 <hr />
                                 <h4 className="mt-4 mb-3">Domicilio</h4>
