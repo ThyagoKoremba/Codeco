@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Categoria\CategoriaRequest;
 use App\Http\Requests\Categoria\CategoriaUpdate;
 use App\Models\Categorias;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class CategoriasController extends Controller

@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
 
-const Index = ({ auth, categorias, categoriaid}) => {
+const Index = ({ auth, categorias, roles}) => {
 
     return (
 
@@ -12,14 +12,13 @@ const Index = ({ auth, categorias, categoriaid}) => {
 
             header={
                 <div className=' flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Categorias</h2>
-                    <Link href={route('categoria.create')}>
-                        Crear Categoria
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Rol</h2>
+                    <Link href={route('rol.create')}>
+                        Crear Rol
                     </Link>
                 </div>
             }
         >
-            <h1>El ultimo id creado es {categoriaid}</h1>
             <Head title="Dashboard" />
 
             <div className="py-12">
@@ -39,7 +38,7 @@ const Index = ({ auth, categorias, categoriaid}) => {
                                                 Abreviatura
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                Registro en Sistema
+                                                Valor predeterminado
                                             </th>
                                             <th scope="col" className="px-6 py-3">
                                                 Activo
@@ -50,27 +49,27 @@ const Index = ({ auth, categorias, categoriaid}) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {categorias?.map((categoria)=>(                                        
-                                            <tr key={categoria.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        {roles?.map((roles)=>(                                        
+                                            <tr key={roles.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {categoria.descripcion}
+                                                    {roles.roldescripcion}
                                                 </th>
                                                 <td className="px-6 py-4">
-                                                    {categoria.abreviatura}
+                                                    {roles.rolabreviatura}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    {categoria.sn_registrosistema === 1 ? 'Si' : 'No'}
+                                                    {roles.isdefaultvalue === 1 ? 'Si' : 'No'}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    {categoria.sn_activo === 1 ? 'Si' : 'No'}
+                                                    {roles.activosn === 1 ? 'Si' : 'No'}
                                                 </td>
                                                 <td>
                                                     <div className='space-x-5'>
-                                                        <Link href={route('categoria.edit',[categoria])}>
+                                                        <Link href={route('rol.edit',[roles])}>
                                                         Editar
                                                         </Link>
-                                                        <Link href={route('categoria.cambiarEstado',[categoria])}>
-                                                        {categoria.sn_activo === 1 ? 'Desactivar' : 'Activar'}
+                                                        <Link href={route('rol.cambiarEstado',[roles])}>
+                                                        {roles.sn_activo === 1 ? 'Desactivar' : 'Activar'}
                                                         </Link>
                                                     </div>
                                                 </td>
