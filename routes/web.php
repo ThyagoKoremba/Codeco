@@ -45,3 +45,4 @@ require __DIR__.'/auth.php';
 require __DIR__.'/categoria.php';
 require __DIR__.'/contacto.php';
 require __DIR__.'/api_front.php';
+require __DIR__.'/actividad.php';
