@@ -26,6 +26,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         codigoPostal: '',
         id_personal_dato: '',
         id_identidadtributaria_dato: '',
+        id_region: '',
 
     };
 
@@ -49,15 +50,36 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
     const [paisCurrentPage, setPaisCurrentPage] = useState(1);
     const [paisLastPage, setPaisLastPage] = useState(1);
     const [nombrePais, setNombrePais] = useState(''); // Estado para el nombre del país
+
+    // Estado para el modal de búsqueda de regiones
+    const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
+    const [regionSearchQuery, setRegionSearchQuery] = useState('');
+    const [regionSearchResults, setRegionSearchResults] = useState([]);
+    const [regionCurrentPage, setRegionCurrentPage] = useState(1);
+    const [regionLastPage, setRegionLastPage] = useState(1);
+    const [nombreRegion, setNombreRegion] = useState(''); // Estado para el nombre de la región
+
     // Función para abrir el modal de búsqueda de países
     const openPaisModal = () => {
-        setIsPaisModalOpen(true);
-        fetchPaisSearchResults(); // Cargar resultados iniciales
+        setIsPaisModalOpen(true); 
     };
 
-    // Función para cerrar el modal de búsqueda de países
-    const closePaisModal = () => {
+ 
+
+    // Función para abrir el modal de búsqueda de regiones
+    const openRegionModal = () => {
+        setIsRegionModalOpen(true);
+      
+    };
+
+    // Función para cerrar el modal de búsqueda de regiones
+    const closeModal = () => {
+        setIsRegionModalOpen(false);
+        setRegionSearchResults([]); // Limpia los resultados de la búsqueda
+        setRegionSearchQuery(''); // Limpia los resultados de la búsqueda
         setIsPaisModalOpen(false);
+        setPaisSearchResults([]);
+        setPaisSearchQuery(''); // Limpia los resultados de la búsqueda
     };
 
     // Función para realizar la búsqueda de países
@@ -65,6 +87,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         try {
             const response = await fetch(`/contacto/search-paises?query=${paisSearchQuery}&page=${page}`);
             const data = await response.json();
+         
             setPaisSearchResults(data.data);
             setPaisCurrentPage(data.current_page);
             setPaisLastPage(data.last_page);
@@ -73,8 +96,19 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         }
     };
 
-
-    
+    // Función para realizar la búsqueda de regiones
+    const fetchRegionSearchResults = async (page = 1) => {
+        try {
+            const response = await fetch(`/contacto/search-regiones?query=${regionSearchQuery}&page=${page}`);
+            const data = await response.json();
+           
+            setRegionSearchResults(data.data);
+            setRegionCurrentPage(data.current_page);
+            setRegionLastPage(data.last_page);
+        } catch (error) {
+            console.error('Error fetching region search results:', error);
+        }
+    };
 
     // Función para manejar cambios en el campo de búsqueda de países
     const handlePaisSearchChange = (e) => {
@@ -82,19 +116,28 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         fetchPaisSearchResults(); // Realiza la búsqueda automáticamente
     };
 
+    // Función para manejar cambios en el campo de búsqueda de regiones
+    const handleRegionSearchChange = (e) => {
+        setRegionSearchQuery(e.target.value);
+        fetchRegionSearchResults(); // Realiza la búsqueda automáticamente
+    };
+
     // Función para seleccionar un país
     const handleSelectPais = (pais) => {
         data.id_pais = pais.id; // Actualiza el campo del formulario
-        setNombrePais(pais.nombre) 
-        closePaisModal(); // Cierra el modal
+        setNombrePais(pais.nombre);
+        closeModal(); // Cierra el modal
+    };
+
+    // Función para seleccionar una región
+    const handleSelectRegion = (region) => {
+        data.id_region = region.id; // Actualiza el campo del formulario
+        setNombreRegion(region.descripcion);
+        closeModal(); // Cierra el modal
     };
 
 
-
-
-    /*    console.log(fisicojuridico);
-       console.log(identidades);
-       console.log(pais); */
+debugger
 
 
     return (
@@ -345,16 +388,26 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                 </div>
 
                                 <div className="col-md-6">
-                                    <label htmlFor="provincia" className="form-label">Provincia</label>
-                                    <input
-                                        id="provincia"
-                                        type="text"
-                                        name="provincia"
-                                        value={data.provincia}
-                                        className="form-control"
-                                        onChange={(e) => setData('provincia', e.target.value)}
-                                    />
-                                    {errors.provincia && <div className="text-danger mt-1">{errors.provincia}</div>}
+                                    <label htmlFor="region" className="form-label">Región</label>
+                                    <div className="input-group">
+                                        <input
+                                            id="region"
+                                            type="text"
+                                            name="region"
+                                            value={nombreRegion}
+                                            className="form-control"
+                                            readOnly
+                                             // El campo es de solo lectura
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn btn-outline-secondary"
+                                            onClick={openRegionModal}
+                                        >
+                                            Buscar
+                                        </button>
+                                    </div>
+                                    {errors.id_region && <div className="text-danger mt-1">{errors.id_region}</div>}
                                 </div>
 
                                 <div className="col-md-6">
@@ -425,6 +478,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                 <div className="col-12 d-flex justify-content-between mt-4">
                                     <button type="submit" className="btn btn-success">Guardar</button>
                                     <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                   
                                 </div>
                             </form>
                         </div>
@@ -432,81 +486,97 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                 </div>
             </div>
 
-
-
-
-            {/* Modal de búsqueda de países */}
+            {/* Modal de búsqueda de países y regiones */}
             <Modal
-                isOpen={isPaisModalOpen}
-                onRequestClose={closePaisModal}
-                contentLabel="Buscar País"
+                isOpen={isPaisModalOpen || isRegionModalOpen}
+                onRequestClose={closeModal}
+                contentLabel={isPaisModalOpen ? "Buscar País" : "Buscar Región"}
                 className="modal"
                 overlayClassName="modal-overlay"
             >
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Buscar País</h5>
+                            <h5 className="modal-title">{isPaisModalOpen ? "Buscar País" : "Buscar Región"}</h5>
                             <button
                                 type="button"
                                 className="btn-close"
-                                onClick={closePaisModal}
+                                onClick={ closeModal }
                                 aria-label="Cerrar"
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <input
-                                type="text"
-                                value={paisSearchQuery}
-                                onChange={handlePaisSearchChange}
-                                placeholder="Buscar por nombre de país"
-                                className="form-control mb-3"
-                            />
+                            <div className="input-group mb-3">
+                                <input
+                                    type="text"
+                                    value={isPaisModalOpen ? paisSearchQuery : regionSearchQuery}
+                                    onChange={isPaisModalOpen ? (e) => setPaisSearchQuery(e.target.value) : (e) => setRegionSearchQuery(e.target.value)}
+                                    placeholder={isPaisModalOpen ? "Buscar por nombre de país" : "Buscar por nombre de región"}
+                                    className="form-control"
+                                   
+                                />
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={isPaisModalOpen ? () => fetchPaisSearchResults() : () => fetchRegionSearchResults()}
+                                >
+                                    Buscar
+                                </button>
+                            </div>
                             <table className="table">
                                 <thead>
                                     <tr>
-
                                         <th>Nombre</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {paisSearchResults.map((pais) => (
-                                        <tr key={pais.id}>
-
-                                            <td>{pais.nombre}</td>
-                                            <td>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-primary btn-sm"
-                                                    onClick={() => handleSelectPais(pais)}
-                                                >
-                                                    Seleccionar
-                                                </button>
-                                            </td>
+                                    {(isPaisModalOpen ? paisSearchResults : regionSearchResults).length > 0 ? (
+                                        (isPaisModalOpen ? paisSearchResults : regionSearchResults).map((item) => (
+                                            <tr key={item.id}>
+                                                <td>{isPaisModalOpen ? item.nombre : item.descripcion}</td>
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-primary btn-sm"
+                                                        onClick={() => isPaisModalOpen ? handleSelectPais(item) : handleSelectRegion(item)}
+                                                    >
+                                                        Seleccionar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="2" className="text-center">No se encontraron resultados</td>
                                         </tr>
-                                    ))}
+                                    )}
                                 </tbody>
                             </table>
+                            
+                            {(isPaisModalOpen ? paisSearchResults : regionSearchResults).length > 0 ? (
                             <div className="d-flex justify-content-between">
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
-                                    onClick={() => fetchPaisSearchResults(paisCurrentPage - 1)}
-                                    disabled={paisCurrentPage === 1}
+                                    onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage - 1) : fetchRegionSearchResults(regionCurrentPage - 1)}
+                                    disabled={isPaisModalOpen ? paisCurrentPage === 1 : regionCurrentPage === 1}
                                 >
                                     Anterior
                                 </button>
-                                <span>Página {paisCurrentPage} de {paisLastPage}</span>
+                                <span>Página {isPaisModalOpen ? paisCurrentPage : regionCurrentPage} de {isPaisModalOpen ? paisLastPage : regionLastPage}</span>
                                 <button
                                     type="button"
                                     className="btn btn-secondary"
-                                    onClick={() => fetchPaisSearchResults(paisCurrentPage + 1)}
-                                    disabled={paisCurrentPage === paisLastPage}
+                                    onClick={() => isPaisModalOpen ? fetchPaisSearchResults(paisCurrentPage + 1) : fetchRegionSearchResults(regionCurrentPage + 1)}
+                                    disabled={isPaisModalOpen ? paisCurrentPage === paisLastPage : regionCurrentPage === regionLastPage}
                                 >
                                     Siguiente
                                 </button>
                             </div>
+                             ) : (
+                                ''
+                            )}
                         </div>
                     </div>
                 </div>

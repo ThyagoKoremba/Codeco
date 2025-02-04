@@ -11,6 +11,7 @@ use App\Models\geopais;
 use App\Models\Identidades;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Models\geolugares;
 
 class ContactosController extends Controller
 {
@@ -29,7 +30,7 @@ class ContactosController extends Controller
                                     ($data['nombresegundo'] ?? '');  
         $data['patronbusqueda'] = $data['apellidoynombre'] . ' ' . $data['car'];
         contactos::create($data);
-        return to_route('contacto.index');
+        return to_route('contacto.create');
     }
 
     public function index () {
@@ -73,4 +74,19 @@ class ContactosController extends Controller
 
   
 }
+public function searchRegiones(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geolugares::where('descripcion', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+  
+}
+
+
 }
