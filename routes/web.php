@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoriasController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,3 +43,5 @@ require __DIR__.'/auth.php';
 require __DIR__.'/categoria.php';
 require __DIR__.'/contacto.php';
 require __DIR__.'/api_front.php';
+require __DIR__.'/rol.php';
+require __DIR__.'/actividad.php';

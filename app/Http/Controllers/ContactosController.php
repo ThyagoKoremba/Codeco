@@ -15,7 +15,7 @@ class ContactosController extends Controller
 {
     public function create () {
         $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
-        $pais=Geopais::orderBy('id')->get();
+        $pais=Geopais::orderBy('id')->paginate(10);
         $identidades=Identidades::orderBy('id')->get();
         $condicionestributarias=Condiciontributarias::orderBy('id')->get();
         return Inertia::render('Contacto/Create',compact('fisicojuridico','pais','identidades','condicionestributarias'));
