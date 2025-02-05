@@ -22,10 +22,11 @@ return new class extends Migration
             $table->boolean('sn_identidadtributaria')->nullable();
             $table->boolean('sn_activo')->nullable();
             $table->boolean('sn_registrosistema')->nullable();
-            
+            $table->unsignedBigInteger('id_pais')->nullable();
             $table->index('id_pais', 'IDX_id_pais_identidad'); 
-            $table->bigInteger('id_pais')->unsigned()->nullable();
-            $table->foreign('id_pais', 'FK_id_pais_identidad')->references('id')->on('geopais')->onDelete('cascade'); 
+            $table->foreign('id_pais', 'FK_id_pais_identidad')
+            ->references('id')->on('geopais')
+            ->onDelete('cascade'); 
             $table->timestamps();
         });
     }

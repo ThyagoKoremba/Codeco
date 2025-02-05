@@ -15,25 +15,43 @@ return new class extends Migration
     {
         Schema::create('contactoradicaciones', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_contacto');
             $table->index('id_contacto','IDX_id_contacto_contactoradicaciones');
-            $table->foreign('id_contacto','FK_id_contacto_contactoradicaciones')->references('id')->on('contactos')->onDelete('cascade'); 
+            $table->foreign('id_contacto','FK_id_contacto_contactoradicaciones')
+            ->references('id')->on('contactos')
+            ->onDelete('cascade'); 
             $table->decimal('latitud',9,6)->nullable()->default(null);
             $table->decimal('longitud',9,6)->nullable()->default(null);
             $table->decimal('altitud',7,2)->nullable()->default(null);
             $table->string('descripcion',45)->nullable()->default(null);
+            $table->unsignedBigInteger('id_pais')->default(1);
             $table->index('id_pais','IDX_id_pais_contactoradicaciones');
-            $table->foreign('id_pais','FK_id_pais_contactoradicaciones')->references('id')->on('geopais')->onDelete('cascade')->default(1);
+            $table->foreign('id_pais','FK_id_pais_contactoradicaciones')
+            ->references('id')->on('geopais')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('id_provincia')->default(1);
             $table->index('id_provincia','IDX_id_provincia_contactoradicaciones'); 
-            $table->foreign('id_provincia','FK_id_provincia_contactoradicaciones')->references('id')->on('geoprovinciasregiones')->onDelete('cascade')->nullable();
+            $table->foreign('id_provincia','FK_id_provincia_contactoradicaciones')
+            ->references('id')->on('geoprovinciasregiones')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('id_subregion')->default(1);
             $table->index('id_subregion','IDX_id_subregion_contactoradicaciones');
-            $table->foreign('id_subregion','FK_id_subregion_contactoradicaciones')->references('id')->on('geoprovinciasregiones')->onDelete('cascade')->nullable(); 
+            $table->foreign('id_subregion','FK_id_subregion_contactoradicaciones')
+            ->references('id')->on('geoprovinciasregiones')
+            ->onDelete('cascade'); 
             $table->string('direccion_calle',255)->nullable()->default(null);
             $table->string('localidad',255)->nullable();
+            $table->unsignedBigInteger('id_departamento_ciudad')->default(1);
             $table->index('id_departamento_ciudad','IDX_id_departamento_ciudad_contactoradicaciones');
-            $table->foreign('id_departamento_ciudad','FK_id_departamento_contactoradicaciones')->references('id')->on('geolugares')->onDelete('cascade')->nullable()->default(1);
+            $table->foreign('id_departamento_ciudad','FK_id_departamento_contactoradicaciones')
+            ->references('id')->on('geolugares')
+            ->onDelete('cascade');
             $table->string('departamento_ciudad',255)->nullable()->default(null); 
+            $table->unsignedBigInteger('id_localidad')->default(1);
             $table->index('id_localidad','IDX_id_localidad_contactoradicaciones');
-            $table->foreign('id_localidad','FK_id_localidad_contactoradicaciones')->references('id')->on('geolugares')->onDelete('cascade')->nullable()->default(1);
+            $table->foreign('id_localidad','FK_id_localidad_contactoradicaciones')
+            ->references('id')->on('geolugares')
+            ->onDelete('cascade');
             $table->string('codigo_postal',20)->nullable()->default(null);
             $table->string('mail_tipo',45)->default(null)->nullable();
             $table->string('mail_direccion',100)->default(null)->nullable();
