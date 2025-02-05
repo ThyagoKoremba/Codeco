@@ -24,6 +24,6 @@ class Identidades extends Model
     ];
 
     public function geopais(){
-        return $this->belongsTo(Geopais::class,'id_pais_identidad', 'id');
+        return $this->belongsTo(Geopais::class,'id_pais', 'id');
     }
 }

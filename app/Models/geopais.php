@@ -19,4 +19,8 @@ class Geopais extends Model
         'sn_provincia_determinada',
         'id_provincia_determinada',
     ];
+
+    public function identidades (){
+        return $this->hasMany(Identidades::class);
+    }
 }
