@@ -10,15 +10,17 @@ use App\Models\Fisicojuridicos;
 use App\Models\geopais;
 use App\Models\Identidades;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\geolugares;
 
 class ContactosController extends Controller
 {
     public function create () {
         $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
-        $pais=Geopais::orderBy('id')->paginate(10);
+       
         $identidades=Identidades::orderBy('id')->get();
         $condicionestributarias=Condiciontributarias::orderBy('id')->get();
-        return Inertia::render('Contacto/Create',compact('fisicojuridico','pais','identidades','condicionestributarias'));
+        return Inertia::render('Contacto/Create',compact('fisicojuridico','identidades','condicionestributarias'));
     }
 
     public function store (ContactoRequest $contacto) {
@@ -28,7 +30,7 @@ class ContactosController extends Controller
                                     ($data['nombresegundo'] ?? '');  
         $data['patronbusqueda'] = $data['apellidoynombre'] . ' ' . $data['car'];
         contactos::create($data);
-        return to_route('contacto.index');
+        return to_route('contacto.create');
     }
 
     public function index () {
@@ -57,4 +59,33 @@ class ContactosController extends Controller
 
         return to_route('contacto.index');
     }
+
+
+    public function searchPaises(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geopais::where('nombre', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+
+}
+public function searchRegiones(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geolugares::where('descripcion', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+}
+
+
 }

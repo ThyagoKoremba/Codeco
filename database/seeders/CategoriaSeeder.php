@@ -37,5 +37,30 @@ class CategoriaSeeder extends Seeder
             'sn_registrosistema' => true,
             'sn_activo'=> true,
         ]);
+        Categorias::create([
+            'descripcion'=> 'Contacto',
+            'abreviatura'=> 'Contacto',
+            'sn_registrosistema' => true,
+            'sn_activo'=> true,
+        ]);
+        Categorias::create([
+            'descripcion'=> 'Banco / Financiera',
+            'abreviatura'=> 'Bco./Fin.',
+            'sn_registrosistema' => true,
+            'sn_activo'=> true,
+        ]);
+        Categorias::create([
+            'descripcion'=> 'Proveedor',
+            'abreviatura'=> 'Proveed',
+            'sn_registrosistema' => true,
+            'sn_activo'=> true,
+        ]);
+        Categorias::create([
+            'descripcion'=> 'Personal de la firma',
+            'abreviatura'=> 'Pers.Firma',
+            'sn_registrosistema' => true,
+            'sn_activo'=> true,
+        ]);
+
     }
 }

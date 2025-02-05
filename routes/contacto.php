@@ -10,4 +10,9 @@ Route::prefix('contacto')->middleware('auth')->group(function () {
     Route::get('/edit/{actividad}',[ContactosController::class,'edit'])->name('contacto.edit');
     Route::put('/update/{actividad}',[ContactosController::class,'update'])->name('contacto.update');
     Route::get('/cambiarEstado/{actividad}',[ContactosController::class,'cambiarEstado'])->name('contacto.cambiarEstado');
+
+
+    Route::get('/search-paises', [ContactosController::class, 'searchPaises']);
+    Route::get('/search-regiones', [ContactosController::class, 'searchRegiones']);
+
 });
