@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('geolugares', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion',255)->nullable();
+            $table->string('descripcion',255);
             $table->boolean('sn_activo')->default(1);
             $table->timestamps();
         });

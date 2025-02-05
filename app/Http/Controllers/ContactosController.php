@@ -73,7 +73,7 @@ class ContactosController extends Controller
 
         return response()-> json($results);
 
-  
+
 }
 public function searchRegiones(Request $request)
 {
@@ -86,7 +86,6 @@ public function searchRegiones(Request $request)
 
         return response()-> json($results);
 
-  
 }
 public function searchProvincias(Request $request)
 {
