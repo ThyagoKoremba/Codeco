@@ -163,7 +163,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                         <div className="card-body">
                             <form onSubmit={submit} className="row g-3">
                                 {/*  Información Personal  */}
-                                <h4 className="mb-3">Información Personal</h4>
+                                <h4 className="mb-3">Información Contacto</h4>
 
                                 <div className="col-md-6">
                                     <label htmlFor="persona" className="form-label">Persona</label>
@@ -295,40 +295,11 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                     {errors.id_condiciontributaria && <div className="text-danger mt-1">{errors.id_condiciontributaria}</div>}
                                 </div>
 
+                               
 
 
                                 <div className="col-md-6">
-                                    <label htmlFor="identidadTributaria" className="form-label">Identidad Tributaria</label>
-                                    <select
-                                        id="identidadTributaria"
-                                        name="identidadTributaria"
-                                        value={data.id_identidadtributaria}
-                                        onChange={(e) => {
-                                            const selectedId = e.target.value;
-                                            setData('id_identidadtributaria', selectedId);
-
-                                            const selectedIdentidad = identidades.find(identidad => identidad.id == selectedId);
-                                            if (selectedIdentidad) {
-                                                setMascaraTributaria(selectedIdentidad.dato_mascara);
-                                            }
-                                        }}
-                                        className="form-select"
-                                    >
-                                        <option value="">Seleccionar</option>
-                                        {data.id_fisicojuridico == 2
-                                            ? identidades.filter(identidad => identidad.sn_juridica == 1).map((identidad) => (
-                                                <option key={identidad.id} value={identidad.id}>
-                                                    {identidad.descripcion}
-                                                </option>
-                                            ))
-                                            : identidades.filter(identidad => identidad.sn_juridica == 0).map((identidad) => (
-                                                <option key={identidad.id} value={identidad.id}>
-                                                    {identidad.descripcion}
-                                                </option>
-                                            ))
-                                        }
-                                    </select>
-                                    {errors.id_identidadtributaria && <div className="text-danger mt-1">{errors.id_identidadtributaria}</div>}
+                                    <p>El código de acceso rápido es un número rápido e identificatorio para el contacto. Se recomienda usar los dos primeros y los tres últimos dígitos del CUIT. Por ejemplo: 20-12345678-9 = 12789</p>
                                 </div>
 
                                 <div className="col-md-6">
@@ -336,8 +307,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                     <input
                                         id="valorIdTributaria"
                                         type="text"
-                                        placeholder={mascaraTributaria}
-                                        maxLength={mascaraTributaria.length} // Limita a 8 caracteres si el ID es 1
+                                        maxLength={data.id_identidadtributaria === "3" ? 8 : 11} // Limita a 8 caracteres si el ID es 1
                                         name="valorIdTributaria"
                                         value={data.id_identidadtributaria_dato}
                                         className="form-control"
@@ -348,7 +318,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                 </div>
 
                                 <hr></hr>
-
+                          
                                 <h4 className="mt-4 mb-3">Información Personal</h4>
 
                                 <div className="col-md-6">
@@ -374,17 +344,17 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                         value={data.id_personal_dato}
                                         className="form-control"
                                         onChange={(e) => setData('id_personal_dato', e.target.value)}
-                                        disabled={data.id_fisicojuridico == '2'}
+                                        disabled={data.id_fisicojuridico == '2'} 
                                     />
                                     {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
                                 </div>
 
-
+                               
                                 <div className="col-md-6">
-                                    <p>El código de acceso rápido es un número rápido e identificatorio para el contacto. Se recomienda usar los dos primeros y los tres últimos dígitos del CUIT. Por ejemplo: 20-12345678-9 = 12789</p>
-                                </div>
+                                <p>El código de acceso rápido es un número rápido e identificatorio para el contacto. Se recomienda usar los dos primeros y los tres últimos dígitos del CUIT. Por ejemplo: 20-12345678-9 = 12789</p>
+</div>
 
-                                <div className="col-md-4">
+<div className="col-md-4">
                                     <label htmlFor="codigoAccesoRapido" className="form-label">Código de Acceso Rápido</label>
                                     <input
                                         id="codigoAccesoRapido"
@@ -396,7 +366,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                     />
                                     {errors.car && <div className="text-danger mt-1">{errors.car}</div>}
 
-
+                                   
                                 </div>
                                 <hr />
                                 <h4 className="mt-4 mb-3">Domicilio</h4>
