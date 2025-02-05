@@ -12,6 +12,7 @@ use App\Models\Identidades;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\geolugares;
+use App\Models\geoprovinciasregiones;
 
 class ContactosController extends Controller
 {
@@ -87,6 +88,20 @@ public function searchRegiones(Request $request)
 
   
 }
+public function searchProvincias(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geoprovinciasregiones::where('descripcion', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+  
+}
+
 
 
 }
