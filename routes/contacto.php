@@ -14,5 +14,5 @@ Route::prefix('contacto')->middleware('auth')->group(function () {
 
     Route::get('/search-paises', [ContactosController::class, 'searchPaises']);
     Route::get('/search-regiones', [ContactosController::class, 'searchRegiones']);
-
+    Route::get('/search-prov', [ContactosController::class, 'searchProv']);
 });
