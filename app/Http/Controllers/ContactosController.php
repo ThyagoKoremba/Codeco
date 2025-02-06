@@ -12,6 +12,7 @@ use App\Models\Identidades;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\geolugares;
+use App\Models\geoprovinciasregiones;
 
 class ContactosController extends Controller
 {
@@ -24,12 +25,34 @@ class ContactosController extends Controller
     }
 
     public function store (ContactoRequest $contacto) {
-        $data=$contacto->all();
-        $data['apellidoynombre'] = ($data['apellidorazonsocial'] ?? '') . ' ' . 
-                                    ($data['nombrefansatia'] ?? '') . ' ' . 
-                                    ($data['nombresegundo'] ?? '');  
-        $data['patronbusqueda'] = $data['apellidoynombre'] . ' ' . $data['car'];
-        contactos::create($data);
+        $contactos = new contactos();
+        $contactos->id_fisicojuridico = $contacto->id_fisicojuridico;
+        $contactos->id_pais=$contacto->id_pais;
+        $contactos->car= $contacto->car;
+        $contactos->apellidorazonsocial=$contacto->apellidorazonsocial;
+        $contactos->nombrefantasia=$contacto->nombrefantasia;
+        $contactos->nombresegundo=$contacto->nombresegundo;
+        if($contacto->id_fisicojuridico == 2){
+            $contactos->apellidoynombre=$contacto->apellidorazonsocial . ' ' . $contacto->nombrefantasia;
+        }else{
+            $contactos->apellidoynombre=$contacto->apellidorazonsocial. ' ' . $contacto->nombresegundo . ' ' . $contacto->nombrefantasia;
+        }
+        $contactos->patronbusqueda=$contactos->apellidoynombre . ' ' . $contacto->id . ' ' . $contacto->id_personal_dato;
+        $contactos->id_personal=$contacto->id_personal;
+        $contactos->id_personal_dato=$contacto->id_personal_dato;
+        $contactos->id_condiciontributaria=$contacto->id_condiciontributaria;
+        $contactos->id_identidadtributaria=$contacto->id_identidadtributaria;
+        $contactos->id_identidadtributaria_dato=$contacto->id_identidadtributaria_dato;
+        $contactos->mail_direccion=$contacto->mail_direccion;
+        $contactos->telefono_numero=$contacto->telefono_numero;
+        $contactos->telefono_sn_movil=$contacto->telefono_sn_movil;
+        $contactos->observacion=$contacto->observacion;
+        $contactos->id_provincia=$contacto->id_provincia;
+        $contactos->id_subregion=$contacto->id_subregion;
+        $contactos->direccion_calle=$contacto->direccion_calle;
+        $contactos->codigo_postal=$contacto->codigo_postal;
+        $contactos->save();
+
         return to_route('contacto.create');
     }
 
@@ -86,6 +109,20 @@ public function searchRegiones(Request $request)
         return response()-> json($results);
 
 }
+
+public function searchProv(Request $request)
+{
+    $query = $request->input('query');
+    $page = $request->input('page', 1);
+
+    $results = Geoprovinciasregiones::where('descripcion', 'like', "%$query%")
+        ->paginate(5, ['*'], 'page', $page)
+        ->appends(['query' => $query]);
+
+        return response()-> json($results);
+
+}
+
 
 
 }
