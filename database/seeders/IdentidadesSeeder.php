@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Geopais;
 use App\Models\Identidades;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class IdentidadesSeeder extends Seeder
@@ -13,6 +13,8 @@ class IdentidadesSeeder extends Seeder
      */
     public function run(): void
     {
+        $pais=Geopais::find(14);
+
         Identidades::create([
             'id'=>'1',
             'descripcion'=>'<Sin Informar>',
@@ -24,7 +26,7 @@ class IdentidadesSeeder extends Seeder
             'sn_identidadtributaria'=>false,
             'sn_activo'=>true,
             'sn_registrosistema'=>true,
-            'id_pais'=>0,
+            'id_pais'=>1,
         ]);
         Identidades::create([
             'id'=>'2',
@@ -37,7 +39,7 @@ class IdentidadesSeeder extends Seeder
             'sn_identidadtributaria'=>true,
             'sn_activo'=>true,
             'sn_registrosistema'=>false,
-            'id_pais'=>14,
+            'id_pais'=> 14,
         ]);
         Identidades::create([
             'id'=>'3',
@@ -50,7 +52,7 @@ class IdentidadesSeeder extends Seeder
             'sn_identidadtributaria'=>false,
             'sn_activo'=>true,
             'sn_registrosistema'=>false,
-            'id_pais'=>14,
+            'id_pais'=> 14,
         ]);
         Identidades::create([
             'id'=>'4',
@@ -63,7 +65,8 @@ class IdentidadesSeeder extends Seeder
             'sn_identidadtributaria'=>false,
             'sn_activo'=>true,
             'sn_registrosistema'=>false,
-            'id_pais'=>14,
+            'id_pais'=> 14,
         ]);
+        
     }
 }
