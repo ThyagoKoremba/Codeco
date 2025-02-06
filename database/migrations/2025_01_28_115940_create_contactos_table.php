@@ -64,7 +64,7 @@ return new class extends Migration
             $table->string('mail_direccion',100)->default(null)->nullable();
             $table->string('telefono_tipo',45)->default(null)->nullable();
             $table->string('telefono_numero',45)->default(null)->nullable();
-            $table->boolean('telefono_sn_movil')->default(0);
+            $table->boolean('telefono_sn_movil')->default(0)->nullable();
             $table->mediumText('observacion');
             $table->unsignedBigInteger('id_provincia')->default(1);
             $table->index('id_provincia','FK_id_provincia_contactos_idx');
@@ -91,7 +91,7 @@ return new class extends Migration
             $table->string('localidad',255)->default(null)->nullable();
             $table->string('codigo_postal',20)->default(null)->nullable();
             $table->string('domicilioformateado',255)->default(null)->nullable();
-            $table->text('foto');
+            $table->text('foto')->nullable();
             $table->date('fecha_form_alta')->nullable();
             $table->date('fecha_form_modificacion')->nullable();
             $table->date('fecha_vigenciahasta')->nullable();

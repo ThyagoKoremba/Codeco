@@ -62,7 +62,7 @@ return new class extends Migration
             $table->string('telefono1_numero',45)->default(null)->nullable();
             $table->boolean('telefono1_sn_movil')->default(0);
             $table->string('domicilioformateado',255)->default(null)->nullable();
-            $table->mediumText('nota');
+            $table->mediumText('nota')->nullable();
             $table->boolean('sn_predeterminado')->default(0);
             $table->boolean('sn_correspondencia')->default(0);
             $table->boolean('sn_activo')->default(1);

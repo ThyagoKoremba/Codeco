@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Contacto\ContactoRequest;
 use App\Http\Requests\Contacto\ContactoUpdate;
 use App\Models\condiciontributarias;
+use App\Models\Contactoradicaciones;
 use App\Models\contactos;
 use App\Models\Fisicojuridicos;
 use App\Models\geopais;
@@ -18,7 +19,6 @@ class ContactosController extends Controller
 {
     public function create () {
         $fisicojuridico=Fisicojuridicos::orderBy('id')->get();
-       
         $identidades=Identidades::orderBy('id')->get();
         $condicionestributarias=Condiciontributarias::orderBy('id')->get();
         return Inertia::render('Contacto/Create',compact('fisicojuridico','identidades','condicionestributarias'));
@@ -53,8 +53,23 @@ class ContactosController extends Controller
         $contactos->codigo_postal=$contacto->codigo_postal;
         $contactos->save();
 
+        $radicaciones = new Contactoradicaciones();
+        $radicaciones->id_contacto=$contactos->id;
+        $radicaciones->id_pais=$contacto->id_pais;
+        $radicaciones->id_provincia=$contacto->id_provincia;
+        $radicaciones->id_subregion=$contacto->id_subregion;
+        $radicaciones->direccion_calle=$contacto->direccion_calle;
+        $radicaciones->codigo_postal=$contacto->codigo_postal;
+        $radicaciones->mail_direccion=$contacto->mail_direccion;
+        $radicaciones->telefono_numero=$contacto->telefono_numero;
+        $radicaciones->telefono_sn_movil=$contacto->telefono_sn_movil;
+        $radicaciones->nota=$contacto->observacion;
+        $radicaciones->save();
+
         return to_route('contacto.create');
     }
+
+
 
     public function index () {
         
