@@ -26,15 +26,15 @@ class ActividadUpdate extends FormRequest
         return [
             'actividadnombre'=>[
                 'required',
-                'regex:/^[a-zA-Z0-9]{1,45}$/',
+                'regex:/^[\p{L}\p{N}\s\.\-]{1,45}$/',
                 Rule::unique('actividades','actividadnombre')->ignore($this->actividad->id),
                 ],
-                'actividadabreviatura'=>'required|regex:/^[a-zA-Z0-9]{1,15}$/',
+                'actividadabreviatura' => 'required|regex:/^[\p{L}\p{N}.\-\s]{1,15}$/u',
                 'isdefaultvalue'=>'boolean',
                 'activosn'=>'boolean',
                 'titulosn'=>'boolean',
-                'informacionsn' => 'required|in:0,1',
-                'etiquetasn' => 'required|in:0,1',
+                'informacionsn' => 'boolean',
+                'etiquetasn' => 'boolean',
                 'actividaddsc'=>'string',
         ];
     }

@@ -23,13 +23,13 @@ class ActividadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'actividadnombre'=>'required|unique:actividades,actividadnombre|regex:/^[a-zA-Z0-9]{1,45}$/',
-            'actividadabreviatura'=>'required|regex:/^[a-zA-Z0-9]{1,15}$/',
+            'actividadnombre' => 'required|unique:actividades,actividadnombre|regex:/^[\p{L}\d\s\.\-]{1,45}$/u',
+            'actividadabreviatura'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,15}$/u',
             'isdefaultvalue'=>'boolean',
             'activosn'=>'boolean',
             'titulosn'=>'boolean',
-            'informacionsn' => 'required|in:0,1',
-            'etiquetasn' => 'required|in:0,1',
+            'informacionsn' => 'boolean',
+            'etiquetasn' => 'boolean',
             'actividaddsc'=>'string'
         ];
     }

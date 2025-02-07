@@ -13,10 +13,10 @@ const Create = ({ auth }) => {
         descripcion:"",
         abreviatura: "",
         sn_registrosistema:false,
-        sn_activo:false,
+        sn_activo:true,
     }
 
-    const {data, errors, setData, post}=useForm({initialValues})
+    const {data, errors, setData, post}=useForm(initialValues)
 
     const submit = (e) =>{
         e.preventDefault();

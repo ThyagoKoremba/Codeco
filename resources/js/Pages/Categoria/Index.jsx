@@ -1,6 +1,6 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head} from '@inertiajs/react';
 
 
 const Index = ({ auth, categorias }) => {
@@ -13,7 +13,7 @@ const Index = ({ auth, categorias }) => {
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Categorias</h2>
                     <a href={route('categoria.create')}>
-                        <button className='btn btn-primary'>Categorias</button>
+                        <button className='btn btn-primary'>Nueva Categorias</button>
                     </a>
                 </div>
             }

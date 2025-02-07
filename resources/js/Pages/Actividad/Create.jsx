@@ -1,10 +1,9 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
-import InputLabel from '@/Components/InputLabel';
-import TextInput from '@/Components/TextInput';
+import { Head } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+
 import InputError from '@/Components/InputError';
-import PrimaryButton from '@/Components/PrimaryButton';
 
 
 const Create = ({ auth }) => {
@@ -13,18 +12,16 @@ const Create = ({ auth }) => {
         actividadnombre: "",
         actividadabreviatura: "",
         isdefaultvalue: false,
-        activosn: false,
+        activosn: true,
         titulosn: false,
         informacionsn: false,
         etiquetasn: false,
         actividaddsc: "",
     }
-
-    const { data, errors, setData, post } = useForm({ initialValues })
-
+    const { data, errors, setData, post } = useForm(initialValues)
     const submit = (e) => {
         e.preventDefault();
-        post(route('actividad.store'))
+        post(route('actividad.store'));
         console.log(data);
     }
 
@@ -82,6 +79,17 @@ const Create = ({ auth }) => {
                                                     />
                                                     <InputError message={errors.actividadabreviatura} className="mt-2" />
                                                 </div>
+                                                <div className='mb-6'>
+                                                        <label htmlFor="actividaddsc">Descripción:</label>
+                                                        <textarea 
+                                                        id="actividaddsc"
+                                                        type="Text"
+                                                        name='actividaddsc'
+                                                        checked={data.etiquetasn}
+                                                        onChange={(e)=>setData('actividaddsc', e.target.value)}
+                                                        row='5'
+                                                        />
+                                                    </div>
                                                 <div className='row mb-3'>
                                                     <div className='col-6'>
                                                         <label htmlFor="isdefaultvalue" className='form-label'>Valor predeterminado</label>
@@ -89,11 +97,13 @@ const Create = ({ auth }) => {
                                                             id='isdefaultvalue'
                                                             type="checkbox"
                                                             name='isdefaultvalue'
-                                                            value={data.isdefaultvalue}
-                                                            className='form-check-input'
+                                                            checked={data.isdefaultvalue}
                                                             onChange={(e) => setData('isdefaultvalue', e.target.checked)}
                                                         />
+                                                    <InputError message={errors.isdefaultvalue} className="mt-2" />
+
                                                     </div>
+
 
                                                     <div className='col-6'>
 
@@ -102,12 +112,41 @@ const Create = ({ auth }) => {
                                                             id='titulosn'
                                                             type="checkbox"
                                                             name='titulosn'
-                                                            value={data.titulosn}
-                                                            className='form-check-input'
+                                                            checked={data.titulosn}
                                                             onChange={(e) => setData('titulosn', e.target.checked)}
                                                         />
+                                                        <InputError message={errors.titulosn} className="mt-2" />
+
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div className='row mb-3'>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="informacionsn">Información:</label>
+                                                        <input 
+                                                        id="informacionsn"
+                                                        type="checkbox"
+                                                        name='informacionsn'
+                                                        checked={data.informacionsn}
+                                                        onChange={(e)=>setData('informacionsn', e.target.checked)}
+                                                        />
+                                                        <InputError message={errors.informacionsn} className="mt-2" />
+
+                                                    </div>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="etiquetasn">Etiqueta:</label>
+                                                        <input 
+                                                        id="etiquetasn"
+                                                        type="checkbox"
+                                                        name='etiquetasn'
+                                                        checked={data.etiquetasn}
+                                                        onChange={(e)=>setData('etiquetasn', e.target.checked)}
+                                                        />
+                                                        <InputError message={errors.etiquetasn} className="mt-2" />
+
                                                     </div>
                                                 </div>
+
                                                 <div className="mb-3">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>

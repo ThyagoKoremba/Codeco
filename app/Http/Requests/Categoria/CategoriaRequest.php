@@ -23,8 +23,8 @@ class CategoriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'descripcion'=>'required|max:45|unique:categorias,descripcion',
-            'abreviatura'=>'required|max:10|unique:categorias,abreviatura',
+            'descripcion'=>'required|unique:categorias,descripcion|regex:/^[\p{L}\p{N}\d\s\.\-]{1,45}$/u',
+            'abreviatura'=>'required|unique:categorias,abreviatura|regex:/^[\p{L}\p{N}\d\s\.\-]{1,10}$/u',
             'sn_registrosistema'=>'boolean',
             'sn_activo'=>'boolean',
         ];
