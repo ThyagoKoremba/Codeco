@@ -13,7 +13,7 @@ class GeolugaresSeeder extends Seeder
      */
     public function run(): void
     {
-        Geolugares::crete([
+        Geolugares::create([
             'id'=>'1',
             'descripcion'=>'prueba'
         ]);
