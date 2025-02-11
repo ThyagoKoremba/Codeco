@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Proyecto;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProyectoUpdate extends FormRequest
 {
@@ -11,7 +13,7 @@ class ProyectoUpdate extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +24,17 @@ class ProyectoUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'proyectonombre' => [
+                'required',
+                'regex:/^[\p{L}\p{N}\.\-\s]{1,100}$/u',
+                Rule::unique('proyectos', 'proyectonombre')->ignore($this->proyecto->id),
+            ],
+            'proyectoabreviatura'   => 'required|regex:/^[\p{L}\p{N}]{1,15}$/u',
+            'fechainicio'           => 'date',
+            'fechafinalizacion'     => 'nullable|date|after_or_equal:fechainicio',
+            'activosn'              => 'boolean',
+            'productoressn'         => 'boolean',
+            'proyectodescripcion'   => 'nullable|string',
         ];
     }
 }

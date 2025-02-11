@@ -33,7 +33,7 @@ class ContactosController extends Controller
         $contactos->nombrefantasia=$contacto->nombrefantasia;
         $contactos->nombresegundo=$contacto->nombresegundo;
         if($contacto->id_fisicojuridico == 2){
-            $contactos->apellidoynombre=$contacto->apellidorazonsocial . ' ' . $contacto->nombrefantasia;
+            $contactos->apellidoynombre=$contacto->apellidorazonsocial . '-' . $contacto->nombrefantasia;
         }else{
             $contactos->apellidoynombre=$contacto->apellidorazonsocial. ' ' . $contacto->nombresegundo . ' ' . $contacto->nombrefantasia;
         }

@@ -45,3 +45,5 @@ require __DIR__.'/contacto.php';
 require __DIR__.'/api_front.php';
 require __DIR__.'/rol.php';
 require __DIR__.'/actividad.php';
+require __DIR__.'/proyecto.php';
+
