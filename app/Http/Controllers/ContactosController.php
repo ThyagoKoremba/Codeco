@@ -73,8 +73,8 @@ class ContactosController extends Controller
 
     public function index () {
         
-        $contactos=contactos::orderBy('id')->get();
-        return Inertia::render('/Contacto/Index',compact('contactos'));
+        $contactos=Contactos::orderBy('id')->get();
+        return Inertia::render('Contacto/Index',compact('contactos'));
     }
 
     public function edit (contactos $contacto) {
