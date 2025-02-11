@@ -8,6 +8,7 @@ import DashboardLayout from '@/Layouts/Sidebar'; ;
 import './styles.css';
 Modal.setAppElement('#app');
 
+import Swal from 'sweetalert2';
 
 const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributarias }) => {
 
@@ -42,7 +43,17 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('contacto.store'));
+        post(route('contacto.store'), {
+            onSuccess: () => {
+                Swal.fire({
+                    title: 'Contacto Creado',
+                    text: 'El contacto ha sido creado exitosamente.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                reset();
+            }
+        });
     };
 
     const [isPaisModalOpen, setIsPaisModalOpen] = useState(false);

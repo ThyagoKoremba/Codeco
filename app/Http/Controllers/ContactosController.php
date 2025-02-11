@@ -66,7 +66,7 @@ class ContactosController extends Controller
         $radicaciones->nota=$contacto->observacion;
         $radicaciones->save();
 
-        return to_route('contacto.create');
+        return to_route('contacto.index');
     }
 
 

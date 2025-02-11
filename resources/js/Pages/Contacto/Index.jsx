@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const Index = ({ auth, contactos }) => {
   
-
+console.log(contactos);
   
     const [searchTerm, setSearchTerm] = useState('');
     const [contacts, setContacts] = useState();
@@ -43,8 +43,8 @@ const deleteContact = (id) => {
 };
 
   
-    const filteredContacts = contacts?.filter(contact =>
-        contact.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredContacts = contactos?.filter(contact =>
+        contact.nombrefantasia.toLowerCase().includes(searchTerm.toLowerCase())
     ); 
 
     return (
@@ -72,24 +72,24 @@ const deleteContact = (id) => {
                             <table className="table table-striped">
                                 <thead className="thead-dark" style={{ position: 'sticky', top: 0 }}>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Fecha</th>
+                                        <th>Nombre / Razon Social</th>
+                                        <th>Persona</th>
+                                        <th>Email</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {filteredContacts?.map(contact => (
                                         <tr key={contact.id}>
-                                            <td>{contact.nombre}</td>
-                                            <td>{contact.tipo}</td>
-                                            <td>{contact.fecha}</td>
+                                            <td>{contact.apellidoynombre}</td>
+                                            <td>{contact.id_fisicojuridico == '2' ? 'Juridica' : 'Fisica'}</td>
+                                            <td>{contact.mail_direccion}</td>
                                             <td>
                                                 <Link href={`/contacto/${contact.id}/edit`} className="btn btn-sm btn-primary" style={{ marginRight: '6px' }}>
-                                                    Edit
+                                                    Editar
                                                 </Link>
                                                 <button onClick={() => deleteContact(contact.id)} className="btn btn-sm btn-danger">
-                                                    Delete
+                                                    Eliminar
                                                 </button>
                                             </td>
                                         </tr>
