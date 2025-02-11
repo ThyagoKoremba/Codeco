@@ -14,6 +14,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\geolugares;
 use App\Models\geoprovinciasregiones;
+use App\Models\vista_contactos;
 
 class ContactosController extends Controller
 {
@@ -73,9 +74,9 @@ class ContactosController extends Controller
 
     public function index () {
         
-        $contactos=Contactos::orderBy('id')->get();
-        return Inertia::render('Contacto/Index',compact('contactos'));
-    }
+        $contactos=vista_contactos::orderby('id_contacto')->get();
+        return Inertia::render('Contacto/Index',['contactos'=>$contactos]);
+    } 
 
     public function edit (contactos $contacto) {
         $fisicojuridico=Fisicojuridicos::orderBy('id')->get();

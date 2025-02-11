@@ -34,7 +34,7 @@ const deleteContact = (id) => {
         cancelButtonColor: '#3085d6',
     }).then((result) => {
         if (result.isConfirmed) {
-            const updatedContacts = contacts.filter(contact => contact.id !== id);
+            const updatedContacts = contacts.filter(contact => contact.id_contacto !== id);
             setContacts(updatedContacts);
             Inertia.delete(`/contacto/${id}`);
             Swal.fire('Eliminado', 'El contacto ha sido eliminado.', 'success');
@@ -72,8 +72,10 @@ const deleteContact = (id) => {
                             <table className="table table-striped">
                                 <thead className="thead-dark" style={{ position: 'sticky', top: 0 }}>
                                     <tr>
-                                        <th>Nombre / Razon Social</th>
+                                        <th>Apellido / Razon Social</th>
+                                        <th>Nombre / Nombre Fantasia</th>
                                         <th>Persona</th>
+                                        <th>Identificación</th>
                                         <th>Email</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -81,14 +83,17 @@ const deleteContact = (id) => {
                                 <tbody>
                                     {filteredContacts?.map(contact => (
                                         <tr key={contact.id}>
-                                            <td>{contact.apellidoynombre}</td>
-                                            <td>{contact.id_fisicojuridico == '2' ? 'Juridica' : 'Fisica'}</td>
+                                            <td>{contact.apellidorazonsocial}</td>
+                                            <td>{contact.nombrefantasia}</td>
+                                            <td>{contact.fisicojuridico }</td>
+                                            <td>{contact.fisicojuridico == 'JURIDICO' ? (contact.identidad_tributaria + ' ' + contact.id_identidadtributaria_dato) : (contact.identidad_personal + ' ' + contact.id_personal_dato)}</td>
+                                            
                                             <td>{contact.mail_direccion}</td>
                                             <td>
-                                                <Link href={`/contacto/${contact.id}/edit`} className="btn btn-sm btn-primary" style={{ marginRight: '6px' }}>
+                                                <Link href={`/contacto/${contact.id_contacto}/edit`} className="btn btn-sm btn-primary" style={{ marginRight: '6px' }}>
                                                     Editar
                                                 </Link>
-                                                <button onClick={() => deleteContact(contact.id)} className="btn btn-sm btn-danger">
+                                                <button onClick={() => deleteContact(contact.id_contacto)} className="btn btn-sm btn-danger">
                                                     Eliminar
                                                 </button>
                                             </td>
