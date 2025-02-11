@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(GeopaisSeeder::class);
+        $this->call(GeolugaresSeeder::class);
+        $this->call(GeoprovinciasregionesSeeder::class);
         $this->call(CategoriaSeeder::class);
         $this->call(CondiciontributariasSeeder::class);
         $this->call(ContactoestadoSeeder::class);
