@@ -12,6 +12,9 @@ class GeolugaresSeeder extends Seeder
      */
     public function run(): void
     {
-        
+        Geolugares::crete([
+            'id'=>'1',
+            'descripcion'=>'prueba'
+        ]);
     }
 }
