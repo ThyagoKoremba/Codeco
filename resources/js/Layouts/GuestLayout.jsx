@@ -1,17 +1,20 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Guest({ children }) {
     return (
-        <div className="min-vh-100 d-flex flex-column justify-content-center align-items-center pt-3 bg-light">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-25 h-25 text-secondary" />
-                </Link>
-            </div>
-
-            <div className="w-100 mt-3 px-3 py-4 bg-white shadow-sm rounded">
-                {children}
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5">
+                        <div className="card-header">
+                            <h3>Iniciar Sesión</h3>
+                        </div>
+                        <div className="card-body">
+                            {children}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
