@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Link } from '@inertiajs/react';
 import DashboardLayout from '@/Layouts/Sidebar';
@@ -7,14 +7,14 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Swal from 'sweetalert2';
 
 import { Dropdown } from 'react-bootstrap';
-const RadicacionesIndex = ({ auth, contactos }) => {
+const RadicacionesIndex = ({ auth, radicaciones, nombre, apellido }) => {
 
     
 
     const [searchTerm, setSearchTerm] = useState('');
     const [contacts, setContacts] = useState();
 
-   
+   console.log(radicaciones, nombre, apellido)
 
     const deleteContact = (id) => {
         Swal.fire({
@@ -30,6 +30,7 @@ const RadicacionesIndex = ({ auth, contactos }) => {
             if (result.isConfirmed) {
                 const updatedContacts = contacts.filter(contact => contact.id_contacto !== id);
                 setContacts(updatedContacts);
+                
                 Inertia.delete(`/contacto/${id}`);
                 Swal.fire('Eliminado', 'El contacto ha sido eliminado.', 'success');
             }
@@ -37,14 +38,12 @@ const RadicacionesIndex = ({ auth, contactos }) => {
     };
 
 
-    const filteredContacts = contactos?.filter(contact =>
-        contact.nombrefantasia.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+   
 
     return (
         <>
             <DashboardLayout>
-                <AuthenticatedLayout user={auth.user} header={<h2>Contactos</h2>}>
+                <AuthenticatedLayout user={auth.user} header={<h2>Radicaciones de  {apellido} , {nombre} </h2>}>
                     <div className="container mt-4">
                         <div className="row mb-3">
                             <div className="col-md-6">
@@ -58,30 +57,35 @@ const RadicacionesIndex = ({ auth, contactos }) => {
                             </div>
                             <div className="col-md-6 text-right">
                                 <Link href="/contacto/create" className="btn btn-dark">
-                                    Crear Contacto
+                                    Crear 
                                 </Link>
                             </div>
                         </div>
-                        <div className="table-responsive" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                        <div className="table-responsive" style={{ maxHeight: '500px', minHeight:'300px', overflowY: 'auto' }}>
                             <table className="table table-striped">
                                 <thead className="thead-dark" style={{ position: 'sticky', top: 0 }}>
                                     <tr>
-                                        <th>Apellido / Razon Social</th>
-                                        <th>Nombre / Nombre Fantasia</th>
-                                        <th>Persona</th>
-                                        <th>Identificación</th>
+                                        <th>Pais</th>
+                                        <th>Región</th>
+                                        <th>Localidad</th>
                                         <th>Email</th>
+                                        <th>Dirección</th>
+                                        <th>Código Postal</th>
+                                     
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredContacts?.map(contact => (
+                                    {radicaciones?.map(contact => (
                                         <tr key={contact.id}>
-                                            <td>{contact.apellidorazonsocial}</td>
-                                            <td>{contact.nombrefantasia}</td>
-                                            <td>{contact.fisicojuridico}</td>
-                                            <td>{contact.fisicojuridico == 'JURIDICO' ? (contact.identidad_tributaria + ' ' + contact.id_identidadtributaria_dato) : (contact.identidad_personal + ' ' + contact.id_personal_dato)}</td>
-                                            <td>{contact.mail_direccion}</td>
+                                            <td>{contact.pais}</td>
+                                            <td>{contact.provincia}</td>
+                                            <td>{contact.localidad}</td>
+                                           
+                                            <td>{contact.mail}</td>
+                                            <td>{contact.direccion}</td>
+                                            <td>{contact.codigo_postal}</td>
+                                           
                                             <td>
 
                                                 <Dropdown>
@@ -94,9 +98,7 @@ const RadicacionesIndex = ({ auth, contactos }) => {
                                                         <Dropdown.Item onClick={() => deleteContact(contact.id_contacto)}>
                                                         <button className="btn btn-danger w-100">Eliminar</button>
                                                         </Dropdown.Item>
-                                                        <Dropdown.Item as={Link} href={`/contacto/${contact.id_contacto}/radicaciones`}>
-                                                        <button className="btn btn-primary w-100">Radicaciones</button>
-                                                        </Dropdown.Item>
+                                                       
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                             </td>
