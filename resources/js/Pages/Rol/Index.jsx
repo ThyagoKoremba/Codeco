@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
 
-const Index = ({ auth, categorias, roles}) => {
+const Index = ({ auth, roles}) => {
 
     return (
 
@@ -11,78 +11,77 @@ const Index = ({ auth, categorias, roles}) => {
             user={auth.user}
 
             header={
-                <div className=' flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Rol</h2>
-                    <Link href={route('rol.create')}>
-                        Crear Rol
-                    </Link>
+                <div className='d-flex justify-content-between'>
+                    <h2 className="">Roles</h2>
+                    <a href={route('rol.create')}>
+                        <button className='btn btn-primary'>Crear Rol</button>
+                    </a>
                 </div>
             }
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
+            <div className="tabla-index">
+                <div className="table-responsive overflow-visible">
+                    <table className="table table-striped table-hover align-middle">
+                        <thead className="sticky-top">
+                            <tr>
+                                <th scope='col'>
+                                    ID
+                                </th>
+                                <th scope="col">
+                                    Descripción
+                                </th>
+                                <th scope="col">
+                                    Abreviatura
+                                </th>
+                                <th scope="col">
+                                    Activo
+                                </th>
+                                <th scope="col">
+                                    Opciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {roles?.map((rol) => (
+                                <tr key={rol.id} className="">
+                                    <th scope='row' className='px6 py-4'>
+                                        {rol.id}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {rol.roldescripcion}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {rol.rolabreviatura}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {rol.activosn === 1 ? 'Si' : 'No'}
+                                    </td>
+                                    <td>
+                                        <div className="dropdown">
+                                            <button className="btn btn-secondary" type="button" id="dropdownMenu2"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                                </svg>
+                                            </button>
+                                            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
 
+                                                <a className="dropdown-item" href={route('rol.edit', [rol])} >Editar</a>
+                                                <a className="dropdown-item" href={route('rol.cambiarEstado', [rol])}>
+                                                    {rol.activosn === 1 ? 'Desactivar' : 'Activar'}
+                                                </a>
 
-                            <div className="relative overflow-x-auto">
-                                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                        <tr>
-                                            <th scope="col" className="px-6 py-3">
-                                                Descripción
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Abreviatura
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Valor predeterminado
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Activo
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Opciones
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {roles?.map((roles)=>(                                        
-                                            <tr key={roles.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                    {roles.roldescripcion}
-                                                </th>
-                                                <td className="px-6 py-4">
-                                                    {roles.rolabreviatura}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {roles.isdefaultvalue === 1 ? 'Si' : 'No'}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {roles.activosn === 1 ? 'Si' : 'No'}
-                                                </td>
-                                                <td>
-                                                    <div className='space-x-5'>
-                                                        <Link href={route('rol.edit',[roles])}>
-                                                        Editar
-                                                        </Link>
-                                                        <Link href={route('rol.cambiarEstado',[roles])}>
-                                                        {roles.sn_activo === 1 ? 'Desactivar' : 'Activar'}
-                                                        </Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            ))}
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </AuthenticatedLayout>

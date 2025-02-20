@@ -26,10 +26,14 @@ class EtiquetaUpdate extends FormRequest
         return [
             'etiquetanombre' => [
                 'required',
-                'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,100}$/',
+                'regex:/^[\p{L}\p{N}\d\s\.\-]{1,100}$/u',
                 Rule::unique('etiquetas', 'etiquetanombre')->ignore($this->etiqueta->id),
             ],
-            'etiquetaabreviatura' => 'required|unique:etiquetas,etiquetaabreviatura|regex:/^[a-zA-Z0-9]{1,15}$/',
+            'etiquetaabreviatura' => [
+                'required',
+                'regex:/^[\p{L}\p{N}\d\s\.\-]{1,15}$/u',
+                Rule::unique('etiquetas', 'etiquetaabreviatura')->ignore($this->etiqueta->id),
+            ],
             'isdefaultvalue' => 'boolean',
             'activosn' => 'boolean',
         ];

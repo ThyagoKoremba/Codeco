@@ -23,8 +23,8 @@ class EtiquetaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'etiquetanombre' => 'required|unique:etiquetas,etiquetanombre|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s]{1,100}$/',
-            'etiquetaabreviatura' => 'required|unique:etiquetas,etiquetaabreviatura|regex:/^[a-zA-Z0-9]{1,15}$/',
+            'etiquetanombre' => 'required|unique:etiquetas,etiquetanombre|regex:/^[\p{L}\p{N}\d\s\.\-]{1,100}$/u',
+            'etiquetaabreviatura' => 'required|unique:etiquetas,etiquetaabreviatura|regex:/^[\p{L}\p{N}\d\s\.\-]{1,15}$/u',
             'isdefaultvalue' => 'boolean',
             'activosn' => 'boolean',
         ];

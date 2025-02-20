@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Rol;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class RolUpdate extends FormRequest
 {
@@ -11,7 +12,7 @@ class RolUpdate extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,8 +23,8 @@ class RolUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            'roldescripcion'=>'required|regex:/^[a-zA-Z0-9]{1,45}$/',
-            'rolabreviatura'=>'required|regex:/^[a-zA-Z0-9]{1,15}$/',
+            'roldescripcion'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,45}$/u',
+            'rolabreviatura'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,15}$/u',
             'isdefaultvalue'=>'boolean',
             'activosn'=>'boolean',
         ];

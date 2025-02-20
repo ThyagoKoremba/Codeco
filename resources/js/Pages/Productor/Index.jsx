@@ -4,7 +4,7 @@ import { Head} from '@inertiajs/react';
 import './../../../css/app.css';
 
 
-const Index = ({ auth, proyectos }) => {
+const Index = ({ auth, productores }) => {
     return (
 
         <AuthenticatedLayout
@@ -12,9 +12,9 @@ const Index = ({ auth, proyectos }) => {
 
             header={
                 <div className='d-flex justify-content-between'>
-                    <h2 className="">Proyectos</h2>
-                    <a href={route('proyecto.create')}>
-                        <button className='btn btn-primary'>Nuevo Proyecto</button>
+                    <h2 className="">Productor</h2>
+                    <a href={route('productor.create')}>
+                        <button className='btn btn-primary'>Nuevo Productor</button>
                     </a>
                 </div>
             }
@@ -30,16 +30,13 @@ const Index = ({ auth, proyectos }) => {
                                     ID
                                 </th>
                                 <th scope="col">
-                                    Nombre
+                                    Nombres y Apellido
                                 </th>
                                 <th scope="col">
-                                    Abreviatura
+                                    Email
                                 </th>
                                 <th scope="col">
-                                    Fecha de Inicio
-                                </th>
-                                <th scope="col">
-                                    Fecha de Finalizacion
+                                    Telefono
                                 </th>
                                 <th scope="col">
                                     Activo
@@ -50,25 +47,22 @@ const Index = ({ auth, proyectos }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {proyectos?.map((proyecto) => (
-                                <tr key={proyecto.id} className="">
+                            {productores?.map((productor) => (
+                                <tr key={productor.id} className="">
                                     <th scope='row' className='px6 py-4'>
-                                        {proyecto.id}
+                                        {productor.id}
                                     </th>
                                     <td className="px-6 py-4">
-                                        {proyecto.proyectonombre}
+                                        {productor.nombres + ' ' + productor.apellido}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {proyecto.proyectoabreviatura}
+                                        {productor.mail}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {proyecto.fechainicio}
+                                        {productor.telefono}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {!proyecto.fechafinalizacion ? 'No definida' : proyecto.fechafinalizacion}
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        {proyecto.activosn === 1 ? 'Si' : 'No'}
+                                        {productor.activosn === 1 ? 'Si' : 'No'}
                                     </td>
                                     <td>
                                         <div className="dropdown">
@@ -82,9 +76,9 @@ const Index = ({ auth, proyectos }) => {
                                             </button>
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-                                                <a className="dropdown-item" href={route('proyecto.edit', [proyecto])} >Editar</a>
-                                                <a className="dropdown-item" href={route('proyecto.cambiarEstado', [proyecto])}>
-                                                    {proyecto.activosn === 1 ? 'Desactivar' : 'Activar'}
+                                                <a className="dropdown-item" href={route('productor.edit', [productor])} >Editar</a>
+                                                <a className="dropdown-item" href={route('productor.cambiarEstado', [productor])}>
+                                                    {productor.activosn === 1 ? 'Desactivar' : 'Activar'}
                                                 </a>
 
                                             </div>

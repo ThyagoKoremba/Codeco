@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('etiquetanombre',45)->unique('etiquetanombre')->index('etiquetanombre_IDX');
             $table->string('etiquetaabreviatura',15)->nullable()->unique('etiquetaabreviatura')->index('etiquetaabreviatura_IDX');
-            $table->boolean('isdefaultvalue')->nullable();
-            $table->boolean('activosn')->nullable();
+            $table->boolean('isdefaultvalue')->default(0);
+            $table->boolean('activosn')->default(0);
             $table->timestamps();
         });
     }

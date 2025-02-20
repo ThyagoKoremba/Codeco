@@ -46,4 +46,9 @@ require __DIR__.'/api_front.php';
 require __DIR__.'/rol.php';
 require __DIR__.'/actividad.php';
 require __DIR__.'/proyecto.php';
+require __DIR__.'/etiqueta.php';
+require __DIR__.'/productor.php';
+require __DIR__.'/proyectocnfgnotificacion.php';
+
+
 

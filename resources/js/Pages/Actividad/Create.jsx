@@ -80,12 +80,13 @@ const Create = ({ auth }) => {
                                                     <InputError message={errors.actividadabreviatura} className="mt-2" />
                                                 </div>
                                                 <div className='mb-6'>
-                                                        <label htmlFor="actividaddsc">Descripción:</label>
+                                                        <label htmlFor="actividaddsc" className='form-label'>Descripción:</label>
                                                         <textarea 
                                                         id="actividaddsc"
                                                         type="Text"
                                                         name='actividaddsc'
-                                                        checked={data.etiquetasn}
+                                                        value={data.actividaddsc}
+                                                        className='form-control mb-3'
                                                         onChange={(e)=>setData('actividaddsc', e.target.value)}
                                                         row='5'
                                                         />
@@ -98,6 +99,7 @@ const Create = ({ auth }) => {
                                                             type="checkbox"
                                                             name='isdefaultvalue'
                                                             checked={data.isdefaultvalue}
+                                                            className='form-check-input mx-2'
                                                             onChange={(e) => setData('isdefaultvalue', e.target.checked)}
                                                         />
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
@@ -113,6 +115,7 @@ const Create = ({ auth }) => {
                                                             type="checkbox"
                                                             name='titulosn'
                                                             checked={data.titulosn}
+                                                            className='form-check-input mx-2'
                                                             onChange={(e) => setData('titulosn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.titulosn} className="mt-2" />
@@ -128,6 +131,7 @@ const Create = ({ auth }) => {
                                                         type="checkbox"
                                                         name='informacionsn'
                                                         checked={data.informacionsn}
+                                                        className='form-check-input mx-2'
                                                         onChange={(e)=>setData('informacionsn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.informacionsn} className="mt-2" />
@@ -139,6 +143,7 @@ const Create = ({ auth }) => {
                                                         id="etiquetasn"
                                                         type="checkbox"
                                                         name='etiquetasn'
+                                                        className='form-check-input mx-2'
                                                         checked={data.etiquetasn}
                                                         onChange={(e)=>setData('etiquetasn', e.target.checked)}
                                                         />

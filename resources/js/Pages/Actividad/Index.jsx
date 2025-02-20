@@ -13,7 +13,7 @@ const Index = ({ auth, actividades }) => {
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Actividades</h2>
                     <a href={route('actividad.create')}>
-                        <button className='btn btn-primary'>Nueva Actividades</button>
+                        <button className='btn btn-primary'>Nueva Actividad</button>
                     </a>
                 </div>
             }

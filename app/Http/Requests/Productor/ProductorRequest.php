@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Rol;
+namespace App\Http\Requests\Productor;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class RolRequest extends FormRequest
+class ProductorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,7 @@ class RolRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'roldescripcion'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,45}$/u',
-            'rolabreviatura'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,15}$/u',
-            'isdefaultvalue'=>'boolean',
-            'activosn'=>'boolean',
+            //
         ];
     }
 }

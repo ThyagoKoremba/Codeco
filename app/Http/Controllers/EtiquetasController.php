@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Etiqueta\EtiquetaRequest;
 use App\Http\Requests\Etiqueta\EtiquetaUpdate;
 use App\Models\Etiquetas;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EtiquetasController extends Controller
@@ -26,7 +25,7 @@ class EtiquetasController extends Controller
     }
 
     public function edit (Etiquetas $etiqueta){        
-        return Inertia::render('Etiquta/Edit',compact('etiqueta'));
+        return Inertia::render('Etiqueta/Edit',compact('etiqueta'));
     }
 
     public function update (Etiquetas $etiqueta, EtiquetaUpdate $request){
@@ -36,7 +35,7 @@ class EtiquetasController extends Controller
     }
 
     public function cambiarEstado (Etiquetas $etiqueta){
-        $etiqueta->activosn=!$etiqueta->ativosn;
+        $etiqueta->activosn=!$etiqueta->activosn;
         $etiqueta->save();
         return  to_route('etiqueta.index');
     }

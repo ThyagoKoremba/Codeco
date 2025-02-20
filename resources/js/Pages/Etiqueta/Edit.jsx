@@ -4,20 +4,20 @@ import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 
-const Edit = ({ auth, rol }) => {
+const Edit = ({ auth, etiqueta }) => {
 
     const initialValues = {
-        roldescripcion: rol.roldescripcion,
-        rolabreviatura: rol.rolabreviatura,
-        isdefaultvalue: rol.isdefaultvalue,
-        activosn: rol.activosn,
+        etiquetanombre: etiqueta.etiquetanombre,
+        etiquetaabreviatura: etiqueta.etiquetaabreviatura,
+        isdefaultvalue: etiqueta.isdefaultvalue,
+        activosn: etiqueta.activosn,
     }
 
     const { data, errors, setData, put } = useForm(initialValues)
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('rol.update',rol))
+        put(route('etiqueta.update',etiqueta))
         console.log(data);
     }
 
@@ -27,9 +27,9 @@ const Edit = ({ auth, rol }) => {
 
             header={
                 <div className=' d-flex justify-content-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Rol</h2>
-                    <a href={route('rol.index')}>
-                    <button className='btn btn-primary'>Roles</button>
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Etiqueta</h2>
+                    <a href={route('etiqueta.index')}>
+                        <button className='btn btn-primary'>Etiquetas</button>
                     </a>
                 </div>
             }
@@ -39,42 +39,42 @@ const Edit = ({ auth, rol }) => {
                 <div className="container">
                     <div className="card shadow-sm">
                         <div className="card-body">
-                            <h1 className="mb-3">Editar Rol</h1>
+                            <h1 className="mb-3">Editar Etiqueta</h1>
                             <div className="row">
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
                                                 <div className='mb-3'>
-                                                    <label htmlFor="roldescripcion">Descripción</label>
+                                                    <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
 
                                                     <input
-                                                        id="roldescripcion"
+                                                        id="etiquetanombre"
                                                         type="text"
-                                                        name="roldescripcion"
-                                                        value={data.roldescripcion}
+                                                        name="etiquetanombre"
+                                                        value={data.etiquetanombre}
                                                         className="form-control"
-                                                        onChange={(e) => setData('roldescripcion', e.target.value)}
+                                                        onChange={(e) => setData('etiquetanombre', e.target.value)}
                                                     />
 
-                                                    <InputError message={errors.roldescripcion} className="mt-2" />
+                                                    <InputError message={errors.etiquetanombre} className="mt-2" />
                                                 </div>
                                                 <div className='mb-3'>
-                                                <label htmlFor="roldabreviatura">Abreviatura</label>
+                                                    <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
 
                                                     <input
-                                                        id="rolabreviatura"
+                                                        id="etiquetaabreviatura"
                                                         type="text"
-                                                        name="rolabreviatura"
-                                                        value={data.rolabreviatura}
+                                                        name="etiquetaabreviatura"
+                                                        value={data.etiquetaabreviatura}
                                                         className="form-control"
-                                                        onChange={(e) => setData('rolabreviatura', e.target.value)}
+                                                        onChange={(e) => setData('etiquetaabreviatura', e.target.value)}
                                                     />
 
-                                                    <InputError message={errors.rolabreviatura} className="mt-2" />
+                                                    <InputError message={errors.etiquetaabreviatura} className="mt-2" />
                                                 </div>
                                                 <div className='mb-3'>
-                                                    <label htmlFor="isdefaultvalue">Valor predeterminado</label>  
+                                                    <label htmlFor="isdefaultvalue" className='form-label'>Valor predeterminado</label>
 
                                                     <input
                                                         id="isdefaultvalue"
@@ -91,6 +91,7 @@ const Edit = ({ auth, rol }) => {
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -99,6 +100,7 @@ const Edit = ({ auth, rol }) => {
                     </div>
                 </div>
             </div>
+
         </AuthenticatedLayout>
     )
 }

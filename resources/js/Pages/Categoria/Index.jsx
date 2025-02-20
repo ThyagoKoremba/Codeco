@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head} from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+import './../../../css/app.css';
 
 
 const Index = ({ auth, categorias }) => {
@@ -25,6 +26,9 @@ const Index = ({ auth, categorias }) => {
                     <table className="table table-striped table-hover align-middle">
                         <thead className="sticky-top">
                             <tr>
+                            <th scope="col">
+                                    ID
+                                </th>
                                 <th scope="col">
                                     Descripción
                                 </th>
@@ -45,9 +49,12 @@ const Index = ({ auth, categorias }) => {
                         <tbody>
                             {categorias?.map((categoria) => (
                                 <tr key={categoria.id} className="">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {categoria.descripcion}
+                                    <th scope="row" className="px-6 py-4 ">
+                                        {categoria.id}
                                     </th>
+                                    <td scope="row" className="px-6 py-4 ">
+                                        {categoria.descripcion}
+                                    </td>
                                     <td className="px-6 py-4">
                                         {categoria.abreviatura}
                                     </td>
