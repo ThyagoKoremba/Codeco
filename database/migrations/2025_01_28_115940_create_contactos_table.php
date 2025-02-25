@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('nombrefantasia',100)->nullable();
             $table->string('nombresegundo',55)->nullable();
             $table->string('apellidoynombre',255);
-            $table->unsignedBigInteger('id_nacionalidad')->default(null)->nullable();
+            $table->unsignedBigInteger('id_nacionalidad')->default(1)->nullable();
             $table->index('id_nacionalidad','IDX_id_nacionalidad_contactos');
             $table->foreign('id_nacionalidad','FK_id_nacionalidad_contactos')
             ->references('id')->on('geopais')

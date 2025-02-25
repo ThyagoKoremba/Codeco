@@ -4,8 +4,6 @@ import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 import Modal from 'react-modal';
 import './../../../css/app.css';
-
-// Configura el elemento de la aplicación para react-modal
 Modal.setAppElement('#app');
 
 const Create = ({ auth }) => {
@@ -43,44 +41,47 @@ const Create = ({ auth }) => {
         }
     };
 
-    // Estado para el modal de búsqueda de proyectos
     const [isProyectoModalOpen, setIsProyectoModalOpen] = useState(false);
     const [proyectoSearchQuery, setProyectoSearchQuery] = useState('');
     const [proyectoSearchResults, setProyectoSearchResults] = useState([]);
     const [proyectoCurrentPage, setProyectoCurrentPage] = useState(1);
     const [proyectoLastPage, setProyectoLastPage] = useState(1);
-    const [nombreProyecto, setNombreProyecto] = useState(''); // Estado para el nombre del proyecto
+    const [nombreProyecto, setNombreProyecto] = useState('');
 
     const openProyectoModal = () => {
         setIsProyectoModalOpen(true);
     };
 
+    const closeModal = () => {
+        setIsProyectoModalOpen(false);
+        setProyectoSearchResults([]);
+        setProyectoSearchQuery('');
+    };
+
     const fetchProyectoSearchResults = async (page = 1) => {
         try {
-            const response = await fetch(`/proyectocnfgnotificacion/search-prov?query=${proyectoSearchQuery}&page=${page}`);
+            const response = await fetch(`/proyectocnfgnotificacion/search-proyecto?query=${proyectoSearchQuery}&page=${page}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
-
             setProyectoSearchResults(data.data);
             setProyectoCurrentPage(data.current_page);
             setProyectoLastPage(data.last_page);
         } catch (error) {
-            console.error('Error fetching province search results:', error);
+            console.error('Error fetching project search results:', error);
         }
     };
 
-    // Función para seleccionar una provincia
+    const handleProyectoSearchChange = (e) => {
+        setProyectoSearchQuery(e.target.value);
+        fetchProyectoSearchResults(); // Realiza la búsqueda automáticamente
+    };
+
     const handleSelectProyecto = (proyecto) => {
         setData('proyectoid', proyecto.id); // Actualiza el campo del formulario
         setNombreProyecto(proyecto.proyectonombre);
         closeModal(); // Cierra el modal
-    };
-
-    // Función para cerrar el modal de búsqueda de regiones
-    const closeModal = () => {
-        // Limpia los resultados de la búsqueda
-        setIsProyectoModalOpen(false);
-        setProyectoSearchResults([]);
-        setProyectoSearchQuery(''); // Limpia los resultados
     };
 
     return (
@@ -108,15 +109,15 @@ const Create = ({ auth }) => {
                                         <div className="card-body">
                                             <form onSubmit={submit}>
                                                 <div className="col-md-6">
-                                                    <label htmlFor="provincia" className="form-label">Proyecto</label>
+                                                    <label htmlFor="proyectoid" className="form-label">Proyecto</label>
                                                     <div className="input-group">
                                                         <input
                                                             id="proyectoid"
                                                             type="text"
                                                             name="proyectoid"
-                                                            value={data.proyectoid}
+                                                            value={nombreProyecto}
                                                             className="form-control"
-                                                            readOnly
+                                                            readOnly // El campo es de solo lectura
                                                         />
                                                         <button
                                                             type="button"
@@ -216,110 +217,113 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </div>
-            <Modal
-                isOpen={isProyectoModalOpen}
-                onRequestClose={closeModal}
-                contentLabel={"Buscar Proyecto"}
-                className="modal"
-                style={{
-                    content: {
-                        backgroundColor: '#ffffff',
-                        borderRadius: '10px',
-                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                        padding: '20px',
-                        maxWidth: '600px',
-                        margin: '0 auto',
-                    }
-                }}
-                overlayClassName="modal-overlay"
-            >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">
-                                {"Buscar Proyecto"}
-                            </h5>
-                            <button
-                                type="button"
-                                className="btn-close"
-                                onClick={closeModal}
-                                aria-label="Cerrar"
-                            ></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="input-group mb-3">
-                                <input
-                                    type="text"
-                                    value={ proyectoSearchQuery}
-                                    onChange={(e) => {setProyectoSearchQuery(e.target.value);}}
-                                    placeholder={"Buscar por nombre de proyecto"}
-                                    className="form-control"
-                                />
-                                <button
-                                    type="button"
-                                    className="btn btn-primary"
-                                    onClick={() => {fetchProyectoSearchResults();}}
-                                >
-                                    Buscar
-                                </button>
-                            </div>
-                            <table className="table table-hover" style={{ cursor: 'pointer' }}>
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {(proyectoSearchResults).length > 0 ? (
-                                        proyectoSearchResults.map((item) => (
-                                            <tr key={item.id}>
-                                                <td
-                                                    className='table-hover'
-                                                    onClick={() => {handleSelectProyecto(item);}}
-                                                >
-                                                    {item.proyectonombre}
-                                                </td>
-                                            </tr>
-                                        ))
-                                    ) : (
-                                        <tr>
-                                            <td colSpan="2" className="text-center">No se encontraron resultados</td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </table>
+                        <Modal
+                            isOpen={isProyectoModalOpen}
+                            onRequestClose={closeModal}
+                            contentLabel={"Buscar Proyecto"}
+                            style={{
+                                content: {
+                                    backgroundColor: '#ffffff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                    padding: '20px',
+                                    maxWidth: '600px',
+                                    maxHeight:"70vh",
+                                    margin: '0 auto',
+                                }
+                            }}
+                            overlayClassName="modal-overlay"
+                        >
+                            <div className="modal-dialog modal-lg h-100">
+                                <div className="modal-content h-100">
+                                    <div className="modal-header d-flex justify-content-between mb-5">
+                                        <h5 className="modal-title">
+                                            Buscar Proyecto
+                                        </h5>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            onClick={closeModal}
+                                            aria-label="Cerrar"
+                                        ></button>
+                                    </div>
 
-                            {(proyectoSearchResults).length > 0 ? (
-                                <div className="d-flex justify-content-center gap-2">
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        onClick={() => {
-                                                fetchProyectoSearchResults(proyectoCurrentPage - 1);
-                                        }}
-                                        disabled={proyectoCurrentPage === 1}
-                                    >
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </button>
-                                    <span>
-                                            {proyectoCurrentPage} de {" "} {proyectoLastPage}
-                                    </span>
-                                    <button
-                                        type="button"
-                                        className="btn btn-secondary"
-                                        onClick={() => {fetchProyectoSearchResults(proyectoCurrentPage + 1);}}
-                                        disabled={proyectoCurrentPage === proyectoLastPage}
-                                    >
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </button>
+
+                                    <div className="modal-body h-100 d-flex flex-column">
+
+                                        <div className='mb-auto'>
+                                        <div className="input-group mb-5">
+                                            <input
+                                                type="text"
+                                                value={proyectoSearchQuery}
+                                                onChange={(e) => {setProyectoSearchQuery(e.target.value)}}
+                                                placeholder={"Buscar por nombre de proyecto"}
+                                                className="form-control"
+                                            />
+                                            <button
+                                                type="button"
+                                                className="btn btn-primary"
+                                                onClick={() => {fetchProyectoSearchResults()}}
+                                            >
+                                                Buscar
+                                            </button>
+                                        </div>
+                                        <table className="table table-hover" style={{ cursor: 'pointer' }}>
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {(proyectoSearchResults).length > 0 ? (
+                                                    (proyectoSearchResults).map((item) => (
+                                                        <tr key={item.id}>
+                                                            <td
+                                                                className='table-hover'
+                                                                onClick={() => {handleSelectProyecto(item)}}
+                                                            >
+                                                                {item.proyectonombre}
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                ) : (
+                                                    <tr>
+                                                        <td colSpan="2" className="text-center">No se encontraron resultados</td>
+                                                    </tr>
+                                                )}
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        
+                                        {(proyectoSearchResults).length > 0 ? (
+                                            <div className="d-flex justify-content-center gap-2 mt-auto">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary"
+                                                    onClick={() => {fetchProyectoSearchResults(proyectoCurrentPage - 1)}}
+                                                    disabled={proyectoCurrentPage === 1}
+                                                >
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </button>
+                                                <span>
+                                                    {proyectoCurrentPage} de{" "} {proyectoLastPage}
+                                                </span>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary"
+                                                    onClick={() => {fetchProyectoSearchResults(proyectoCurrentPage + 1)}}
+                                                    disabled={proyectoCurrentPage === proyectoLastPage}
+                                                >
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            ''
+                                        )}
+                                    </div>
                                 </div>
-                            ) : (
-                                ''
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </Modal>
+                            </div>
+                        </Modal>
         </AuthenticatedLayout>
     )
 }
