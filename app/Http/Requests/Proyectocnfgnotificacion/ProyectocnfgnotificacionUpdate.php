@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Proyectocnfgnotificacion;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProyectocnfgnotificacionUpdate extends FormRequest
 {
@@ -11,7 +12,7 @@ class ProyectocnfgnotificacionUpdate extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,8 @@ class ProyectocnfgnotificacionUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'mail_notificacion'     => 'required_if:sn_mail_notificacion,true|email',
+            'movil_notificacion' => 'required_if:sn_movil_notificacion,true|regex:/^[0-9]*$/|max:15',
         ];
     }
 }

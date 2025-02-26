@@ -23,7 +23,13 @@ class ProductorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'usuarioid'     => 'nullable',
+            'apellido'      => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
+            'nombres'       => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
+            'dnicuit'       => 'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,14}$/u',
+            'activosn'      => 'boolean',
+            'mail'          => 'required|email|unique:productores,mail',
+            'telefono'      => 'required|regex:/^[\p{N}\d\s\.\-]{1,15}$/u',
         ];
     }
 }

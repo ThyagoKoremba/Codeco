@@ -23,7 +23,8 @@ class ProyectocnfgnotificacionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'mail_notificacion'     => 'required_if:sn_mail_notificacion,1|email',
+            'movil_notificacion' => 'required_if:sn_movil_notificacion,1|regex:/^[0-9]*$/|max:15',
         ];
     }
 }
