@@ -130,7 +130,8 @@ const Create = ({ auth }) => {
                                                     {errors.proyectoid && <div className="text-danger mt-1">{errors.proyectoid}</div>}
                                                 </div>
                                                 <hr></hr>
-                                                <div className='mb-3 mt-4'>
+                                                <div className='row mb-3'>
+                                                <div className='col-6 mt-4'>
                                                     <label htmlFor="sn_mail_notificacion" className='form-label'>Notificación Email</label>
 
                                                     <input
@@ -144,7 +145,22 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.sn_mail_notificacion} className="mt-2" />
                                                 </div>
-                                                <div className='mb-3'>
+
+                                                <div className='col-6'>
+                                                    <label htmlFor="sn_movil_notificacion" className='form-label'>Notificación Movil</label>
+
+                                                    <input
+                                                        id="sn_movil_notificacion"
+                                                        type="checkbox"
+                                                        name="sn_movil_notificacion"
+                                                        checked={data.sn_movil_notificacion}
+                                                        className="form-check-input mx-2"
+                                                        onChange={handleMovilCheckboxChange}
+                                                    />
+
+                                                    <InputError message={errors.sn_movil_notificacion} className="mt-2" />
+                                                </div>
+                                                <div className='col-6 mb-3'>
                                                     <label htmlFor="mail_notificacion" className='form-label'>Email</label>
 
                                                     <input
@@ -159,21 +175,7 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.mail_notificacion} className="mt-2" />
                                                 </div>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="sn_movil_notificacion" className='form-label'>Notificación Movil</label>
-
-                                                    <input
-                                                        id="sn_movil_notificacion"
-                                                        type="checkbox"
-                                                        name="sn_movil_notificacion"
-                                                        checked={data.sn_movil_notificacion}
-                                                        className="form-check-input mx-2"
-                                                        onChange={handleMovilCheckboxChange}
-                                                    />
-
-                                                    <InputError message={errors.sn_movil_notificacion} className="mt-2" />
-                                                </div>
-                                                <div className='mb-3'>
+                                                <div className='col-6'>
                                                     <label htmlFor="movil_notificacion" className='form-label'>Movil</label>
 
                                                     <input
@@ -188,6 +190,9 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.movil_notificacion} className="mt-2" />
                                                 </div>
+                                                </div>
+
+                                                <hr />
 
                                                 <div className='mb-3'>
                                                     <label htmlFor="sn_activo" className='form-label'>Activo</label>
