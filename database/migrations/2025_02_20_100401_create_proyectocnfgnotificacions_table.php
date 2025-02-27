@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proyectoscnfgnotificacion', function (Blueprint $table) {
+        Schema::create('proyectocnfgnotificacion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('proyectoid');
-            $table->boolean('sn_mail_notificacion');
+            $table->unsignedBigInteger('proyectoid')->nullable();
+            $table->boolean('sn_mail_notificacion')->nullable();
             $table->string('mail_notificacion')->nullable();
-            $table->boolean('sn_movil_notificacion');
+            $table->boolean('sn_movil_notificacion')->nullable();
             $table->string('movil_notificacion')->nullable();
             $table->boolean('sn_activo');
             $table->timestamps();
-            $table->foreign('proyectoid')->references('id')->on('proyectos');
+            $table->foreign('proyectoid')->references('id')->on('proyectos')->onDelete("cascade");
         });
     }
 

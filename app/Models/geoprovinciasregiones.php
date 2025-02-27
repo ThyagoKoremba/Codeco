@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Geoprovinciasregiones extends Model
+class GeoProvinciasRegiones extends Model
 {
     use HasFactory;
-
+    protected $table ="geoprovinciasregiones";
     protected $fillable = [
         'descripcion',
         'abreviatura',

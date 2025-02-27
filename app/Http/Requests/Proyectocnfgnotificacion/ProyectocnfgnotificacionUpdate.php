@@ -23,8 +23,11 @@ class ProyectocnfgnotificacionUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            'mail_notificacion'     => 'required_if:sn_mail_notificacion,true|email',
-            'movil_notificacion' => 'required_if:sn_movil_notificacion,true|regex:/^[0-9]*$/|max:15',
+            'sn_mail_notificacion' => 'sometimes|boolean',
+            'mail_notificacion'    => 'required_if:sn_mail_notificacion,true|email',
+
+            'sn_movil_notificacion' => 'sometimes|boolean',
+            'movil_notificacion'    => 'required_if:sn_movil_notificacion,true|regex:/^[0-9]*$/|max:15|nullable',
         ];
     }
 }

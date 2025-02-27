@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contacto\ContactoRequest;
 use App\Http\Requests\Contacto\ContactoUpdate;
-use App\Models\condiciontributarias;
-use App\Models\Contactoradicaciones;
+use App\Models\CondicionTributarias;
+use App\Models\ContactoRadicaciones;
 use App\Models\contactos;
-use App\Models\Fisicojuridicos;
+use App\Models\FisicoJuridicos;
 use App\Models\geopais;
 use App\Models\Identidades;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-use App\Models\geolugares;
-use App\Models\geoprovinciasregiones;
+use App\Models\GeoLugares;
+use App\Models\GeoProvinciasRegiones;
 use App\Models\vista_contactos;
 
 class ContactosController extends Controller

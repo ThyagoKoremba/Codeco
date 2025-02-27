@@ -26,4 +26,9 @@ class Proyectos extends Model
         'gps_popup_color',
         'url_carpeta_destino_img',
     ];
+
+    public function notificacion()
+    {
+        return $this->hasOne(ProyectoCnfgNotificacion::class, 'proyectoid');
+    }
 }

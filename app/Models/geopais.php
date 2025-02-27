@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Geopais extends Model
 {
     use HasFactory;
+    protected $table = "geopais";
     protected $fillable = [
         'nombre',
         'abreviatura',

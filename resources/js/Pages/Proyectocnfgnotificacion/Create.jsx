@@ -60,7 +60,7 @@ const Create = ({ auth }) => {
 
     const fetchProyectoSearchResults = async (page = 1) => {
         try {
-            const response = await fetch(`/proyectocnfgnotificacion/search-proyecto?query=${proyectoSearchQuery}&page=${page}`);
+            const response = await fetch(`/configuracion/proyectos/search-proyecto?query=${proyectoSearchQuery}&page=${page}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
