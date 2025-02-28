@@ -12,7 +12,7 @@ class Etiquetas extends Model
     protected $fillable = [
         'etiquetanombre',
         'etiquetaabreviatura',
-        'esdefaultvalue',
+        'isdefaultvalue',
         'activosn',
     ];
 }

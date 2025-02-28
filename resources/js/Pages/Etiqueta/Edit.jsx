@@ -17,7 +17,7 @@ const Edit = ({ auth, etiqueta }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('etiqueta.update',etiqueta))
+        put(route('etiqueta.update', etiqueta))
         console.log(data);
     }
 
@@ -45,34 +45,38 @@ const Edit = ({ auth, etiqueta }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
 
-                                                    <input
-                                                        id="etiquetanombre"
-                                                        type="text"
-                                                        name="etiquetanombre"
-                                                        value={data.etiquetanombre}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('etiquetanombre', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="etiquetanombre"
+                                                            type="text"
+                                                            name="etiquetanombre"
+                                                            value={data.etiquetanombre}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('etiquetanombre', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.etiquetanombre} className="mt-2" />
+                                                        <InputError message={errors.etiquetanombre} className="mt-2" />
+                                                    </div>
+
+                                                    <div className='col-6'>
+                                                        <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
+
+                                                        <input
+                                                            id="etiquetaabreviatura"
+                                                            type="text"
+                                                            name="etiquetaabreviatura"
+                                                            value={data.etiquetaabreviatura}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('etiquetaabreviatura', e.target.value)}
+                                                        />
+
+                                                        <InputError message={errors.etiquetaabreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
-
-                                                    <input
-                                                        id="etiquetaabreviatura"
-                                                        type="text"
-                                                        name="etiquetaabreviatura"
-                                                        value={data.etiquetaabreviatura}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('etiquetaabreviatura', e.target.value)}
-                                                    />
-
-                                                    <InputError message={errors.etiquetaabreviatura} className="mt-2" />
-                                                </div>
+                                                <hr />
                                                 <div className='mb-3'>
                                                     <label htmlFor="isdefaultvalue" className='form-label'>Valor predeterminado</label>
 
@@ -87,7 +91,22 @@ const Edit = ({ auth, etiqueta }) => {
 
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
                                                 </div>
-                                                <div className="mb-3">
+                                                <hr />
+                                                <div className='mb-3'>
+                                                    <label htmlFor="activosn" className='form-label'>Activo</label>
+
+                                                    <input
+                                                        id="activosn"
+                                                        type="checkbox"
+                                                        name="activosn"
+                                                        checked={data.activosn}
+                                                        className="form-check-input mx-2"
+                                                        onChange={(e) => setData('activosn', e.target.checked)}
+                                                    />
+
+                                                    <InputError message={errors.activosn} className="mt-2" />
+                                                </div>
+                                                <div className="mt-4 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>

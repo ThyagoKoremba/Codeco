@@ -13,7 +13,7 @@ const Create = ({ auth }) => {
         sn_activo: true,
     }
 
-    const { data, errors, setData, post } = useForm(initialValues)
+    const { data, errors, setData, post, reset } = useForm(initialValues)
 
     const submit = (e) => {
         e.preventDefault();
@@ -45,34 +45,38 @@ const Create = ({ auth }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="descripcion" className='form-label'>Descripción</label>
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="descripcion" className='form-label'>Descripción</label>
 
-                                                    <input
-                                                        id="descripcion"
-                                                        type="text"
-                                                        name="descripcion"
-                                                        value={data.descripcion}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('descripcion', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="descripcion"
+                                                            type="text"
+                                                            name="descripcion"
+                                                            value={data.descripcion}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('descripcion', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.descripcion} className="mt-2" />
+                                                        <InputError message={errors.descripcion} className="mt-2" />
+                                                    </div>
+
+                                                    <div className='col-6'>
+                                                        <label htmlFor="abreviatura" className='form-label'>Abreviatura</label>
+
+                                                        <input
+                                                            id="abreviatura"
+                                                            type="text"
+                                                            name="abreviatura"
+                                                            value={data.abreviatura}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('abreviatura', e.target.value)}
+                                                        />
+
+                                                        <InputError message={errors.abreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="abreviatura" className='form-label'>Abreviatura</label>
-
-                                                    <input
-                                                        id="abreviatura"
-                                                        type="text"
-                                                        name="abreviatura"
-                                                        value={data.abreviatura}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('abreviatura', e.target.value)}
-                                                    />
-
-                                                    <InputError message={errors.abreviatura} className="mt-2" />
-                                                </div>
+                                                <hr />
                                                 <div>
                                                     <label htmlFor="sn_registrosistema" className='form-label'>Registro en Sistema</label>
 
@@ -87,8 +91,9 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.sn_registrosistema} className="mt-2" />
                                                 </div>
-                                                <div>
-                                                    <label htmlFor="sn_activo" className='form-label'>Activo</label> 
+                                                <hr />
+                                                <div className='mb-3'>
+                                                    <label htmlFor="sn_activo" className='form-label'>Activo</label>
 
                                                     <input
                                                         id="sn_activo"
@@ -101,9 +106,13 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.sn_activo} className="mt-2" />
                                                 </div>
-
-                                                <div className="mb-3">
+                                                <div className="mt-4 row">
+                                                    <div className='col-6'>
+                                                    <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                                    </div>
+                                                    <div className='col-6 d-flex justify-content-end'>
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

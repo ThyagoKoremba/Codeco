@@ -18,10 +18,10 @@ const Edit = ({ auth, actividad}) => {
         etiquetasn: actividad.etiquetasn,
         actividaddsc: actividad.actividaddsc,
     }
-    const { data, errors, setData, post } = useForm(initialValues)
+    const { data, errors, setData, put } = useForm(initialValues)
     const submit = (e) => {
         e.preventDefault();
-        post(route('actividad.update',actividad));
+        put(route('actividad.update',actividad));
         console.log(data);
     }
 
@@ -53,8 +53,8 @@ const Edit = ({ auth, actividad}) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-
-                                                <div className="mb-3">
+                                            <div className='row mb-3'>
+                                                <div className="col-6">
                                                     <label htmlFor="nombre" className="form-label">Nombre</label>
                                                     <input
                                                         id='nombre'
@@ -67,7 +67,7 @@ const Edit = ({ auth, actividad}) => {
                                                     <InputError message={errors.actividadnombre} className="mt-2" />
                                                 </div>
 
-                                                <div className="mb-3">
+                                                <div className="col-6">
                                                     <label htmlFor="abreviatura" className="form-label">Abreviatura</label>
                                                     <input
                                                         id='abreviatura'
@@ -79,8 +79,9 @@ const Edit = ({ auth, actividad}) => {
                                                     />
                                                     <InputError message={errors.actividadabreviatura} className="mt-2" />
                                                 </div>
+                                                </div>
                                                 <div className='mb-6'>
-                                                        <label htmlFor="actividaddsc" className='form-label'>Descripción:</label>
+                                                        <label htmlFor="actividaddsc" className='form-label'>Descripción</label>
                                                         <textarea 
                                                         id="actividaddsc"
                                                         type="Text"
@@ -91,15 +92,18 @@ const Edit = ({ auth, actividad}) => {
                                                         row='5'
                                                         />
                                                     </div>
+                                                    <hr />
                                                 <div className='row mb-3'>
-                                                    <div className='col-6'>
-                                                        <label htmlFor="isdefaultvalue" className='form-label'>Valor predeterminado</label>
+                                                    <div className='col-2 d-flex justify-content-end'>
+                                                        <label htmlFor="isdefaultvalue" className='form-label'>Predeterminado</label>
+                                                    </div>
+                                                    <div className='col-3'>
                                                         <input
                                                             id='isdefaultvalue'
                                                             type="checkbox"
                                                             name='isdefaultvalue'
                                                             checked={data.isdefaultvalue}
-                                                            className='form-check-input mx-2'
+                                                            className='form-check-input'
                                                             onChange={(e) => setData('isdefaultvalue', e.target.checked)}
                                                         />
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
@@ -107,15 +111,17 @@ const Edit = ({ auth, actividad}) => {
                                                     </div>
 
 
-                                                    <div className='col-6'>
+                                                    <div className='col-2 d-flex justify-content-end'>
 
-                                                        <label htmlFor="titulosn" className='form-label'>Titulo</label>
+                                                        <label htmlFor="titulosn" className='form-label'>Título</label>
+                                                    </div>
+                                                    <div className='col-3'>
                                                         <input
                                                             id='titulosn'
                                                             type="checkbox"
                                                             name='titulosn'
                                                             checked={data.titulosn}
-                                                            className='form-check-input mx-2'
+                                                            className='form-check-input'
                                                             onChange={(e) => setData('titulosn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.titulosn} className="mt-2" />
@@ -124,26 +130,30 @@ const Edit = ({ auth, actividad}) => {
                                                     
                                                 </div>
                                                 <div className='row mb-3'>
-                                                    <div className='col-6'>
-                                                        <label htmlFor="informacionsn">Información:</label>
+                                                    <div className='col-2 d-flex justify-content-end'>
+                                                        <label htmlFor="informacionsn">Información</label>
+                                                    </div>
+                                                    <div className='col-3'>
                                                         <input 
                                                         id="informacionsn"
                                                         type="checkbox"
                                                         name='informacionsn'
                                                         checked={data.informacionsn}
-                                                        className='form-check-input mx-2'
+                                                        className='form-check-input'
                                                         onChange={(e)=>setData('informacionsn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.informacionsn} className="mt-2" />
 
                                                     </div>
-                                                    <div className='col-6'>
-                                                        <label htmlFor="etiquetasn">Etiqueta:</label>
+                                                    <div className='col-2 d-flex justify-content-end'>
+                                                        <label htmlFor="etiquetasn">Etiqueta</label>
+                                                    </div>
+                                                    <div className='col-3'>
                                                         <input 
                                                         id="etiquetasn"
                                                         type="checkbox"
                                                         name='etiquetasn'
-                                                        className='form-check-input mx-2'
+                                                        className='form-check-input'
                                                         checked={data.etiquetasn}
                                                         onChange={(e)=>setData('etiquetasn', e.target.checked)}
                                                         />
@@ -151,10 +161,25 @@ const Edit = ({ auth, actividad}) => {
 
                                                     </div>
                                                 </div>
+                                                <hr />
+                                                <div className='col-6'>
+                                                        <label htmlFor="etiquetasn">Activo</label>
+                                                        <input 
+                                                        id="activosn"
+                                                        type="checkbox"
+                                                        name='activosn'
+                                                        className='form-check-input mb-3 mx-2'
+                                                        checked={data.activosn}
+                                                        onChange={(e)=>setData('activosn', e.target.checked)}
+                                                        />
+                                                        <InputError message={errors.activosn} className="mt-2" />
 
-                                                <div className="mb-3">
+                                                    </div>
+
+                                                <div className="mt-4 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
+                                                
                                             </form>
                                         </div>
                                     </div>

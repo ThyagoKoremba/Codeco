@@ -13,7 +13,7 @@ const Create = ({ auth }) => {
         activosn: true,
     }
 
-    const { data, errors, setData, post } = useForm(initialValues)
+    const { data, errors, setData, post, reset } = useForm(initialValues)
 
     const submit = (e) => {
         e.preventDefault();
@@ -45,7 +45,8 @@ const Create = ({ auth }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
                                                     <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
 
                                                     <input
@@ -59,7 +60,8 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.etiquetanombre} className="mt-2" />
                                                 </div>
-                                                <div className='mb-3'>
+
+                                                <div className='col-6'>
                                                     <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
 
                                                     <input
@@ -73,6 +75,8 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.etiquetaabreviatura} className="mt-2" />
                                                 </div>
+                                                </div>
+                                                <hr />
                                                 <div className='mb-3'>
                                                     <label htmlFor="isdefaultvalue" className='form-label'>Valor predeterminado</label>
 
@@ -87,6 +91,7 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
                                                 </div>
+                                                <hr />
                                                 <div className='mb-3'>
                                                     <label htmlFor="activosn" className='form-label'>Activo</label>
 
@@ -101,9 +106,13 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.activosn} className="mt-2" />
                                                 </div>
-
-                                                <div className="mb-3">
+                                                <div className="mt-4 row">
+                                                    <div className='col-6'>
+                                                    <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                                    </div>
+                                                    <div className='col-6 d-flex justify-content-end'>
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
+                                                    </div>
                                                 </div>
                                             </form>
 

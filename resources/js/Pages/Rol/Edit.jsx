@@ -17,7 +17,7 @@ const Edit = ({ auth, rol }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('rol.update',rol))
+        put(route('rol.update', rol))
         console.log(data);
     }
 
@@ -29,7 +29,7 @@ const Edit = ({ auth, rol }) => {
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Rol</h2>
                     <a href={route('rol.index')}>
-                    <button className='btn btn-primary'>Roles</button>
+                        <button className='btn btn-primary'>Roles</button>
                     </a>
                 </div>
             }
@@ -45,36 +45,43 @@ const Edit = ({ auth, rol }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="roldescripcion">Descripción</label>
+                                                
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="roldescripcion">Descripción</label>
 
-                                                    <input
-                                                        id="roldescripcion"
-                                                        type="text"
-                                                        name="roldescripcion"
-                                                        value={data.roldescripcion}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('roldescripcion', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="roldescripcion"
+                                                            type="text"
+                                                            name="roldescripcion"
+                                                            value={data.roldescripcion}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('roldescripcion', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.roldescripcion} className="mt-2" />
+                                                        <InputError message={errors.roldescripcion} className="mt-2" />
+                                                    </div>
+
+                                                    <div className='col-6'>
+                                                        <label htmlFor="roldabreviatura">Abreviatura</label>
+
+                                                        <input
+                                                            id="rolabreviatura"
+                                                            type="text"
+                                                            name="rolabreviatura"
+                                                            value={data.rolabreviatura}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('rolabreviatura', e.target.value)}
+                                                        />
+
+                                                        <InputError message={errors.rolabreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
-                                                <div className='mb-3'>
-                                                <label htmlFor="roldabreviatura">Abreviatura</label>
 
-                                                    <input
-                                                        id="rolabreviatura"
-                                                        type="text"
-                                                        name="rolabreviatura"
-                                                        value={data.rolabreviatura}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('rolabreviatura', e.target.value)}
-                                                    />
+                                                <hr />
 
-                                                    <InputError message={errors.rolabreviatura} className="mt-2" />
-                                                </div>
                                                 <div className='mb-3'>
-                                                    <label htmlFor="isdefaultvalue">Valor predeterminado</label>  
+                                                    <label htmlFor="isdefaultvalue">Valor predeterminado</label>
 
                                                     <input
                                                         id="isdefaultvalue"
@@ -87,7 +94,8 @@ const Edit = ({ auth, rol }) => {
 
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
                                                 </div>
-                                                <div className="mb-3">
+
+                                                <div className='d-flex justify-content-end'>
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>

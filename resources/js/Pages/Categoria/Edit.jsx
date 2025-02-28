@@ -4,7 +4,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 
-const Edit = ({ auth,categoria }) => {
+const Edit = ({ auth, categoria }) => {
 
     const initialValues = {
         descripcion: categoria.descripcion,
@@ -45,34 +45,38 @@ const Edit = ({ auth,categoria }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="descripcion" className='form-label'>Descripción</label>
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="descripcion" className='form-label'>Descripción</label>
 
-                                                    <input
-                                                        id="descripcion"
-                                                        type="text"
-                                                        name="descripcion"
-                                                        value={data.descripcion}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('descripcion', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="descripcion"
+                                                            type="text"
+                                                            name="descripcion"
+                                                            value={data.descripcion}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('descripcion', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.descripcion} className="mt-2" />
+                                                        <InputError message={errors.descripcion} className="mt-2" />
+                                                    </div>
+
+                                                    <div className='col-6'>
+                                                        <label htmlFor="abreviatura" className='form-label'>Abreviatura</label>
+
+                                                        <input
+                                                            id="abreviatura"
+                                                            type="text"
+                                                            name="abreviatura"
+                                                            value={data.abreviatura}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('abreviatura', e.target.value)}
+                                                        />
+
+                                                        <InputError message={errors.abreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
-                                                <div className='mb-3'>
-                                                    <label htmlFor="abreviatura" className='form-label'>Abreviatura</label>
-
-                                                    <input
-                                                        id="abreviatura"
-                                                        type="text"
-                                                        name="abreviatura"
-                                                        value={data.abreviatura}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('abreviatura', e.target.value)}
-                                                    />
-
-                                                    <InputError message={errors.abreviatura} className="mt-2" />
-                                                </div>
+                                                <hr />
                                                 <div>
                                                     <label htmlFor="sn_registrosistema" className='form-label'>Registro en Sistema</label>
 
@@ -87,8 +91,9 @@ const Edit = ({ auth,categoria }) => {
 
                                                     <InputError message={errors.sn_registrosistema} className="mt-2" />
                                                 </div>
-                                                <div>
-                                                    <label htmlFor="sn_activo" className='form-label'>Activo</label> 
+                                                <hr />
+                                                <div className='mb-3'>
+                                                    <label htmlFor="sn_activo" className='form-label'>Activo</label>
 
                                                     <input
                                                         id="sn_activo"
@@ -101,8 +106,7 @@ const Edit = ({ auth,categoria }) => {
 
                                                     <InputError message={errors.sn_activo} className="mt-2" />
                                                 </div>
-
-                                                <div className="mb-3">
+                                                <div className="mt-4 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>

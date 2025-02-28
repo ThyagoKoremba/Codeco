@@ -10,14 +10,15 @@ const Edit = ({ auth, productor }) => {
     const initialValues = {
         apellido: productor.apellido,
         nombres: productor.nombres,
-        dnicuit:    productor.dnicuit,
+        dnicuit: productor.dnicuit,
         mail: productor.mail,
         telefono: productor.telefono,
+        activosn:productor.activosn
     }
     const { data, errors, setData, put } = useForm(initialValues)
     const submit = (e) => {
         e.preventDefault();
-        put(route('productor.update',productor));
+        put(route('productor.update', productor));
         console.log(data);
     }
 
@@ -50,8 +51,9 @@ const Edit = ({ auth, productor }) => {
                                         <div className="card-body">
                                             <form onSubmit={submit}>
 
+
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <label htmlFor="apellido" className="form-label">Apellido</label>
                                                         <input
                                                             id='apellido'
@@ -64,7 +66,7 @@ const Edit = ({ auth, productor }) => {
                                                         <InputError message={errors.apellido} className="mt-2" />
                                                     </div>
 
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <label htmlFor="nombres" className="form-label">Nombres</label>
                                                         <input
                                                             id='nombres'
@@ -78,8 +80,8 @@ const Edit = ({ auth, productor }) => {
                                                     </div>
                                                 </div>
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
-                                                        <label htmlFor="dnicuit" className="form-label">dnicuit</label>
+                                                    <div className="col-2">
+                                                        <label htmlFor="dnicuit" className="form-label">DNI - CUIT</label>
                                                         <input
                                                             id='dnicuit'
                                                             type='text'
@@ -91,20 +93,21 @@ const Edit = ({ auth, productor }) => {
                                                         <InputError message={errors.dnicuit} className="mt-2" />
                                                     </div>
                                                 </div>
-                                                <div className="mb-3">
-                                                    <label htmlFor="mail" className="form-label">Email</label>
-                                                    <input
-                                                        id='mail'
-                                                        type='text'
-                                                        name='mail'
-                                                        value={data.mail}
-                                                        className='form-control'
-                                                        onChange={(e) => setData('mail', e.target.value)}
-                                                    />
-                                                    <InputError message={errors.mail} className="mt-2" />
-                                                </div>
+                                                <hr />
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
+                                                    <div className="col-3">
+                                                        <label htmlFor="mail" className="form-label">Email</label>
+                                                        <input
+                                                            id='mail'
+                                                            type='text'
+                                                            name='mail'
+                                                            value={data.mail}
+                                                            className='form-control'
+                                                            onChange={(e) => setData('mail', e.target.value)}
+                                                        />
+                                                        <InputError message={errors.mail} className="mt-2" />
+                                                    </div>
+                                                    <div className="col-2">
                                                         <label htmlFor="telefono" className="form-label">telefono</label>
                                                         <input
                                                             id='telefono'
@@ -118,8 +121,7 @@ const Edit = ({ auth, productor }) => {
                                                     </div>
                                                 </div>
 
-                                            
-                                                <div className="mb-3">
+                                                <div className="mb-3 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>

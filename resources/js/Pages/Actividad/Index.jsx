@@ -25,6 +25,9 @@ const Index = ({ auth, actividades }) => {
                     <table className="table table-striped table-hover align-middle">
                         <thead className="sticky-top">
                             <tr>
+                            <th scope="col">
+                                    ID
+                                </th>
                                 <th scope="col">
                                     Nombre
                                 </th>
@@ -45,9 +48,12 @@ const Index = ({ auth, actividades }) => {
                         <tbody>
                             {actividades?.map((actividad) => (
                                 <tr key={actividad.id} className="">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {actividad.actividadnombre}
+                                    <th scope="row" className="px-6 py-4">
+                                        {actividad.id}
                                     </th>
+                                    <td scope="row" className="px-6 py-4">
+                                        {actividad.actividadnombre}
+                                    </td>
                                     <td className="px-6 py-4">
                                         {actividad.actividadabreviatura}
                                     </td>

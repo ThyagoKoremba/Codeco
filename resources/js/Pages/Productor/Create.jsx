@@ -15,7 +15,7 @@ const Create = ({ auth }) => {
         telefono: "",
         activosn: true,
     }
-    const { data, errors, setData, post } = useForm(initialValues)
+    const { data, errors, setData, post, reset} = useForm(initialValues)
     const submit = (e) => {
         e.preventDefault();
         post(route('productor.store'));
@@ -52,7 +52,7 @@ const Create = ({ auth }) => {
                                             <form onSubmit={submit}>
 
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <label htmlFor="apellido" className="form-label">Apellido</label>
                                                         <input
                                                             id='apellido'
@@ -65,7 +65,7 @@ const Create = ({ auth }) => {
                                                         <InputError message={errors.apellido} className="mt-2" />
                                                     </div>
 
-                                                    <div className="col-6">
+                                                    <div className="col-4">
                                                         <label htmlFor="nombres" className="form-label">Nombres</label>
                                                         <input
                                                             id='nombres'
@@ -79,8 +79,8 @@ const Create = ({ auth }) => {
                                                     </div>
                                                 </div>
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
-                                                        <label htmlFor="dnicuit" className="form-label">dnicuit</label>
+                                                    <div className="col-2">
+                                                        <label htmlFor="dnicuit" className="form-label">DNI - CUIT</label>
                                                         <input
                                                             id='dnicuit'
                                                             type='text'
@@ -92,20 +92,21 @@ const Create = ({ auth }) => {
                                                         <InputError message={errors.dnicuit} className="mt-2" />
                                                     </div>
                                                 </div>
-                                                <div className="mb-3">
-                                                    <label htmlFor="mail" className="form-label">Email</label>
-                                                    <input
-                                                        id='mail'
-                                                        type='text'
-                                                        name='mail'
-                                                        value={data.mail}
-                                                        className='form-control'
-                                                        onChange={(e) => setData('mail', e.target.value)}
-                                                    />
-                                                    <InputError message={errors.mail} className="mt-2" />
-                                                </div>
+                                                <hr />
                                                 <div className='row mb-3'>
-                                                    <div className="col-6">
+                                                    <div className="col-3">
+                                                        <label htmlFor="mail" className="form-label">Email</label>
+                                                        <input
+                                                            id='mail'
+                                                            type='text'
+                                                            name='mail'
+                                                            value={data.mail}
+                                                            className='form-control'
+                                                            onChange={(e) => setData('mail', e.target.value)}
+                                                        />
+                                                        <InputError message={errors.mail} className="mt-2" />
+                                                    </div>
+                                                    <div className="col-2">
                                                         <label htmlFor="telefono" className="form-label">telefono</label>
                                                         <input
                                                             id='telefono'
@@ -119,6 +120,7 @@ const Create = ({ auth }) => {
                                                     </div>
                                                 </div>
 
+                                                <hr />
                                                 <div className='row mb-3'>
                                                     <div className='col-6'>
                                                         <label htmlFor="activosn" className='form-label'>Activo</label>
@@ -134,8 +136,13 @@ const Create = ({ auth }) => {
 
                                                     </div>
                                                 </div>
-                                                <div className="mb-3">
+                                                <div className="mt-4 row">
+                                                    <div className='col-6'>
+                                                    <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                                    </div>
+                                                    <div className='col-6 d-flex justify-content-end'>
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

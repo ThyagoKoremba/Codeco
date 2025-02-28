@@ -13,7 +13,7 @@ const Create = ({ auth }) => {
         activosn: true,
     }
 
-    const { data, errors, setData, post } = useForm(initialValues)
+    const { data, errors, setData, post, reset } = useForm(initialValues)
 
     const submit = (e) => {
         e.preventDefault();
@@ -39,13 +39,14 @@ const Create = ({ auth }) => {
                 <div className="container">
                     <div className="card shadow-sm">
                         <div className="card-body">
-                            <h1 className="mb-3">Nuevo Proyecto</h1>
+                            <h1 className="mb-3">Nuevo Rol</h1>
                             <div className="row">
                                 <div className="col">
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                                <div className='mb-3'>
+                                                <div className='mb-3 row'>
+                                                    <div className='col-6'>
                                                     <label htmlFor="roldescripcion">Descripción</label>
 
                                                     <input
@@ -59,7 +60,8 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.roldescripcion} className="mt-2" />
                                                 </div>
-                                                <div className='mb-3'>
+
+                                                <div className='col-6'>
                                                 <label htmlFor="roldabreviatura">Abreviatura</label>
 
                                                     <input
@@ -73,6 +75,8 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.rolabreviatura} className="mt-2" />
                                                 </div>
+                                                </div>
+                                                <hr />
                                                 <div className='mb-3'>
                                                     <label htmlFor="isdefaultvalue">Valor predeterminado</label>  
 
@@ -87,6 +91,7 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.isdefaultvalue} className="mt-2" />
                                                 </div>
+                                                <hr />
                                                 <div className='mb-3'>
                                                     <label htmlFor="activosn">Activo</label> 
 
@@ -101,9 +106,13 @@ const Create = ({ auth }) => {
 
                                                     <InputError message={errors.activosn} className="mt-2" />
                                                 </div>
-
-                                                <div className="mb-3">
+                                                <div className="mt-4 row">
+                                                    <div className='col-6'>
+                                                    <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                                    </div>
+                                                    <div className='col-6 d-flex justify-content-end'>
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
