@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('perfil_componentes', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('id_componente');
             $table->unsignedBigInteger('id_perfil');
-            $table->primary(['id_perfil', 'id_componente']);
             $table->boolean('activo')->default(false);
             $table->foreign('id_perfil','FK_id_perfil_perfilcomponentes')->references('id')->on('perfiles')->onDelete('cascade');
             $table->foreign('id_componente','FK_id_componente_perfilcomponentes')->references('id')->on('componentes')->onDelete('cascade');

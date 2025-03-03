@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('perfiles', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre',50);
             $table->string('descripcion',100);
             $table->string('abreviatura',45);
             $table->boolean('activo')->default(true);

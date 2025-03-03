@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('primer_login')->nullable()->default(true);
+            $table->date('primer_login')->nullable();
             $table->boolean('super_admin')->nullable()->default(false);
             $table->boolean('activo')->nullable()->default(true);
             $table->unique('name');
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['primer_login','super_login','activo']);
+            $table->dropColumn(['primer_login','super_admin','activo']);
             $table->dropUnique(['name']);
         });
     }

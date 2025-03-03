@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('user_perfil_componentes', function (Blueprint $table) {
             $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_perfil');
-            $table->primary(['id_user', 'id_perfil']);
+            $table->unsignedBigInteger('id_perfil_componentes');
+            $table->primary(['id_user', 'id_perfil_componentes']);
             $table->boolean('activo')->default(true);
-            $table->foreign('id_perfil','FK_id_perfil_userperfilcomponentes')->references('id')->on('perfiles')->onDelete('cascade');
+            $table->foreign('id_perfil_componentes','FK_id_perfil_userperfilcomponentes')->references('id')->on('perfil_componentes')->onDelete('cascade');
             $table->foreign('id_user','FK_id_user_userperfilcomponentes')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('componentes', function (Blueprint $table) {
             $table->id();
-            $table->string('informacion',45)->comment('Información del componente por ejemplo "Nuevo Contacto - Rapido" o "Pagina en blanco", "401: No autorizada"');
-            $table->string('descripcion',100);
-            $table->string('abreviatura',45);
+            $table->string('nombre');
+            $table->string('descripcion',100)->comment('Información del componente por ejemplo "Nuevo Contacto - Rapido" o "Pagina en blanco", "401: No autorizada"');
             $table->boolean('activo')->default(false);
             $table->timestamps();
         });
