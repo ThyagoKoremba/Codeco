@@ -14,6 +14,7 @@ Verificar lo siguiente:
 ## Para levantar el proyecto desde docker
 Dentro de la carpeta correr los siguientes compandos:
 docker compose build (si es la primera vez o si se quiere construir en base al cache generado)
+o DOCKER_BUILDKIT=0 docker compose build --no-cache
 docker compose up -d 
 
 ## Acceder al contenedor
