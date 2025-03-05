@@ -1,3 +1,10 @@
+:root{
+    --green:rgb(31,162,46);
+    --ligthgreen: rgb(122,181,29);
+    --orange: rgb(235,105,22);
+    --gray: #D2D7DF;
+}
+
 .tabla-index{
     overflow-y:auto; 
     height:400px;
@@ -29,4 +36,14 @@
     max-height: 80vh;
     overflow-y: auto;
     z-index: 1051; /* Asegura que el contenido del modal esté por encima del overlay */
+}
+
+.logo-img{
+    max-width: 100%;
+    width: 250px;
+    height: auto;
+}
+
+h1{
+    color: var(--green);
 }

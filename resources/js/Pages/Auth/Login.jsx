@@ -2,9 +2,6 @@ import { useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Login({ status, canResetPassword }) {
@@ -28,15 +25,17 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title="Iniciar Sesion" />
 
             {status && <div className="mb-4 font-medium text-sm text-success">{status}</div>}
 
-            <form onSubmit={submit}>
-                <div className="mb-3">
-                    <InputLabel htmlFor="email" value="Email" />
 
-                    <TextInput
+
+            <form onSubmit={submit}>
+                <div className="container w-75 mb-3">
+                    <label htmlFor="email" className='form-label text-md-start'>Email</label>
+
+                    <input
                         id="email"
                         type="email"
                         name="email"
@@ -50,10 +49,10 @@ export default function Login({ status, canResetPassword }) {
                     <InputError message={errors.email} className="mt-2 text-danger" />
                 </div>
 
-                <div className="mb-3">
-                    <InputLabel htmlFor="password" value="Password" />
+                <div className="container w-75 mb-3">
+                    <label htmlFor="password" className='form-label text-md-start'>Contraseña</label>
 
-                    <TextInput
+                    <input
                         id="password"
                         type="password"
                         name="password"
@@ -65,34 +64,33 @@ export default function Login({ status, canResetPassword }) {
 
                     <InputError message={errors.password} className="mt-2 text-danger" />
                 </div>
-
-                <div className="form-check mb-3">
-                    <Checkbox
-                        name="remember"
-                        checked={data.remember}
-                        className="form-check-input"
-                        onChange={(e) => setData('remember', e.target.checked)}
-                    />
-                    <label className="form-check-label ms-2 text-sm text-gray-600">
-                        Remember me
-                    </label>
+                <div className=' container w-75 mb-3'>
+                    <div className="d-flex justify-content-start">
+                        <input
+                            type='checkbox'
+                            name="remember"
+                            checked={data.remember}
+                            className="form-check-input mx-2"
+                            onChange={(e) => setData('remember', e.target.checked)}
+                        />
+                        <label className="form-check-label">
+                            Recordarme
+                        </label>
+                    </div>
                 </div>
 
-                <div className="d-flex justify-content-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="text-decoration-underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
 
-                    <PrimaryButton className="btn btn-primary ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
+                <div className='mb-0 container w-75'>
+                    <button className="btn btn-primary w-100" disabled={processing}>
+                        Ingresar
+                    </button>
                 </div>
+
+
             </form>
+
+
+
         </GuestLayout>
     );
 }
