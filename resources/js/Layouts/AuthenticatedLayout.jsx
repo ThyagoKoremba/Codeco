@@ -24,7 +24,7 @@ export default function Authenticated({ user, header, children }) {
                     <div className={`collapse navbar-collapse ${showingNavigationDropdown ? 'show' : ''}`}>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <NavLink className="nav-link" href={route('dashboard')} active={route().current('dashboard')}>
-                                Dashboard
+                                Inicio
                             </NavLink>
                         </ul>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
