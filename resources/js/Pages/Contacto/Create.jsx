@@ -494,11 +494,11 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                                 id="codigoPostal"
                                                 type="text"
                                                 name="codigoPostal"
-                                                value={data.codigoPostal}
+                                                value={data.codigo_postal}
                                                 className="form-control"
-                                                onChange={(e) => setData('codigoPostal', e.target.value)}
+                                                onChange={(e) => setData('codigo_postal', e.target.value)}
                                             />
-                                            {errors.codigoPostal && <div className="text-danger mt-1">{errors.codigoPostal}</div>}
+                                            {errors.codigo_postal && <div className="text-danger mt-1">{errors.codigo_postal}</div>}
                                         </div>
 
                                         <div className="col-md-3">
