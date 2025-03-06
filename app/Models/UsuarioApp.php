@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UsuarioApp extends Model
 {
     use HasFactory;
-    protected $table = 'usuario_apps';
+    protected $table = 'usuarios_app';
     protected $fillable = [
         'usuariocodigouuid',
         'dnicuit',

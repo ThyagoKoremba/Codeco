@@ -23,12 +23,12 @@ class UsuarioAppRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dnicuit' => 'required|string|max:14|unique:usuarios,dnicuit',
-            'nombre' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
+            'dnicuit' => 'required|string|max:14|unique:usuarios_app,dnicuit',
+            'nombres' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
             'apellido' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
-            'usuario' => 'required|string|unique:usuarios,usuario|max:45',
+            'usuario' => 'required|string|unique:usuarios_app,usuario|max:45',
             'clave' => 'required|string',
-            'mail' => 'required|email|unique:usuarios,mail',
+            'mail' => 'required|email|unique:usuarios_app,mail',
             'telefono' => 'numeric|required|digits_between:1,45',
             'activosn' => 'boolean',
         ];

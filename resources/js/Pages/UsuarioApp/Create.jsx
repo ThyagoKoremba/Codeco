@@ -33,13 +33,14 @@ const Create = ({ auth }) => {
             header={
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Usuario App</h2>
-                    <a href={route('rol.index')}>
+                    <a href={route('usuarioapp.index')}>
                         <button className='btn btn-primary'>Usuarios App</button>
                     </a>
                 </div>
             }
         >
             <Head title="Dashboard" />
+            
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -50,6 +51,8 @@ const Create = ({ auth }) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
+
+
                                                 <div className='card'>
                                                     <div className='card-header'>
                                                         <h5>Datos personales</h5>
@@ -98,17 +101,17 @@ const Create = ({ auth }) => {
                                                     </div>
                                                     <div className='mb-3 mx-3 row'>
                                                         <div className='col-6'>
-                                                            <label htmlFor="email">Email</label>
+                                                            <label htmlFor="mail">Email</label>
                                                             <input
-                                                                id="email"
+                                                                id="mail"
                                                                 type="text"
-                                                                name="email"
-                                                                value={data.email}
+                                                                name="mail"
+                                                                value={data.mail}
                                                                 className="form-control"
-                                                                onChange={(e) => setData('email', e.target.value)}
+                                                                onChange={(e) => setData('mail', e.target.value)}
                                                             />
 
-                                                            <InputError message={errors.email} className="mt-2" />
+                                                            <InputError message={errors.mail} className="mt-2" />
                                                         </div>
 
                                                         <div className='col-6'>

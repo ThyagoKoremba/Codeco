@@ -28,20 +28,20 @@ class UsuarioAppUpdate extends FormRequest
                 'required',
                 'string',
                 'max:14',
-                Rule::unique('usuarios','dnicuit')->ignore($this->usuarioapp->id)
+                Rule::unique('usuarios_app','dnicuit')->ignore($this->usuarioapp->id)
             ],
             'mail' => [
                 'required',
                 'email',
-                Rule::unique('usuarios','mail')->ignore($this->usuarioapp->id)
+                Rule::unique('usuarios_app','mail')->ignore($this->usuarioapp->id)
             ],
             'usuario'=>[
                 'required',
                 'string',
                 'max:45',
-                Rule::unique('usuarios','usuario')->ignore($this->usuarioapp->id)
+                Rule::unique('usuarios_app','usuario')->ignore($this->usuarioapp->id)
             ],
-            'nombre' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
+            'nombres' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
             'apellido' => 'required|string|regex:/^[\p{L}\d\s]{1,255}$/u',
             'clave' => 'required|string',
             'telefono' => 'required|numeric|digits_between:1,45',
