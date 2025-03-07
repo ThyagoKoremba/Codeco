@@ -90,7 +90,7 @@ const Index = ({ auth, actividades }) => {
                         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         padding: '20px',
                         maxWidth: '600px',
-                        maxHeight: "75vh",
+                        maxHeight: "73vh",
                         margin: '0 auto',
                     }
                 }}
@@ -117,11 +117,10 @@ const Index = ({ auth, actividades }) => {
                                     <div className="card-body">
                                         {selectedActividad && (
                                             <>
-
                                                 <p>ID: <span className="text-muted">{selectedActividad.id}</span></p>
                                                 <div className="row">
-                                                    <p className="col-6">Nombre: <span className="text-muted">{selectedActividad.actividadnombre}</span></p>
-                                                    <p className="col-6">Abreviatura: <span className="text-muted">{selectedActividad.actividadabreviatura}</span></p>
+                                                <p className="col-6">Nombre: <span className="text-muted">{selectedActividad.actividadnombre}</span></p>
+                                                <p className="col-6">Abreviatura: <span className="text-muted">{selectedActividad.actividadabreviatura}</span></p>
                                                 </div>
                                                 <hr />
                                                 <div className="row">

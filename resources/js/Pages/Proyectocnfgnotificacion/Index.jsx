@@ -127,13 +127,13 @@ const Index = ({ auth, proyectosnotif, proyectos }) => {
                         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                         padding: '20px',
                         maxWidth: '600px',
-                        maxHeight: "78vh",
                         margin: '0 auto',
+                        maxHeight: '80vh'
                     }
                 }}
                 overlayClassName="modal-overlay"
             >
-                <div className="modal-dialog modal-lg h-100">
+                <div className="modal-dialog modal-lg">
                     <div className="modal-content h-100">
                         <div className="modal-header d-flex justify-content-between">
                             <h5 className="modal-title mb-3">
