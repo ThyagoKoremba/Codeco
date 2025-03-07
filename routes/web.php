@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('/imibio', function () {
+    return Inertia::render('Imibio/Imibio');
+})->name('imibio');
+
 
 
 
