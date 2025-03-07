@@ -24,8 +24,8 @@ class ProductorRequest extends FormRequest
     {
         return [
             'usuarioid'     => 'nullable',
-            'apellido'      => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
-            'nombres'       => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
+            'apellido'      => 'required|regex:/^[\p{L}\s]{1,255}$/u',
+            'nombres'       => 'required|regex:/^[\p{L}\s]{1,255}$/u',
             'dnicuit'       => 'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,14}$/u',
             'activosn'      => 'boolean',
             'mail'          => 'required|email|unique:productores,mail',

@@ -33,8 +33,8 @@ class ProductorUpdate extends FormRequest
                 'email',
                 Rule::unique('productores', 'mail')->ignore($this->productor->id),
             ],
-            'apellido'      => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
-            'nombres'       => 'required|regex:/^[\p{L}\d\s\.\-]{1,255}$/u',
+            'apellido'      => 'required|regex:/^[\p{L}\s]{1,255}$/u',
+            'nombres'       => 'required|regex:/^[\p{L}\s]{1,255}$/u',
             'activosn'      => 'boolean',
             'telefono'      => 'required|regex:/^[\p{N}\d\s\.\-]{1,15}$/u',
         ];

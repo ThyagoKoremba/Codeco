@@ -1,11 +1,27 @@
-import React from 'react'
+import {React, useState} from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head} from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import './../../../css/app.css';
+import Modal from 'react-modal';
+Modal.setAppElement('#app');
 
 
-const Index = ({ auth, proyectosnotif, proyectos}) => {
-    console.log("Proyectos:", proyectos);
+
+const Index = ({ auth, proyectosnotif, proyectos }) => {
+
+    const [isVerModalOpen, setIsVerModalOpen] = useState(false);
+    const [selectedProyectoNotif, setSelectedProyectoNotif] = useState(null);
+
+    const openVerModal = (proyectonotif) => {
+        setSelectedProyectoNotif(proyectonotif);
+        setIsVerModalOpen(true);
+    }
+
+    const closeVerModal = () => {
+        setIsVerModalOpen(false);
+        setSelectedProyectoNotif(null);
+    }
+
     return (
 
         <AuthenticatedLayout
@@ -55,7 +71,6 @@ const Index = ({ auth, proyectosnotif, proyectos}) => {
                                     </th>
                                     <td className="px-6 py-4">
                                         {proyectos?.map((proyecto) => {
-                                            console.log(`Comparando: ${proyecto.id} con ${proyectonotif.proyectoid}`);
                                             return (
                                                 <div key={proyecto.id}>
                                                     {proyecto.id === proyectonotif.proyectoid ? proyecto.proyectonombre : null}
@@ -64,10 +79,10 @@ const Index = ({ auth, proyectosnotif, proyectos}) => {
                                         })}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {proyectonotif.movil_notificacion}
+                                        {proyectonotif.movil_notificacion || 'Sin Datos'}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {proyectonotif.mail_notificacion}
+                                        {proyectonotif.mail_notificacion || 'Sin Datos'}
                                     </td>
                                     <td className="px-6 py-4">
                                         {proyectonotif.sn_activo === 1 ? 'Si' : 'No'}
@@ -85,19 +100,92 @@ const Index = ({ auth, proyectosnotif, proyectos}) => {
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
 
                                                 <a className="dropdown-item" href={route('proyectocnfgnotificacion.edit', [proyectonotif])} >Editar</a>
+                                                <a className='dropdown-item' onClick={() => openVerModal(proyectonotif)}>Ver</a>
                                                 <a className="dropdown-item" href={route('proyectocnfgnotificacion.cambiarEstado', [proyectonotif])}>
                                                     {proyectonotif.sn_activo === 1 ? 'Desactivar' : 'Activar'}
                                                 </a>
+
 
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
+                                
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+            <Modal
+                isOpen={isVerModalOpen}
+                onRequestClose={closeVerModal}
+                contentLabel={"Ver"}
+                style={{
+                    content: {
+                        backgroundColor: '#ffffff',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                        padding: '20px',
+                        maxWidth: '600px',
+                        maxHeight: "78vh",
+                        margin: '0 auto',
+                    }
+                }}
+                overlayClassName="modal-overlay"
+            >
+                <div className="modal-dialog modal-lg h-100">
+                    <div className="modal-content h-100">
+                        <div className="modal-header d-flex justify-content-between">
+                            <h5 className="modal-title mb-3">
+                            {selectedProyectoNotif && (
+                                    <p>Ver Configuración de Notificación - {selectedProyectoNotif.id}</p>
+
+                                )}
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                onClick={closeVerModal}
+                                aria-label="Cerrar"
+                            ></button>
+                        </div>
+                        <div className="modal-body h-100 d-flex flex-column">
+                            <div className='mb-auto'>
+                                <div className="card">
+                                    <div className="card-body">
+                                    {selectedProyectoNotif && (
+                                            <>
+                                                <p>ID: <span className="text-muted">{selectedProyectoNotif.id}</span></p>
+                                                <p>Proyecto: <span className="text-muted">
+                                                    {proyectos?.map((proyecto) => {
+                                                        return (
+                                                            <span key={proyecto.id}>
+                                                                {proyecto.id === selectedProyectoNotif.proyectoid ? proyecto.proyectonombre : null}
+                                                            </span>
+                                                        );
+                                                    })}
+                                                </span></p>
+                                                <hr />
+                                                <div className="row">
+                                                <p className="col-6">Notif. Movil: <span className="text-muted">{selectedProyectoNotif.sn_movil_notificacion === 1 ? 'Si' : 'No'}</span></p>
+                                                <p className="col-6">Notif. Email: <span className="text-muted">{selectedProyectoNotif.sn_mail_notificacion === 1 ? 'Si' : 'No'}</span></p>
+                                                <p className="col-6">Movil Notificación: <span className="text-muted">{selectedProyectoNotif.movil_notificacion || 'Sin Datos'}</span></p>
+                                                <p className="col-6">Email Notificación: <span className="text-muted">{selectedProyectoNotif.mail_notificacion || 'Sin Datos'}</span></p>
+                                                </div>
+                                                <hr />
+                                                <p>Activo: <span className="text-muted">{selectedProyectoNotif.sn_activo === 1 ? 'Si' : 'No'}</span></p>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-end">
+                                <button onClick={closeVerModal} className="btn btn-secondary mt-3">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </AuthenticatedLayout >
     )
 }

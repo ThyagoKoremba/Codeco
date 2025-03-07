@@ -191,25 +191,7 @@ const Edit = ({ auth, proyectonotif, proyectoNom }) => {
                                                         <InputError message={errors.movil_notificacion} className="mt-2" />
                                                     </div>
                                                 </div>
-
-                                                <hr />
-
-                                                <div className='mb-3'>
-                                                    <label htmlFor="sn_activo" className='form-label'>Activo</label>
-
-                                                    <input
-                                                        id="sn_activo"
-                                                        type="checkbox"
-                                                        name="sn_activo"
-                                                        checked={data.sn_activo}
-                                                        className="form-check-input mx-2"
-                                                        onChange={(e) => setData('sn_activo', e.target.checked)}
-                                                    />
-
-                                                    <InputError message={errors.sn_activo} className="mt-2" />
-                                                </div>
-
-                                                <div className="mb-3">
+                                                <div className="mb-3 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
                                             </form>

@@ -1,10 +1,26 @@
-import React from 'react'
+import {React, useState} from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head} from '@inertiajs/react';
 import './../../../css/app.css';
+import Modal from 'react-modal';
+Modal.setAppElement('#app');
 
 
 const Index = ({ auth, proyectos }) => {
+
+    const [isVerModalOpen, setIsVerModalOpen] = useState(false);
+        const [selectedProyecto, setSelectedProyecto] = useState(null);
+    
+        const openVerModal = (proyecto) => {
+            setSelectedProyecto(proyecto);
+            setIsVerModalOpen(true);
+        }
+    
+        const closeVerModal = () => {
+            setIsVerModalOpen(false);
+            setSelectedProyecto(null);
+        }
+
     return (
 
         <AuthenticatedLayout
@@ -83,6 +99,7 @@ const Index = ({ auth, proyectos }) => {
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
 
                                                 <a className="dropdown-item" href={route('proyecto.edit', [proyecto])} >Editar</a>
+                                                <a className='dropdown-item' onClick={() => openVerModal(proyecto)}>Ver</a>
                                                 <a className="dropdown-item" href={route('proyecto.cambiarEstado', [proyecto])}>
                                                     {proyecto.activosn === 1 ? 'Desactivar' : 'Activar'}
                                                 </a>
@@ -96,6 +113,78 @@ const Index = ({ auth, proyectos }) => {
                     </table>
                 </div>
             </div>
+                        <Modal
+                            isOpen={isVerModalOpen}
+                            onRequestClose={closeVerModal}
+                            contentLabel={"Ver"}
+                            style={{
+                                content: {
+                                    backgroundColor: '#ffffff',
+                                    borderRadius: '10px',
+                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                    padding: '20px',
+                                    maxWidth: '600px',
+                                    maxHeight: "85vh",
+                                    margin: '0 auto',
+                                }
+                            }}
+                            overlayClassName="modal-overlay"
+                        >
+                            <div className="modal-dialog modal-lg h-100">
+                                <div className="modal-content h-100">
+                                    <div className="modal-header d-flex justify-content-between">
+                                        <h5 className="modal-title mb-3">
+                                        {selectedProyecto && (
+                                                <p>Ver Proyecto - {selectedProyecto.id}</p>
+            
+                                            )}
+                                        </h5>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            onClick={closeVerModal}
+                                            aria-label="Cerrar"
+                                        ></button>
+                                    </div>
+                                    <div className="modal-body h-100 d-flex flex-column">
+                                        <div className='mb-auto'>
+                                            <div className="card">
+                                                <div className="card-body">
+                                                {selectedProyecto && (
+                                                        <>
+                                                            <p>ID: <span className="text-muted">{selectedProyecto.id}</span></p>
+                                                            <div className="row">
+                                                            <p className="col-6">Nombre: <span className="text-muted">{selectedProyecto.proyectonombre}</span></p>
+                                                            <p className="col-6">Abreviatura: <span className="text-muted">{selectedProyecto.proyectoabreviatura}</span></p>
+                                                            </div>
+                                                            <hr />
+                                                            <div className="row">
+                                                                <div className="col-6">
+                                                                <p>Fecha Inicio: <span className="text-muted">{selectedProyecto.fechainicio}</span></p>
+                                                                </div>
+                                                                <div className="col-6">
+                                                                <p>Fecha Finalización: <span className="text-muted">{selectedProyecto.fechafinalizacion || 'Sin Datos'}</span></p>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <p>Productores: <span className="text-muted">{selectedProyecto.productoressn === 1 ? 'Si' : 'No'}</span></p>
+                                                            <hr />
+                                                            <p>Descripción: <span className="text-muted">{selectedProyecto.proyectodescripcion}</span></p>
+                                                            <p>Activo: <span className="text-muted">{selectedProyecto.activosn === 1 ? 'Si' : 'No'}</span></p>
+                                                            
+
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="d-flex justify-content-end">
+                                            <button onClick={closeVerModal} className="btn btn-secondary mt-3">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Modal>    
         </AuthenticatedLayout >
     )
 }
