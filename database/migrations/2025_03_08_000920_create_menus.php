@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfiles', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',50);
-            $table->string('informacion',100)->comment('Cual es la función operativa del perfil y sus alcances');
-            $table->string('abreviatura',45)->nullable();
-            $table->boolean('activo')->default(true);
+            $table->string('nombre',45)->unique();
+            $table->string('abreviatura',20)->unique();
+            $table->string('informacion')->nullable();
+            $table->boolean('activo')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('menus_componentes');
+        Schema::dropIfExists('menus');
     }
 };

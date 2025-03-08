@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfil_componentes', function (Blueprint $table) {
+        Schema::create('menus_componentes', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_menu');
             $table->unsignedBigInteger('id_componente');
-            $table->unsignedBigInteger('id_perfil');
-            $table->primary(['id_componente','id_perfil']);
+            $table->primary(['id_menu','id_componente']);
             $table->boolean('activo')->default(false);
-            $table->foreign('id_perfil','FK_id_perfil_perfilcomponentes')->references('id')->on('perfiles')->onDelete('cascade');
-            $table->foreign('id_componente','FK_id_componente_perfilcomponentes')->references('id')->on('componentes')->onDelete('cascade');
+            $table->integer('orden')->nullable();
             $table->timestamps();
+            
+            $table->foreign('id_menu')->references('id')->on('menus')->onDelete('cascade');
+            $table->foreign('id_componente')->references('id')->on('componentes')->onDelete('cascade');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perfil_componentes');
+        Schema::dropIfExists('menus_componentes');
     }
 };
