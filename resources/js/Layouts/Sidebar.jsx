@@ -1,11 +1,26 @@
 // resources/js/Layouts/DashboardLayout.jsx
-import { Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { Link, usePage } from '@inertiajs/react';
+import { useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from 'framer-motion';
 import './styles.css';
 
-export default function DashboardLayout({ children }) {
+export default function DashboardLayout({ children}) {const { permissionsJson } = usePage().props;
+const [abilities, setAbilities] = useState([]);
+
+useEffect(() => {
+    fetch('/session-data')
+        .then(response => response.json())
+        .then(data => {
+            setAbilities(data.abilities);
+        })
+        .catch(error => {
+            console.error('Error fetching session data:', error);
+        });
+}, []);
+console.log(abilities);
+
+
     const [sidebarVisible, setSidebarVisible] = useState(true);
 
     const sidebarVariants = {
@@ -41,9 +56,11 @@ export default function DashboardLayout({ children }) {
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/dashboard">Inicio</Link>
                         </li>
+                        {abilities.map((ability, index) => (
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/contacto/index">Contactos</Link>
                         </li>
+                        ))}
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/proyectos">Proyectos</Link>
                         </li>

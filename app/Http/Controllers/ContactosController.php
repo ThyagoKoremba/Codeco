@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\geolugares;
 use App\Models\geoprovinciasregiones;
 use App\Models\vista_contactos;
+use Illuminate\Support\Facades\Auth;
 
 class ContactosController extends Controller
 {
@@ -73,9 +74,13 @@ class ContactosController extends Controller
 
 
     public function index () {
-        
-        $contactos=vista_contactos::orderby('id_contacto')->get();
-        return Inertia::render('Contacto/Index',['contactos'=>$contactos]);
+        $contactos = vista_contactos::orderby('id_contacto')->get();
+        return Inertia::render('Contacto/Index', [
+            'contactos' => $contactos,
+            'permissions' => [
+                'CrearContacto' => Auth::user()->can('crear-contacto'),
+            ],
+        ]);
     } 
 
     public function edit (contactos $contacto) {

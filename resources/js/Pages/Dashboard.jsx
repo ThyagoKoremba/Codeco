@@ -1,8 +1,22 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 import DashboardLayout from '@/Layouts/SideBar';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth }) {const { permissionsJson } = usePage().props;
+const [abilities, setAbilities] = useState([]);
+
+useEffect(() => {
+    fetch('/session-data')
+        .then(response => response.json())
+        .then(data => {
+            setAbilities(data.abilities);
+        })
+        .catch(error => {
+            console.error('Error fetching session data:', error);
+        });
+}, []);
+console.log(abilities);
     return (
 
         <DashboardLayout>

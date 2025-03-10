@@ -9,8 +9,9 @@ import Swal from 'sweetalert2';
 import { Dropdown } from 'react-bootstrap';
 
 Modal.setAppElement('#app');
+const Index = ({ auth, contactos, permissions }) => {
+    console.log(permissions);
 
-const Index = ({ auth, contactos }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [contacts, setContacts] = useState(contactos);
     const [modal, setModal] = useState(false);
@@ -65,11 +66,13 @@ const Index = ({ auth, contactos }) => {
                                     className="form-control"
                                 />
                             </div>
+                            {permissions.CrearContacto ? (
                             <div className="col-md-6 text-right">
                                 <Link href="/contacto/create" className="btn btn-dark">
                                     Crear Contacto
                                 </Link>
-                            </div>
+                            </div>)
+                            : null}
                         </div>
                         <div className="table-responsive" style={{ maxHeight: '500px', minHeight:'500px', overflowY: 'auto' }}>
                             <table className="table table-striped">
