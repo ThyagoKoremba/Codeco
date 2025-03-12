@@ -14,9 +14,21 @@ class PerfilSeed extends Seeder
     public function run(): void
     {
         Perfil::create([
-            'nombre'      => 'Test',
-            'descripcion' => 'Perfil Test, no considera super_admin',
-            'abreviatura' => 'TEST',
+            'nombre'      => 'Facturador',
+            'informacion' => '',
+            'abreviatura' => 'Facturador',
+            'activo'      => true
+        ]);
+        Perfil::create([
+            'nombre'      => 'Usuario CRM',
+            'informacion' => '',
+            'abreviatura' => 'Usuario CRM',
+            'activo'      => true
+        ]);
+        Perfil::create([
+            'nombre'      => 'Administrador',
+            'informacion' => '',
+            'abreviatura' => 'Administrador',
             'activo'      => true
         ]);
     }

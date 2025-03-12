@@ -14,14 +14,28 @@ class ComponenteSeed extends Seeder
     public function run(): void
     {
         Componente::create([
-            'nombre'      => 'Lista de test',
-            'descripcion' => 'Lista',
-            'activo'      => true
+            'nombre'      => 'Contactos',
+            'descripcion' => '...',
+            'activo'      => true,
+            'url'         => 'test/contactos'
         ]);
         Componente::create([
-            'nombre'      => 'EditarTest',
-            'descripcion' => 'Opción editar completo',
-            'activo'      => true
+            'nombre'      => 'Radicaciones',
+            'descripcion' => '...',
+            'activo'      => true,
+            'url'         => 'test/radicaciones'
+        ]);
+        Componente::create([
+            'nombre'      => 'Categorias',
+            'descripcion' => '...',
+            'activo'      => true,
+            'url'         => 'test/categorias'
+        ]);
+        Componente::create([
+            'nombre'      => 'Agregar',
+            'descripcion' => 'LLama a agregar contacto',
+            'activo'      => true,
+            'url'         => 'test/contactos/agregar'
         ]);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Componente;
+use App\Models\Perfil;
 use App\Models\PerfilComponente;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,14 +15,16 @@ class PerfilComponentesSeed extends Seeder
      */
     public function run(): void
     {
+        $perfil     = Perfil::find(1);
+
         PerfilComponente::create([
-            'id_componente' => 1,
-            'id_perfil'     => 1,
+            'id_componente' => Componente::find(1)->id,
+            'id_perfil'     => $perfil->id,
             'activo'        => true
         ]);
         PerfilComponente::create([
-            'id_componente' => 2,
-            'id_perfil'     => 1,
+            'id_componente' => Componente::find(2)->id,
+            'id_perfil'     => $perfil->id,
             'activo'        => true
         ]);
     }

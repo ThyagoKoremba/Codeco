@@ -26,5 +26,11 @@ class userSeeder extends Seeder
             'password'=>'123456',
             'activo'  => true,
         ]);
+        User::create([
+            'name'    =>'UserTest2',
+            'email'   =>'test2@codeco.com',
+            'password'=>'123456',
+            'activo'  => true,
+        ]);
     }
 }

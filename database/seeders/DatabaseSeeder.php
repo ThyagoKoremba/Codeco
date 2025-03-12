@@ -31,9 +31,12 @@ class DatabaseSeeder extends Seeder
         $this->call(IdentidadesSeeder::class);
         $this->call(UserSeeder::class);
 
+        //Seeders para configurar componentes-menu por usuario, sumar en orden. En el caso que se quiera crear otro usuario asegurarnos de tenerlo arriba o sumarlo en el seed
+        //NO PURAMENTE DESDE DB porque se rompen las relaciones
         $this->call(PerfilSeed::class);
         $this->call(ComponenteSeed::class);
         $this->call(PerfilComponentesSeed::class);
-        $this->call(UserPerfilComponentesSeed::class);
+        $this->call(UserPerfilSeed::class);
+        $this->call(UserComponenteExcepcionSeed::class);
     }
 }
