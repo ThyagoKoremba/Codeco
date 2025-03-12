@@ -38,5 +38,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PerfilComponentesSeed::class);
         $this->call(UserPerfilSeed::class);
         $this->call(UserComponenteExcepcionSeed::class);
+        $this->call(MenuSeed::class);
     }
 }

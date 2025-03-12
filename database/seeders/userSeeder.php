@@ -21,15 +21,15 @@ class userSeeder extends Seeder
             'activo'      => true,
         ]);
         User::create([
-            'name'    =>'UserTest',
-            'email'   =>'test@codeco.com',
+            'name'    =>'Thyago',
+            'email'   =>'thyagotest@codeco.com',
             'password'=>'123456',
             'activo'  => true,
         ]);
         User::create([
-            'name'    =>'UserTest2',
-            'email'   =>'test2@codeco.com',
-            'password'=>'123456',
+            'name'    =>'Lucas',
+            'email'   =>'lucastest@codeco.com',
+            'password'=>'654321',
             'activo'  => true,
         ]);
     }
