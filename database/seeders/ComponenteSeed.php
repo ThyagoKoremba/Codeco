@@ -37,5 +37,17 @@ class ComponenteSeed extends Seeder
             'activo'      => true,
             'url'         => 'test/contactos/agregar'
         ]);
+        Componente::create([
+            'nombre'      => 'Factura A',
+            'descripcion' => '...',
+            'activo'      => true,
+            'url'         => 'test/facturaA'
+        ]);
+        Componente::create([
+            'nombre'      => 'Factura B',
+            'descripcion' => '...',
+            'activo'      => true,
+            'url'         => 'test/facturaB'
+        ]);
     }
 }

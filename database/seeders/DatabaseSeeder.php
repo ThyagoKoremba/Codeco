@@ -35,7 +35,9 @@ class DatabaseSeeder extends Seeder
         //NO PURAMENTE DESDE DB porque se rompen las relaciones
         $this->call(PerfilSeed::class);
         $this->call(ComponenteSeed::class);
-        $this->call(PerfilComponentesSeed::class);
+
+        $this->call(PerfilComponentesSeed::class); //por el momento no lo usamos
+        
         $this->call(UserPerfilSeed::class);
         $this->call(UserComponenteExcepcionSeed::class);
         $this->call(MenuSeed::class);

@@ -36,10 +36,24 @@ class MenuComponenteSeed extends Seeder
             'orden'         => 3,
             'activo'        => true
         ]);
-                //Gestion de contacto - Contactos
+        //Gestion de contacto - Contactos
         MenuComponente::create([
             'id_menu'       => Menu::find(2)->id,
             'id_componente' => Componente::find(4)->id,
+            'orden'         => 1,
+            'activo'        => true
+        ]);
+        //Facturador Factura A
+        MenuComponente::create([
+            'id_menu'       => Menu::find(2)->id,
+            'id_componente' => Componente::find(5)->id,
+            'orden'         => 1,
+            'activo'        => true
+        ]);
+        //Facturador Factura B
+        MenuComponente::create([
+            'id_menu'       => Menu::find(2)->id,
+            'id_componente' => Componente::find(6)->id,
             'orden'         => 1,
             'activo'        => true
         ]);

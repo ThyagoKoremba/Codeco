@@ -31,5 +31,13 @@ class UserPerfilSeed extends Seeder
                 'activo'     => true
             ]
         );
+        // Lucas perfil Facturador
+        UserPerfil::create(
+            [
+                'id_user'    => User::find(3)->id,
+                'id_perfil'  => Perfil::find(1)->id,
+                'activo'     => true
+            ]
+        );
     }
 }

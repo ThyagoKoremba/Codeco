@@ -8,13 +8,9 @@ class Perfil extends Model
 {
     protected $table = 'perfiles';
 
-    public function componentes()
+    public function menus()
     {
-        return $this->belongsToMany(Componente::class, 'perfil_componentes', 'id_perfil', 'id_componente');
-    }
-
-    public function usuarios()
-    {
-        return $this->belongsToMany(User::class, 'users_perfiles', 'id_perfil', 'id_user');
+        return $this->belongsToMany(Menu::class, 'perfiles_menus', 'id_perfil', 'id_menu')
+            ->wherePivot('activo', true);
     }
 }
