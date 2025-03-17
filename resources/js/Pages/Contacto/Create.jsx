@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Modal from 'react-modal';
 
-import DashboardLayout from '@/Layouts/Sidebar'; ;
+
 
 import './styles.css';
 Modal.setAppElement('#app');
@@ -174,7 +174,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
     };
 
     return (
-        <DashboardLayout> 
+       
         <AuthenticatedLayout
             user={auth.user}
             header={
@@ -780,7 +780,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
 
           
         </AuthenticatedLayout >
-        </DashboardLayout> 
+      
     );
 };
 

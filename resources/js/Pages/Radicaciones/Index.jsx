@@ -42,7 +42,7 @@ const RadicacionesIndex = ({ auth, radicaciones, nombre, apellido }) => {
 
     return (
         <>
-            <DashboardLayout>
+         
                 <AuthenticatedLayout user={auth.user} header={<h2>Radicaciones de  {apellido} , {nombre} </h2>}>
                     <div className="container mt-4">
                         <div className="row mb-3">
@@ -109,7 +109,7 @@ const RadicacionesIndex = ({ auth, radicaciones, nombre, apellido }) => {
                         </div>
                     </div>
                 </AuthenticatedLayout>
-            </DashboardLayout>
+        
         </>
     );
 

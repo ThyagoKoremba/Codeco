@@ -1,9 +1,10 @@
-// resources/js/Layouts/DashboardLayout.jsx
-import { Link, usePage } from '@inertiajs/react';
-import { useState, useEffect} from 'react';
+
+import { Link } from '@inertiajs/react';
+import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from 'framer-motion';
 import './styles.css';
+import Authenticated from './AuthenticatedLayout';
 
 export default function DashboardLayout({ children}) {const { permissionsJson } = usePage().props;
 const [abilities, setAbilities] = useState([]);
@@ -12,6 +13,7 @@ const [abilities, setAbilities] = useState([]);
 
 
     const [sidebarVisible, setSidebarVisible] = useState(true);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const sidebarVariants = {
         open: { width: '250px', opacity: 1, x: 0, transition: { duration: 0.3 } },
@@ -27,7 +29,7 @@ const [abilities, setAbilities] = useState([]);
         <div className="d-flex">
 
             <motion.div
-                className="bg-dark text-white p-3 d-flex flex-column justify-content-between"
+                className="bg-success text-white p-3 d-flex flex-column justify-content-between"
                 style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}
                 variants={sidebarVariants}
                 animate={sidebarVisible ? 'open' : 'closed'}
@@ -52,15 +54,16 @@ const [abilities, setAbilities] = useState([]);
                         </li>
                         ))}
                         <li className="nav-item">
-                            <Link className="nav-link text-white" href="/proyectos">Proyectos</Link>
+                            <Link className="nav-link text-white" href="/imibio/proyectos">Proyectos</Link>
                         </li>
                     </ul>
 
                 </div>
-                <footer className="bg-dark text-white text-center py-3">
+                <footer className="bg-success text-white text-center py-3">
 
                     <hr></hr>
                     <div className="container ">
+                        <Authenticated user={user} />
                         <p style={{ fontSize: '12px' }} >&copy; CODECO 2025</p>
                     </div>
                 </footer>

@@ -1,29 +1,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
-import DashboardLayout from '@/Layouts/SideBar';
+import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {const { permissionsJson } = usePage().props;
-const [abilities, setAbilities] = useState([]);
 
-useEffect(() => {
-    fetch('/session-data')
-        .then(response => response.json())
-        .then(data => {
-            setAbilities(data.abilities);
-        })
-        .catch(error => {
-            console.error('Error fetching session data:', error);
-        });
-}, []);
-console.log(abilities);
+export default function Dashboard({ auth }) {
+
+    localStorage.setItem('user', JSON.stringify(auth.user));
+
     return (
 
-        <DashboardLayout>
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
-        >
+      <>
+       <h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+       
             <Head title="Dashboard" />
 
             <div className="py-12">
@@ -34,7 +21,7 @@ console.log(abilities);
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
-        </DashboardLayout>
+      
+            </>
     );
 }
