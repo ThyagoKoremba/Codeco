@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Link } from '@inertiajs/react';
-import DashboardLayout from '@/Layouts/Sidebar';
+
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import './styles.css';
 import Swal from 'sweetalert2';
@@ -52,7 +52,7 @@ const Index = ({ auth, contactos }) => {
 
     return (
         <>
-            <DashboardLayout>
+        
                 <AuthenticatedLayout user={auth.user} header={<h2>Contactos</h2>}>
                     <div className="container mt-4">
                         <div className="row mb-3">
@@ -117,7 +117,7 @@ const Index = ({ auth, contactos }) => {
                         </div>
                     </div>
                 </AuthenticatedLayout>
-            </DashboardLayout>
+          
 
             <Modal
                 isOpen={modal}

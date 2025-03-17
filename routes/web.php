@@ -37,9 +37,22 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/imibio', function () {
-    return Inertia::render('Imibio/Imibio');
+    return Inertia::render('Imibio/Registros/MonitorGeneral');
 })->name('imibio');
+Route::get('/imibio/proyectos', function () {
+    return Inertia::render('Imibio/Registros/MonitorProyectos');
+});
+Route::get('/imibio/actividades', function () {
+    return Inertia::render('Imibio/Registros/MonitorActividades');
+});
 
+Route::get('/imibio/proyecto/{id}', function ($id) {
+    return Inertia::render('Imibio/Registros/ProyectoGral', ['id' => $id]);
+})->name('proyecto.gral');
+
+Route::get('/imibio/proyectoDetalle/{id}', function ($id) {
+    return Inertia::render('Imibio/Registros/DetalleProyecto', ['id' => $id]);
+})->name('proyecto.detalle');
 
 
 
