@@ -8,17 +8,7 @@ import './styles.css';
 export default function DashboardLayout({ children}) {const { permissionsJson } = usePage().props;
 const [abilities, setAbilities] = useState([]);
 
-useEffect(() => {
-    fetch('/session-data')
-        .then(response => response.json())
-        .then(data => {
-            setAbilities(data.abilities);
-        })
-        .catch(error => {
-            console.error('Error fetching session data:', error);
-        });
-}, []);
-console.log(abilities);
+
 
 
     const [sidebarVisible, setSidebarVisible] = useState(true);

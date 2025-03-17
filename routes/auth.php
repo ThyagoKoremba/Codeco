@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -59,5 +61,10 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/session-data', [AuthenticatedSessionController::class, 'getSessionData']);
+                Route::get('/session-data', function (Request $request) {
+                    return response()->json([
+                        'user' => Auth::user(),
+                        'abilities' => Auth::user()->getAbilities()->pluck('name')->toArray(),
+                    ]);
+                });
 });
