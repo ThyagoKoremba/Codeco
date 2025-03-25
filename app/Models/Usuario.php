@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UsuarioApp extends Model
+class Usuario extends Model
 {
     use HasFactory;
-    protected $table = 'usuarios_app';
+    protected $table = 'usuario';
     protected $fillable = [
         'usuariocodigouuid',
         'dnicuit',
@@ -27,4 +27,8 @@ class UsuarioApp extends Model
         'updateusuarioctrl'=>'datetime',
         'updateusuarioapp'=>'datetime',
         ];
+
+    public function productor(){
+        return $this->belongsTo(Productores::class,'productorid','id');
+    }
 }

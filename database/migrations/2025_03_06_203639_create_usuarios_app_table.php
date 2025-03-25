@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios_app', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->uuid('usuariocodigouuid', 36)->unique()->nullable();
             $table->string('dnicuit', 14)->index('dnicuit_IDX');
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('activosn')->default(0)->nullable();
             $table->boolean('modedemosn')->default(1);
             $table->text('observaciones', 255)->nullable();
-            // $table->integer('productorid')->default(1)->index('fk_productorid');
-            // $table->foreign('productorid')->references('id')->on('productores');
+            $table->unsignedBigInteger('productorid')->default(1)->index('fk_productorid');
+            $table->foreign('productorid')->references('id')->on('productores');
             $table->date('vigenciahasta')->nullable();
             $table->string('patronbusqueda', 255)->nullable();
             $table->dateTime('updateusuarioctrl')->nullable();
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios_app');
+        Schema::dropIfExists('usuarios');
     }
 };

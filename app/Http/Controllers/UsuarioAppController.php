@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UsuarioApp\UsuarioAppRequest;
 use App\Http\Requests\UsuarioApp\UsuarioAppUpdate;
-use App\Models\UsuarioApp;
+use App\Models\Usuario;
+
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 
@@ -17,7 +18,7 @@ class UsuarioAppController extends Controller
 
     public function store(UsuarioAppRequest $request)
     {
-        $usuarioapp = new UsuarioApp();
+        $usuarioapp = new Usuario();
         $usuarioapp->usuariocodigouuid = Str::uuid();
         $usuarioapp->dnicuit = $request->input('dnicuit');
         $usuarioapp->nombres = $request->get('nombres');
@@ -41,23 +42,23 @@ class UsuarioAppController extends Controller
 
     public function index()
     {
-        $usuariosapp = UsuarioApp::orderBy("id")->get();
+        $usuariosapp = Usuario::orderBy("id")->get();
         return Inertia::render("UsuarioApp/Index", compact('usuariosapp'));
     }
 
-    public function edit(UsuarioApp $usuarioapp)
+    public function edit(Usuario $usuarioapp)
     {
         return Inertia::render("UsuarioApp/Edit", compact('usuarioapp'));
     }
 
-    public function update(UsuarioAppUpdate $request, UsuarioApp $usuarioapp)
+    public function update(UsuarioAppUpdate $request, Usuario $usuarioapp)
     {
         $data = $request->all();
         $usuarioapp->update($data);
         return to_route('usuarioapp.index');
     }
 
-    public function cambiarEstado(UsuarioApp $usuarioapp)
+    public function cambiarEstado(Usuario $usuarioapp)
     {
         $usuarioapp->activosn = !$usuarioapp->activosn;
         $usuarioapp->save();

@@ -25,8 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pais')->nullable();
             $table->index('id_pais', 'IDX_id_pais_identidad'); 
             $table->foreign('id_pais', 'FK_id_pais_identidad')
-            ->references('id')->on('geopais')
-            ->onDelete('cascade'); 
+            ->references('id')->on('geopais'); 
             $table->timestamps();
         });
     }
