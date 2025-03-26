@@ -112,7 +112,7 @@ Route::get('/imibio/capacitacion-detalle/{id}', function ( $id ) {
 });
 
 
-Route::get('/imibio/map-novedades/{fechaDesde}/{fechaHasta}', function ( $fechaDesde, $fechaHasta) {
+Route::get('/imibio/map-nov/{fechaDesde}/{fechaHasta}', function ( $fechaDesde, $fechaHasta) {
     return Inertia::render('Imibio/Novedades/MapGralNov', [
        
         'fechaDesde' => $fechaDesde,

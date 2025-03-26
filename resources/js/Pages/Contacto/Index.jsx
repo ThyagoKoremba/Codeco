@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 import { Dropdown } from 'react-bootstrap';
 
 Modal.setAppElement('#app');
-const Index = ({ auth, contactos, permissions }) => {
-    console.log(permissions);
+const Index = ({ contactos }) => {
+  
 
     const [searchTerm, setSearchTerm] = useState('');
     const [contacts, setContacts] = useState(contactos);
@@ -65,13 +65,13 @@ const Index = ({ auth, contactos, permissions }) => {
                                     className="form-control"
                                 />
                             </div>
-                            {permissions.CrearContacto ? (
+                     
                             <div className="col-md-6 text-right">
                                 <Link href="/contacto/create" className="btn btn-dark">
                                     Crear Contacto
                                 </Link>
-                            </div>)
-                            : null}
+                            </div>
+                       
                         </div>
                         <div className="table-responsive" style={{ maxHeight: '500px', minHeight:'500px', overflowY: 'auto' }}>
                             <table className="table table-striped">
@@ -128,8 +128,7 @@ const Index = ({ auth, contactos, permissions }) => {
                 className="modal"
                 overlayClassName="modal-overlay"
             >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
+               
                         <div className="modal-header">
                             <h5 className="modal-title">{selectedContact?.apellidoynombre}</h5>
                             <button
@@ -183,8 +182,7 @@ const Index = ({ auth, contactos, permissions }) => {
                                 </table>
                             )}
                         </div>
-                    </div>
-                </div>
+                   
             </Modal>
         </>
     );

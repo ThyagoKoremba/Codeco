@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet'; // Necesario para crear un ícono personalizado
 import 'leaflet/dist/leaflet.css'; // Estilos de Leaflet
-import Header from '../header/header';
-import { useParams } from 'react-router-dom';
-import Footer from '../footer/footer';
+import { usePage } from '@inertiajs/react';
 
 
 
@@ -12,8 +10,8 @@ const MapNov = () => {
 
 
 
-
-    const { fechaDesde, fechaHasta } = useParams();
+const {props} = usePage();
+    const { fechaDesde, fechaHasta } = props;
     const [location, setLocations] = useState([]);
 
 
@@ -80,14 +78,14 @@ const MapNov = () => {
         <>
 
 
-           <Header></Header>
+           
 
 <br></br>
 
             <div className='container'>
             <h2>Novedades</h2>
             <hr></hr>
-                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "550px", width: "100%" }}>
+                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "500px", width: "100%" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -132,7 +130,7 @@ const MapNov = () => {
                     ))}
                 </MapContainer>
             </div>
-<Footer></Footer>
+
         </>
     );
 };

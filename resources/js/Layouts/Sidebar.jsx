@@ -6,8 +6,7 @@ import { motion } from 'framer-motion';
 import './styles.css';
 import Authenticated from './AuthenticatedLayout';
 
-export default function DashboardLayout({ children}) {const { permissionsJson } = usePage().props;
-const [abilities, setAbilities] = useState([]);
+export default function DashboardLayout({ children}) {
 
 
 
@@ -50,11 +49,11 @@ const [abilities, setAbilities] = useState([]);
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/dashboard">Inicio</Link>
                         </li>
-                        {abilities.map((ability, index) => (
+                       
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/contacto/index">Contactos</Link>
                         </li>
-                        ))}
+                   
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/imibio/proyectos">Proyectos</Link>
                         </li>

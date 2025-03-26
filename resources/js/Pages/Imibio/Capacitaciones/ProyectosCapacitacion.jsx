@@ -67,7 +67,7 @@ useEffect(() => {
         <div className="row">
   {proyectos.map((proyecto) => (
     <div className="col-md-4" key={proyecto.proyectoid}>
-               <Link href={`/imibio/capacitaciones/${proyecto.proyectoid}`} target="_blank" className="btn btn-dark ">
+               <Link href={`/imibio/capacitaciones/${proyecto.proyectoid}`} target="_blank" className="btn  ">
 
         
         <div className="card mb-4">

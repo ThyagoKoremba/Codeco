@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-use Silber\Bouncer\Database\Ability;
-use Bouncer;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -26,12 +24,14 @@ class AuthenticatedSessionController extends Controller
             'status' => session('status'),
         ]);
     }
+
     public function getSessionData(Request $request)
     {
         return response()->json([
             'abilities' => $request->session()->get('abilities'),
         ]);
     }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -40,14 +40,6 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        $user = Auth::user();
-
-        // Obtener los permisos del usuario
-        $abilities = $user->getAbilities()->pluck('name');
-
-        // Almacenar los permisos en la sesión
-        $request->session()->put('abilities', $abilities);
 
         // Redirigir a HOME
         return redirect()->route('dashboard');
@@ -64,6 +56,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/', );
+        return redirect('/');
     }
 }
