@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre',45)->unique();
             $table->string('abreviatura',20)->unique();
             $table->string('informacion')->nullable();
-            $table->boolean('activo')->default(0);
+            $table->boolean('sn_activo')->default(0);
             $table->timestamps();
         });
     }

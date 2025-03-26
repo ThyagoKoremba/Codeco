@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Componente;
+use App\Models\Componentes;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,40 +13,40 @@ class ComponenteSeed extends Seeder
      */
     public function run(): void
     {
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Contactos',
             'descripcion' => '...',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/contactos'
         ]);
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Radicaciones',
             'descripcion' => '...',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/radicaciones'
         ]);
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Categorias',
             'descripcion' => '...',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/categorias'
         ]);
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Agregar',
             'descripcion' => 'LLama a agregar contacto',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/contactos/agregar'
         ]);
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Factura A',
             'descripcion' => '...',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/facturaA'
         ]);
-        Componente::create([
+        Componentes::create([
             'nombre'      => 'Factura B',
             'descripcion' => '...',
-            'activo'      => true,
+            'sn_activo'      => true,
             'url'         => 'test/facturaB'
         ]);
     }

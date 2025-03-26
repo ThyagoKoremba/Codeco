@@ -16,13 +16,13 @@ class MenuSeed extends Seeder
             'nombre'      => 'Gestión de contacto',
             'abreviatura' => 'GC',
             'informacion' => '...',
-            'activo'      => true
+            'sn_activo'      => true
         ]);
         Menu::create([
             'nombre'      => 'Facturador',
             'abreviatura' => 'FAC',
             'informacion' => '...',
-            'activo'      => true
+            'sn_activo'      => true
         ]);
     }
 }

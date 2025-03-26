@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Componente;
+use App\Models\Componentes;
 use App\Models\User;
 use App\Models\UserComponenteExcepcion;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,7 +17,7 @@ class UserComponenteExcepcionSeed extends Seeder
     {
         UserComponenteExcepcion::create([
             'id_user'      => User::find(3)->id,
-            'id_componente'=> Componente::find(2)->id
+            'id_componente'=> Componentes::find(2)->id
         ]);
         //Caso de ejemplo para probar que se obtiene el perfil y el menu independientemente si existe una restriccion de componentes
         //UserComponenteExcepcion::create([

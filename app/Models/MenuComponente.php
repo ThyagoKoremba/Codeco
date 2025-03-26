@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class MenuComponente extends Model
 {
     protected $table = 'menus_componentes';
+    protected $fillable = [
+        'id_menu',
+        'id_componente',
+        'activo',
+        'orden'
+    ];
 }
