@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
  import Actividad from '../Actividad/Actividad';
 
-import './test.css';
+import './registros.css';
 import {  usePage } from '@inertiajs/react';
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';

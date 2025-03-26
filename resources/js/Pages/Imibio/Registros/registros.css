@@ -8,7 +8,7 @@
     height: auto; /* Mantiene las proporciones de la imagen */
   }
   
-/*   .texto-banner {
+  .texto-banner {
     max-width: 400px;
     position: absolute;
     top: 50%; 
@@ -21,7 +21,7 @@
     text-decoration: none;
 
     
-  } */
+  } 
 
 .fixed-item {
     
@@ -69,6 +69,8 @@ input[type="date"] {
 .detalle-escritorio {
     display: block; /* Visible por defecto en escritorio */
 }
+
+/* Estilos para el overlay del modal */
 
 /* Modo móvil */
 @media (max-width: 768px) {

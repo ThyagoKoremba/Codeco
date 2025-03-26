@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet'; // Necesario para crear un ícono personalizado
+
 import 'leaflet/dist/leaflet.css'; // Estilos de Leaflet
-import Header from '../header/header';
-import { useParams } from 'react-router-dom';
-import Footer from '../footer/footer';
+
+import { usePage } from '@inertiajs/react';
+
+
+const MapCap = () => {
 
 
 
-const MapComponent = () => {
-
-
-
-
-    const { fechaDesde, fechaHasta } = useParams();
-    const [locations, setLocations] = useState([]);
+ const { props } = usePage(); // Obtener los props enviados desde Laravel
+    const { fechaDesde, fechaHasta } = props; // Extraer los parámetros necesarios
+    const [location, setLocations] = useState([]);
 
    
 
@@ -50,13 +48,13 @@ const MapComponent = () => {
 
     useEffect(() => {
 
-
         const actualizarDatos = () => {
             const proyectoid = 0;  // Para obtener todos los proyectos
 
             fetchData(fechaDesde, fechaHasta, proyectoid).then((data) => {
                 setLocations(data.query);
             });
+    
           };
       
           // Llamar a la función inmediatamente al cargar el componente
@@ -68,41 +66,25 @@ const MapComponent = () => {
           // Limpiar el intervalo cuando el componente se desmonte
           return () => clearInterval(intervalo);
         
-
     },[]);
 
 
 
-
+    const locations = location.filter((registro) => registro.actividadid === 5);
 
 
     return (
-        <>
-     {/*         <div className="banner-container  " style={{ position: 'relative' }}>
-
-
+      
 <>
-     <img
-        src={"/imagenes/20240724_141219.jpg"}
-        alt="Banner"
-        className="img-fluid w-100"
-        style={{ maxHeight: '200px', objectFit: 'cover' }}
-    /> 
-   <a className="texto-banner text-decoration-none" target="_blank" href='http://127.0.0.1:8000' >
-                    Instituto Misionero de Biodiversidad 
-                </a>
-
-</>
 
 
-</div> */}
-<Header></Header>
+
             <br></br>
 
             <div className='container'>
-            <h2>Registros</h2>
-            <hr></hr>
-                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "550px", width: "100%" }}>
+                <h2>Capacitaciones</h2>
+                <hr></hr>
+                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "500px", width: "100%" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -127,18 +109,16 @@ const MapComponent = () => {
                             
                         >
 
-<Popup >
-
-                                <div className="text-start " >
-                            {/*          <img
+                            <Popup>
+                                <div className="text-start ">
+                                    {/*  <img
                         id="foto-actividad"
                       
-                        src={`http://23.29.121.35/imibio/images/igbm/${location.identificadorproyecto}/${location.imagennombre}`}
-
+                        src={location.foto}
                         className="img-fluid zoom-img"
                         style={{ objectFit: 'fill', height: "150px", width: "150px", padding: '10px', border: "0px", cursor:"pointer" }}
                         alt="Foto actividad"
-                    />  */}
+                    /> */}
                                     <p><strong>Descripción:</strong> {location.descripcion}</p>
                                     <p><strong>Etiqueta:</strong> {location.etiquetanombre}</p>
                                     <p><strong>Referencia:</strong> {location.referencia}</p>
@@ -151,9 +131,8 @@ const MapComponent = () => {
             </div>
 
 
-<Footer></Footer>
         </>
     );
 };
 
-export default MapComponent;
+export default MapCap;

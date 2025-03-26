@@ -1,5 +1,5 @@
 
-import "../actividad/actividad.css"
+import "../Actividad/actividad.css"
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -31,13 +31,13 @@ const ActividadGralNov = ({ detalle }) => {
                 <div id="marco" className="col-md-5">
                     {/* Icono de imagen no encontrada */}
                     <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        image_not_supported
+                       
                     </span>
                 </div>
                 <div className="col-md-7">
                     {/* Icono de GPS no encontrado */}
                     <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        location_off
+                       
                     </span>
                 </div>
             </div>
@@ -80,7 +80,7 @@ const ActividadGralNov = ({ detalle }) => {
                         </MapContainer>
                         :
                         <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        location_off
+                    
                     </span>}
 
                 </div>

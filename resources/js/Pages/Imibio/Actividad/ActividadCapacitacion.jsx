@@ -28,13 +28,13 @@ const ActividadCapacitacion = ({ detalle }) => {
                 <div id="marco" className="col-md-5">
                     {/* Icono de imagen no encontrada */}
                     <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        image_not_supported
+                       
                     </span>
                 </div>
                 <div className="col-md-7">
                     {/* Icono de GPS no encontrado */}
                     <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        location_off
+                      
                     </span>
                 </div>
             </div>

@@ -4,25 +4,28 @@
 
 
 import React, { useState, useEffect } from 'react';
-
+import Modal from 'react-modal';
 import { Link, usePage } from '@inertiajs/react';
-import './test.css';
+import './../test.css';
+import ActividadGral from '../Actividad/ActividadGral'; // Asegúrate de importar el componente
+
+ const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
+
+Modal.setAppElement('#app');
 
 
 const fetchData = async (fechaDesde, fechaHasta, proyectoid) => {
   try {
-    const params = new URLSearchParams({
-      fecha_desde: fechaDesde,
-      fecha_hasta: fechaHasta,
-      proyectoid: proyectoid,
-    });
-
-    const response = await fetch(`/registros/data?${params.toString()}`, {
-      method: 'GET',
+    const response = await fetch(API_URL, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
+      body: JSON.stringify({
+        fecha_desde: fechaDesde,
+        fecha_hasta: fechaHasta,
+        proyectoid: proyectoid,
+      }),
     });
 
     if (!response.ok) {
@@ -30,12 +33,16 @@ const fetchData = async (fechaDesde, fechaHasta, proyectoid) => {
     }
 
     const data = await response.json();
+
+    // Retornar data solo si data.query no es nulo o vacío
     return data && data.query ? data : { query: [] };
+
   } catch (error) {
     console.error('Error al obtener los datos:', error);
-    return { query: [] };
+    return { query: [] }; // Retorna un array vacío si hay un error
   }
 };
+
 
 const getFechaArgentina = () => {
   const ahora = new Date();
@@ -50,10 +57,13 @@ const getFechaDesdeInicial = () => {
 };
 
 function MonitorGeneral() {
-  const { props } = usePage();
+ 
+
+   
+  
   const [registros, setRegistros] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedRegistro, setSelectedRegistro] = useState(null);
+  const [detalle, setSelectedRegistro] = useState(null);
   const [fechaDesde, setFechaDesde] = useState(getFechaDesdeInicial());
   const [fechaHasta, setFechaHasta] = useState(getFechaArgentina());
   const [buscador, setBuscador] = useState("");
@@ -100,13 +110,9 @@ function MonitorGeneral() {
             <h3>Monitor General de Registros</h3>
           </div>
           <div className="col-md-2 col-12 d-flex flex-wrap align-items-center justify-content-center">
-            <Link
-              href={`/map/${fechaDesde}/${fechaHasta}`}
-              target='_blank'
-              className='btn btn-dark'
-            >
-              Mapa General
-            </Link>
+                        <Link href={`/imibio/map/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark ">Mapa</Link>
+            
+           
           </div>
         </div>
 
@@ -202,9 +208,24 @@ function MonitorGeneral() {
                 )}
               </tbody>
             </table>
+
+
+         
           </div>
-          {modalVisible && selectedRegistro && (
-            <div className="modal show" tabIndex="-1" style={{ display: 'block' }}>
+         
+             
+          
+        </div>
+
+      
+      </div>
+      <Modal
+              isOpen={modalVisible}
+              onRequestClose={handleCloseModal}
+              contentLabel="Detalle del Registro"
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
               <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header bg-success">
@@ -212,7 +233,7 @@ function MonitorGeneral() {
                     <button type="button" className="btn-close" onClick={handleCloseModal}></button>
                   </div>
                   <div className="modal-body">
-                    <ActividadGral detalle={selectedRegistro} />
+                    <ActividadGral detalle={detalle} />
                   </div>
                   <div className="modal-footer">
                     <button type="button" className="btn btn-success" onClick={handleCloseModal}>
@@ -221,12 +242,8 @@ function MonitorGeneral() {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      </div>
-
- 
+            </Modal>
+     
     </>
   );
 }

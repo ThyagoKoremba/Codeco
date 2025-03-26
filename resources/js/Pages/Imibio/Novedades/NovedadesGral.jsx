@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../registros/test.css';
-import { Link } from 'react-router-dom';
+import './../test.css';
+import { Link } from  '@inertiajs/react';
+import Modal from 'react-modal';
 
-import Footer from '../footer/footer';
-import ActividadGralNov from './act-gral-nov';
+import ActividadGralNov from './ActGraNov';
 
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
@@ -115,7 +115,7 @@ function NovedadesGeneral() {
 
 <>
      <img
-         src={"/imagenes/20240724_141219.jpg"}
+         src={"/storage/20240724_141219.jpg"}
         alt="Banner"
         className="img-fluid w-100"
         style={{ maxHeight: '200px', objectFit: 'cover' }}
@@ -137,7 +137,7 @@ function NovedadesGeneral() {
          </div>
          <div className="col-md-2 col-12 d-flex flex-wrap align-items-center justify-content-center">
            <Link
-             to={`/map-nov/${fechaDesde}/${fechaHasta}`}
+             href={`/imibio/map-nov/${fechaDesde}/${fechaHasta}`}
              target='_blank'
              className='btn btn-dark'
            >
@@ -258,8 +258,15 @@ function NovedadesGeneral() {
               </tbody>
             </table>
           </div>
-          {modalVisible && selectedRegistro && (
-            <div className="modal show" tabIndex="-1" style={{ display: 'block' }}>
+        
+
+<Modal
+              isOpen={modalVisible}
+              onRequestClose={handleCloseModal}
+              contentLabel="Detalle del Registro"
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
               <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header bg-success">
@@ -276,11 +283,10 @@ function NovedadesGeneral() {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            </Modal>
         </div>
       </div>
-<Footer></Footer>
+
     </>
   );
 }

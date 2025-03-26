@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+Route::middleware('auth')->group(function () {
 Route::get('/imibio', function () {
     return Inertia::render('Imibio/Registros/MonitorGeneral');
 })->name('imibio');
@@ -46,6 +46,10 @@ Route::get('/imibio/actividades', function () {
     return Inertia::render('Imibio/Registros/MonitorActividades');
 });
 
+Route::get('/imibio/capacitaciones', function () {
+    return Inertia::render('Imibio/Capacitaciones/Capacitaciones');
+});
+
 Route::get('/imibio/proyecto/{id}', function ($id) {
     return Inertia::render('Imibio/Registros/ProyectoGral', ['id' => $id]);
 })->name('proyecto.gral');
@@ -54,7 +58,103 @@ Route::get('/imibio/proyectoDetalle/{id}', function ($id) {
     return Inertia::render('Imibio/Registros/DetalleProyecto', ['id' => $id]);
 })->name('proyecto.detalle');
 
+Route::get('/imibio/map-proyecto/{id}/{fechaDesde}/{fechaHasta}', function ($id, $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Maps/MapaProyecto', [
+        'id' => $id,
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
+Route::get('/imibio/map/{fechaDesde}/{fechaHasta}', function ( $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Maps/MapaGral', [
+       
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
 
+Route::get('/imibio/map-cap/{fechaDesde}/{fechaHasta}', function ( $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Capacitaciones/MapGralCap', [
+       
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
+
+Route::get('/imibio/map-cap-proyecto/{id}/{fechaDesde}/{fechaHasta}', function ( $id,  $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Capacitaciones/MapCapProyecto', [
+       
+        'id' => $id,
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
+
+
+Route::get('/imibio/capacitaciones/{id}', function ( $id) {
+    return Inertia::render('Imibio/Capacitaciones/CapacitacionesProyecto', [
+       
+        'id' => $id,
+     
+    ]);
+});
+
+Route::get('/imibio/capacitaciones-proyectos', function ( ) {
+    return Inertia::render('Imibio/Capacitaciones/ProyectosCapacitacion');
+});
+
+Route::get('/imibio/capacitacion-detalle/{id}', function ( $id ) {
+    return Inertia::render('Imibio/Capacitaciones/DetalleCapacitacion', [
+       
+        'id' => $id,
+     
+    ]);
+});
+
+
+Route::get('/imibio/map-novedades/{fechaDesde}/{fechaHasta}', function ( $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Novedades/MapGralNov', [
+       
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
+
+Route::get('/imibio/map-novedades-proyecto/{id}/{fechaDesde}/{fechaHasta}', function ( $id,  $fechaDesde, $fechaHasta) {
+    return Inertia::render('Imibio/Novedades/MapProyNov', [
+       
+        'id' => $id,
+        'fechaDesde' => $fechaDesde,
+        'fechaHasta' => $fechaHasta,
+    ]);
+});
+
+
+Route::get('/imibio/novedades/{id}', function ( $id) {
+    return Inertia::render('Imibio/Novedades/ProyectoNovedades', [
+       
+        'id' => $id,
+     
+    ]);
+});
+
+Route::get('/imibio/novedades-proyectos', function ( ) {
+    return Inertia::render('Imibio/Novedades/NovedadesProyectos');
+});
+
+Route::get('/imibio/novedades-detalle/{id}', function ( $id ) {
+    return Inertia::render('Imibio/Novedades/DetalleNovedadesProyecto', [
+       
+        'id' => $id,
+     
+    ]);
+});
+
+Route::get('/imibio/novedades', function () {
+    return Inertia::render('Imibio/Novedades/NovedadesGral');
+});
+
+});
 
 require __DIR__.'/auth.php';
 require __DIR__.'/categoria.php';

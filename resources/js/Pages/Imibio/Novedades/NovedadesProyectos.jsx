@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import "../registros/test.css"
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import { Link } from  '@inertiajs/react';
+import './../test.css';
+
 
 
 
@@ -50,7 +49,7 @@ useEffect(() => {
 
 <>
      <img
-         src={"imagenes/20240724_141219.jpg"}
+         src={"/storage/20240724_141219.jpg"}
         alt="Banner"
         className="img-fluid w-100"
         style={{ maxHeight: '200px', objectFit: 'cover' }}
@@ -71,9 +70,7 @@ useEffect(() => {
   {proyectos.map((proyecto) => (
     <div className="col-md-4" key={proyecto.proyectoid}>
      <Link
-  to={{
-    pathname: `/proyecto-novedades/${proyecto.proyectoid}`,
-  }}
+  href={ `/imibio/novedades/${proyecto.proyectoid}`}
  
   className="text-decoration-none"
 >
@@ -82,7 +79,7 @@ useEffect(() => {
           <br />
           <h5 className="card-title">{proyecto.proyectonombre}</h5>
           <img
-           src={`/imagenes/${proyecto.proyectoid}.jpg`}
+           src={`/storage/${proyecto.proyectoid}.jpg`}
             className="card-img-top img-fluid card-img-custom"
             alt={proyecto.proyectonombre}
           />
@@ -98,7 +95,7 @@ useEffect(() => {
         </div>
       </div>
 
-      <Footer></Footer>
+    
     </>
   );
 }

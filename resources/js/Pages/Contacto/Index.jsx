@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Link } from '@inertiajs/react';
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import './styles.css';
 import Swal from 'sweetalert2';
 
@@ -53,7 +52,7 @@ const Index = ({ auth, contactos }) => {
     return (
         <>
         
-                <AuthenticatedLayout user={auth.user} header={<h2>Contactos</h2>}>
+               <h2 >Contactos</h2>
                     <div className="container mt-4">
                         <div className="row mb-3">
                             <div className="col-md-6">
@@ -116,7 +115,7 @@ const Index = ({ auth, contactos }) => {
                             </table>
                         </div>
                     </div>
-                </AuthenticatedLayout>
+              
           
 
             <Modal

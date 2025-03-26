@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { usePage } from '@inertiajs/react'; // Importar el hook de Inertia
 import L from 'leaflet'; // Necesario para crear un ícono personalizado
 import 'leaflet/dist/leaflet.css'; // Estilos de Leaflet
-import Header from '../header/header';
-import { useParams } from 'react-router-dom';
-import Footer from '../footer/footer';
 
-
-
-const MapCap = () => {
-
-
-
-
-    const { fechaDesde, fechaHasta } = useParams();
-    const [location, setLocations] = useState([]);
-
-   
-
+const MapComponent = () => {
+    const { props } = usePage(); // Obtener los props enviados desde Laravel
+    const { fechaDesde, fechaHasta } = props; // Extraer los parámetros necesarios
+    const [locations, setLocations] = useState([]);
 
     const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
 
@@ -49,55 +39,33 @@ const MapCap = () => {
     };
 
     useEffect(() => {
-
         const actualizarDatos = () => {
-            const proyectoid = 0;  // Para obtener todos los proyectos
+            const proyectoid = 0; // Para obtener todos los proyectos
 
             fetchData(fechaDesde, fechaHasta, proyectoid).then((data) => {
-                setLocations(data.query);
+                if (data && data.query) {
+                    setLocations(data.query);
+                }
             });
-    
-          };
-      
-          // Llamar a la función inmediatamente al cargar el componente
-          actualizarDatos();
-      
-          // Configurar el intervalo para actualizar los datos cada X milisegundos
-          const intervalo = setInterval(actualizarDatos, 5000); // Actualiza cada 5 segundos
-      
-          // Limpiar el intervalo cuando el componente se desmonte
-          return () => clearInterval(intervalo);
-        
-    },[]);
+        };
 
+        // Llamar a la función inmediatamente al cargar el componente
+        actualizarDatos();
 
+        // Configurar el intervalo para actualizar los datos cada X milisegundos
+        const intervalo = setInterval(actualizarDatos, 5000); // Actualiza cada 5 segundos
 
-    const locations = location.filter((registro) => registro.actividadid === 5);
-
+        // Limpiar el intervalo cuando el componente se desmonte
+        return () => clearInterval(intervalo);
+    }, [fechaDesde, fechaHasta]); // Dependencias actualizadas
 
     return (
         <>
-             {/*  <div className="banner-container  " style={{ position: 'relative' }}>
-
-
-<>
-     <img
-         src={"/imagenes/20240724_141219.jpg"}
-        alt="Banner"
-        className="img-fluid w-100"
-        style={{ maxHeight: '200px', objectFit: 'cover' }}
-    /> 
-  
-
-</>
-
-
-</div> */}
-<Header></Header>
+           
             <br></br>
 
             <div className='container'>
-                <h2>Capacitaciones</h2>
+                <h2>Registros</h2>
                 <hr></hr>
                 <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "500px", width: "100%" }}>
                     <TileLayer
@@ -106,38 +74,25 @@ const MapCap = () => {
                     />
 
                     {locations.map(location => (
-
-                     
                         <Marker
                             key={location.idctrl}
                             position={[location.latitud, location.longitud]}
-                     
                             eventHandlers={{
                                 mouseover: (e) => {
                                     e.target.openPopup();
-                                }, mouseout: (e) => {
+                                },
+                                mouseout: (e) => {
                                     setTimeout(() => {
                                         e.target.closePopup();
                                     }, 1500);
                                 }
                             }}
-                            
                         >
-
                             <Popup>
-                                <div className="text-start ">
-                                    {/*  <img
-                        id="foto-actividad"
-                      
-                        src={location.foto}
-                        className="img-fluid zoom-img"
-                        style={{ objectFit: 'fill', height: "150px", width: "150px", padding: '10px', border: "0px", cursor:"pointer" }}
-                        alt="Foto actividad"
-                    /> */}
+                                <div className="text-start">
                                     <p><strong>Descripción:</strong> {location.descripcion}</p>
                                     <p><strong>Etiqueta:</strong> {location.etiquetanombre}</p>
                                     <p><strong>Referencia:</strong> {location.referencia}</p>
-
                                 </div>
                             </Popup>
                         </Marker>
@@ -145,10 +100,9 @@ const MapCap = () => {
                 </MapContainer>
             </div>
 
-<Footer></Footer>
-
+          
         </>
     );
 };
 
-export default MapCap;
+export default MapComponent;

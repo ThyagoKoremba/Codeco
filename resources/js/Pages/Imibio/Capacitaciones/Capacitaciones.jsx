@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import '../registros/test.css';
-import { Link } from 'react-router-dom';
-import Header from '../header/header';
-import ActividadGral from '../Actividad/ActividadGral';
+import './../test.css';
+import { Link } from '@inertiajs/react';
+
+
 import ActividadCapacitacion from '../Actividad/ActividadCapacitacion';
-import Footer from "../footer/footer"
+import Modal from 'react-modal';
+
+
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
 
@@ -116,7 +118,7 @@ function CapacitacionGral() {
 
 <>
      <img
-         src={"/imagenes/20240724_141219.jpg"}
+         src={"/storage/20240724_141219.jpg"}
         alt="Banner"
         className="img-fluid w-100"
         style={{ maxHeight: '200px', objectFit: 'cover' }}
@@ -136,13 +138,8 @@ function CapacitacionGral() {
          <h3>Monitor General de Capacitaciones</h3>
          </div>
          <div className="col-md-2 col-12 d-flex flex-wrap align-items-center justify-content-center">
-           <Link
-             to={`/map-cap/${fechaDesde}/${fechaHasta}`}
-             target='_blank'
-             className='btn btn-dark'
-           >
-             Mapa General
-           </Link>
+          <Link href={`/imibio/map-cap/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark ">Mapa</Link>
+           
          </div>
         </div>
          
@@ -259,8 +256,13 @@ function CapacitacionGral() {
               </tbody>
             </table>
           </div>
-          {modalVisible && selectedRegistro && (
-            <div className="modal show" tabIndex="-1" style={{ display: 'block' }}>
+          <Modal
+              isOpen={modalVisible}
+              onRequestClose={handleCloseModal}
+              contentLabel="Detalle del Registro"
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
               <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header bg-success">
@@ -277,11 +279,10 @@ function CapacitacionGral() {
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            </Modal>
         </div>
       </div>
-<Footer></Footer>
+
     </>
   );
 }

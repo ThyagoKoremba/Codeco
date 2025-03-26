@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import Footer from '../footer/footer';
+import { usePage } from '@inertiajs/react';
 import Actividad from '../Actividad/Actividad';
-import '../registros/test.css'
-import { useParams } from 'react-router-dom';
+import './../test.css'
 
-const API_URL = process.env.REACT_APP_API_URL;
-const API_URL_proyectos = process.env.REACT_APP_API_URL_PROYECTOS;
-const API_URL_ACT = process.env.REACT_APP_API_URL_ACT;
+
+const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
+const API_URL_proyectos = 'http://23.29.121.35:3026/apiv1/pryetqweb';
+const API_URL_ACT = 'http://23.29.121.35:3028/apiv1/pryactwa';
+
 
 
 const fetchData = async (fechaDesde, fechaHasta, proyectoid) => {
@@ -66,8 +67,8 @@ const getFechaDesdeInicial = () => {
   
 const DetalleProyectoNov = () => {
 
-    const { id } = useParams();
-
+    const { props } = usePage();
+const { id } = props;
 
     const [fechaDesde, setFechaDesde] = useState(getFechaDesdeInicial());
     const [fechaHasta, setFechaHasta] = useState(new Date().toISOString().split('T')[0]);
@@ -168,7 +169,7 @@ const DetalleProyectoNov = () => {
 
 
 
-    const urlImagenBanner = `/imagenes/${id}.jpg`;
+    const urlImagenBanner = `/storage/${id}.jpg`;
 
 
 
@@ -375,7 +376,7 @@ const DetalleProyectoNov = () => {
 
 
                 </div>
-                <Footer />
+            
             </div>
         </>
     );

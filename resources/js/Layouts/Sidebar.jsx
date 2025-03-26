@@ -39,7 +39,9 @@ export default function DashboardLayout({ children }) {
                         &#9776;
                     </button>
                     <h4 className="mb-4">CODECO</h4>
-                    <ul className="nav flex-column">
+
+                    <div className='container overflow-auto ' style={{ maxHeight: '350px' , minWidth:'250px', overflowY: 'hidden'}}>
+                    <ul className="nav flex-column " >
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/dashboard">Inicio</Link>
                         </li>
@@ -49,14 +51,36 @@ export default function DashboardLayout({ children }) {
                         <li className="nav-item">
                             <Link className="nav-link text-white" href="/imibio/proyectos">Proyectos</Link>
                         </li>
-                    </ul>
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" href="/imibio">Registros</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" href="/imibio/capacitaciones">Capacitaciones</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" href="/imibio/capacitaciones-proyectos">Capacitaciones - Proyectos</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" href="/imibio/novedades">Novedades</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link text-white" href="/imibio/novedades-proyectos">Novedades - Proyectos</Link>
+                        </li>
 
+
+                      
+
+                        
+
+                    </ul>
+                    </div>
                 </div>
                 <footer className="bg-success text-white text-center py-3">
 
                     <hr></hr>
                     <div className="container ">
                         <Authenticated user={user} />
+                        <hr></hr>
                         <p style={{ fontSize: '12px' }} >&copy; CODECO 2025</p>
                     </div>
                 </footer>

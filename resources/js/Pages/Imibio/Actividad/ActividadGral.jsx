@@ -1,5 +1,5 @@
 
-import "./actividad.css"
+/* import "./actividad.css" */
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -18,7 +18,7 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const ActividadGral = ({ detalle }) => {
 
-
+console.log(detalle);
 
     const openImage = (src) => (event) => {
         event.preventDefault();
@@ -30,15 +30,11 @@ const ActividadGral = ({ detalle }) => {
             <div className="row">
                 <div id="marco" className="col-md-5">
                     {/* Icono de imagen no encontrada */}
-                    <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        image_not_supported
-                    </span>
+                  
                 </div>
                 <div className="col-md-7">
                     {/* Icono de GPS no encontrado */}
-                    <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        location_off
-                    </span>
+                   
                 </div>
             </div>
 
@@ -64,24 +60,22 @@ const ActividadGral = ({ detalle }) => {
                 <div className="col-md-7">
 
                     {detalle.latitud && detalle.longitud !== 0 ?
-                        <MapContainer
-                            center={[detalle.latitud, detalle.longitud]}
-                            zoom={6}
-                            style={{ height: "220px", width: "100%", padding: '10px' }}
-                        >
-                            <TileLayer
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[detalle.latitud, detalle.longitud]}>
-                                <Popup>
-                                    {detalle.etiquetanombre}
-                                </Popup>
-                            </Marker>
-                        </MapContainer>
-                        :
-                        <span className="material-icons" style={{ fontSize: "180px", color: '#ccc' }}>
-                        location_off
-                    </span>}
+                                           <MapContainer
+                                               center={[detalle.latitud, detalle.longitud]}
+                                               zoom={6}
+                                               style={{ height: "220px", width: "100%", padding: '10px' }}
+                                           >
+                                               <TileLayer
+                                                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                               />
+                                               <Marker position={[detalle.latitud, detalle.longitud]}>
+                                                   <Popup>
+                                                       {detalle.etiquetanombre}
+                                                   </Popup>
+                                               </Marker>
+                                           </MapContainer>
+                                           :
+                                          " "}
 
                 </div>
             </div>

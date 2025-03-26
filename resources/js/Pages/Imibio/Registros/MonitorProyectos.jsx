@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
 import { Link } from '@inertiajs/react';
-import './test.css';
+import './registros.css';
 
 
 
 
 const API_URL = 'http://23.29.121.35:3026/apiv1/pryetqweb';
 
-const fetchData = async (  ) => {
+const fetchData = async () => {
   try {
-    const response = await fetch(API_URL );
-    
+    const response = await fetch(API_URL);
+
     if (!response.ok) {
       throw new Error('Error en la solicitud de datos');
     }
@@ -29,20 +29,20 @@ const fetchData = async (  ) => {
 
 function MonitorProyecto() {
 
-const [proyectos,setProyecto] = useState([]);
+  const [proyectos, setProyecto] = useState([]);
 
-useEffect(() => {
-   
- 
+  useEffect(() => {
 
-  fetchData(  ).then((data) => {
-    setProyecto(data[0]);
+
+
+    fetchData().then((data) => {
+      setProyecto(data[0]);
+    });
+
   });
- 
-});
 
 
-/* const urlImagenBanner = `/imagenes/${}.jpg`; */
+  /* const urlImagenBanner = `/imagenes/${}.jpg`; */
 
   return (
     <>
@@ -60,10 +60,11 @@ useEffect(() => {
                   <br />
                   <h5 className="card-title">{proyecto.proyectonombre}</h5>
                   <img
-                    src={`/imagenes/${proyecto.proyectoid}.jpg`}
+                    src={`/storage/${proyecto.proyectoid}.jpg`}
                     className="card-img-top img-fluid card-img-custom"
                     alt={proyecto.proyectonombre}
                   />
+
                   <div className="card-body">
                     <p className="card-title ">{proyecto.proyectodescripcion}</p>
                   </div>

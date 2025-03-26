@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import './test.css';
+import './registros.css';
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
 const API_URL_PROYECTOS = 'http://23.29.121.35:3026/apiv1/pryetqweb';
@@ -12,6 +12,8 @@ const getFechaDesdeInicial = () => {
 const ProyectoGral = () => {
   const { props } = usePage();
   const id = props.id; // Se obtiene el ID desde Inertia props
+
+
 
   const [proyectos, setProyectos] = useState([]);
   const [registros, setRegistros] = useState([]);
@@ -53,7 +55,11 @@ const ProyectoGral = () => {
     return () => clearInterval(intervalo);
   }, [fechaDesde, fechaHasta, id]);
 
-  const proyecto = proyectos.find((p) => p.proyectoid === parseInt(id));
+
+
+  const proyecto = proyectos[0]?.find((p) => p.proyectoid == id );
+
+  
   const registrosFiltrados = registros.filter((r) => r.proyectoid === parseInt(id)).filter((r) =>
     Object.values(r).some((v) => v && v.toString().toLowerCase().includes(buscador.toLowerCase()))
   );
@@ -61,20 +67,31 @@ const ProyectoGral = () => {
   return (
     <>
      <div className="banner-container" style={{ position: 'relative' }}>
-        <img src={`/imagenes/${id}.jpg`} alt="Banner" className="img-fluid w-100" style={{ maxHeight: '200px', objectFit: 'cover' }} />
+
+      {proyecto ? (
+        <img
+          src={`/storage/${proyecto.proyectoid}.jpg`}
+          alt="Banner"
+          className="img-fluid w-100"
+          style={{ maxHeight: '200px', objectFit: 'cover' }}
+        />
+      ) : (
+        ''
+      )}
+    
         <h1 className="texto-banner">{proyecto ? proyecto.proyectonombre : 'Nombre del Proyecto'}</h1>
       </div>
- 
+
       <div className="m-3">
         <div className="row">
           <div className="col-6">
             <h1><strong>Registros</strong></h1>
           </div>
           <div className="col-3">
-            <Link href={`/imibio/proyectoDetalle/${id}`} target="_blank" className="btn btn-dark w-50">Detalle</Link>
+            <Link href={`/imibio/proyectoDetalle/${id}`} target="" className="btn btn-dark w-50">Detalle</Link>
           </div>
           <div className="col-3">
-            <Link href={`/map-proyecto/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
+            <Link href={`/imibio/map-proyecto/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
           </div>
         </div>
 

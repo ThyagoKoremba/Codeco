@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import "../registros/test.css"
-import Header from '../header/header';
-import Footer from '../footer/footer';
 
+import './../test.css';
+
+import { Link } from '@inertiajs/react';
 
 
 const API_URL = 'http://23.29.121.35:3026/apiv1/pryetqweb';
@@ -48,7 +47,7 @@ useEffect(() => {
 
 <>
      <img
-        src={"/imagenes/20240724_141219.jpg"}
+        src={"/storage/20240724_141219.jpg"}
         alt="Banner"
         className="img-fluid w-100"
         style={{ maxHeight: '200px', objectFit: 'cover' }}
@@ -68,19 +67,14 @@ useEffect(() => {
         <div className="row">
   {proyectos.map((proyecto) => (
     <div className="col-md-4" key={proyecto.proyectoid}>
-     <Link
-  to={{
-    pathname: `/cap-proyecto/${proyecto.proyectoid}`,
-  }}
- 
-  className="text-decoration-none"
->
+               <Link href={`/imibio/capacitaciones/${proyecto.proyectoid}`} target="_blank" className="btn btn-dark ">
+
         
         <div className="card mb-4">
           <br />
           <h5 className="card-title">{proyecto.proyectonombre}</h5>
           <img
-            src={`/imagenes/${proyecto.proyectoid}.jpg`}
+            src={`/storage/${proyecto.proyectoid}.jpg`}
             className="card-img-top img-fluid card-img-custom"
             alt={proyecto.proyectonombre}
           />
@@ -96,7 +90,7 @@ useEffect(() => {
         </div>
       </div>
 
-<Footer></Footer>
+
 
     </>
   );

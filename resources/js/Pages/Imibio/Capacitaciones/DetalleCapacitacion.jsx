@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import Footer from '../footer/footer';
+import { usePage } from '@inertiajs/react';
 import Actividad from '../Actividad/Actividad';
-import '../registros/test.css'
-/* import { useParams } from 'react-router-dom'; */
+import './../test.css'
 import ActividadCapacitacion from '../Actividad/ActividadCapacitacion';
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
@@ -52,8 +51,8 @@ const getFechaDesdeInicial = () => {
 
 const DetalleProyectoCap = () => {
 
-    const { id } = useParams();
-
+    const { props } = usePage();
+    const { id  } = props;
 
     const [fechaDesde, setFechaDesde] = useState(getFechaDesdeInicial());
     const [fechaHasta, setFechaHasta] = useState(new Date().toISOString().split('T')[0]);
@@ -158,7 +157,7 @@ const DetalleProyectoCap = () => {
 
 
 
-    const urlImagenBanner = `/imagenes/${id}.jpg`;
+    const urlImagenBanner = `/storage/${id}.jpg`;
 
 
     return (
@@ -342,7 +341,7 @@ const DetalleProyectoCap = () => {
 
 
                 </div>
-                <Footer />
+               
             </div>
         </>
     );

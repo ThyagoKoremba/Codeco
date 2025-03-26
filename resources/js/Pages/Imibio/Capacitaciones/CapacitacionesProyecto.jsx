@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import {Link, usePage} from '@inertiajs/react';
 import ActividadCapacitacion from '../Actividad/ActividadCapacitacion';
-import '../registros/test.css';
-import Footer from '../footer/footer';
+import './../test.css';
+import Modal from 'react-modal';
+
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
 const API_URL_proyectos = 'http://23.29.121.35:3026/apiv1/pryetqweb';
@@ -51,7 +52,9 @@ const getFechaDesdeInicial = () => {
 function CapacitacionProyecto() {
 
 
-  const { id } = useParams(); // ID desde la URL
+  const { props } = usePage(); // ID desde la URL
+const { id } = props;
+
   const [proyectos, setProyectos] = useState([]);
   const [registros, setRegistros] = useState([]);
   const [fechaDesde, setFechaDesde] = useState(getFechaDesdeInicial());
@@ -100,7 +103,7 @@ function CapacitacionProyecto() {
     setSelectedRegistro(null);
   };
 
-  const urlImagenBanner = `/imagenes/${id}.jpg`;
+  const urlImagenBanner = `/storage/${id}.jpg`;
 
 
   const novedades = capacitaciones.filter((accion) => {
@@ -136,9 +139,11 @@ function CapacitacionProyecto() {
           <div className="col-md-3 col-12 d-flex  align-items-center justify-content-center ">
             <h1><strong>Capacitaciones</strong></h1>
           </div>
-          <div className="col-md-3 col-12 d-flex  align-items-center justify-content-center ">            <Link to={`/capacitacion-detalle/${id}`} target="_blank" className="btn btn-dark w-50">Detalle</Link>
+          <div className="col-md-3 col-12 d-flex  align-items-center justify-content-center ">   
+            <Link href={`/imibio/capacitacion-detalle/${id}`} target="_blank" className="btn btn-dark w-50">Detalle</Link>
           </div>
-          <div className="col-md-3 col-12 d-flex  align-items-center justify-content-center ">            <Link to={`/map-cap-proyecto/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
+          <div className="col-md-3 col-12 d-flex  align-items-center justify-content-center ">  
+            <Link href={`/imibio/map-cap-proyecto/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
           </div>
 
 
@@ -251,28 +256,33 @@ function CapacitacionProyecto() {
             </table>
           </div>
         </div>
-
-        {modalVisible && (
-          <div className="modal show" tabIndex="-1" style={{ display: 'block' }}>
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-header bg-success">
-                  <h5 className="modal-title text-black">Detalle de Registro</h5>
-                  <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-                </div>
-                <div className="modal-body">
-                  <ActividadCapacitacion detalle={selectedRegistro} />
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-success" onClick={handleCloseModal}>Cerrar</button>
+        <Modal
+              isOpen={modalVisible}
+              onRequestClose={handleCloseModal}
+              contentLabel="Detalle del Registro"
+              className="modal"
+              overlayClassName="modal-overlay"
+            >
+              <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                  <div className="modal-header bg-success">
+                    <h5 className="modal-title text-black">Detalle de Registro</h5>
+                    <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+                  </div>
+                  <div className="modal-body">
+                    <ActividadCapacitacion detalle={selectedRegistro} />
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-success" onClick={handleCloseModal}>
+                      Cerrar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            </Modal>
       </div>
 
-      <Footer></Footer>
+      
     </>
   );
 }

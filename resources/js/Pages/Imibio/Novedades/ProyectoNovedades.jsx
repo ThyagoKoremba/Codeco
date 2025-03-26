@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
-import ActividadGral from '../Actividad/ActividadGral';
-import '../registros/test.css';
-import Footer from '../footer/footer';
-import ActividadGralNov from './act-gral-nov';
+import { Link, usePage } from '@inertiajs/react';
+
+import './../test.css';
+
+import ActividadGralNov from './ActGraNov';
 
 const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
 const API_URL_proyectos = 'http://23.29.121.35:3026/apiv1/pryetqweb';
@@ -49,7 +49,8 @@ const getFechaDesdeInicial = () => {
 };
 
 function ProyectoNovedades() {
-  const { id } = useParams(); // ID desde la URL
+  const { props } = usePage();
+  const { id } = props;
   const [proyectos, setProyectos] = useState([]);
   const [registros, setRegistros] = useState([]);
   const [fechaDesde, setFechaDesde] = useState(getFechaDesdeInicial());
@@ -99,7 +100,7 @@ function ProyectoNovedades() {
     setSelectedRegistro(null);
   };
 
-  const urlImagenBanner = `/imagenes/${id}.jpg`;
+  const urlImagenBanner = `/storage/${id}.jpg`;
 
   const novedades = registrosFiltrados.filter((accion) => {
     const busqueda = buscador.toLowerCase();
@@ -138,10 +139,10 @@ function ProyectoNovedades() {
             <h1><strong>Novedades</strong></h1>
           </div>
           <div className="col-3">
-            <Link to={`/novedades-detalle/${id}`} target="_blank" className="btn btn-dark w-50">Detalle</Link>
+            <Link href={`/imibio/novedades-detalle/${id}`} target="_blank" className="btn btn-dark w-50">Detalle</Link>
           </div>
           <div className="col-3">
-            <Link to={`/map-proyecto-nov/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
+            <Link href={`/imibio/map-novedades-proyecto/${id}/${fechaDesde}/${fechaHasta}`} target="_blank" className="btn btn-dark w-50">Mapa</Link>
           </div>
 
 
@@ -272,7 +273,7 @@ function ProyectoNovedades() {
         )}
       </div>
 
-      <Footer></Footer>
+   
     </>
   );
 }

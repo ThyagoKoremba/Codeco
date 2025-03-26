@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-import Header from '../header/header';
-import { useParams } from 'react-router-dom';
-import Footer from '../footer/footer';
+import { usePage } from '@inertiajs/react';
 
 
 
@@ -11,8 +9,8 @@ import Footer from '../footer/footer';
 const MapaProyectoNov = () => {
 
 
-
-    const { id, fechaDesde, fechaHasta } = useParams();
+const { props } = usePage();
+    const { id, fechaDesde, fechaHasta } = props;
     const [location, setLocations] = useState([]);
 
     const API_URL = 'http://23.29.121.35:3027/apiv1/regweb';
@@ -74,13 +72,13 @@ const MapaProyectoNov = () => {
 
     return (
         <>
-            <Header></Header>
+           
             <br></br>
             <div className='container'>
 
             <h2>Novedades</h2>
             <hr></hr> 
-                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "550px", width: "100%" }}>
+                <MapContainer center={[-27.3627, -55.9000]} zoom={8} style={{ height: "500px", width: "100%" }}>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -122,7 +120,7 @@ const MapaProyectoNov = () => {
                     ))}
                 </MapContainer>
             </div>
-<Footer></Footer>
+
         </>
     );
 };

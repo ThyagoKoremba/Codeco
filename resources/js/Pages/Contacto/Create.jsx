@@ -175,18 +175,10 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
 
     return (
        
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className="d-flex justify-content-between align-items-center">
-                    <h2 className="font-weight-bold ">Crear Contacto</h2>
-                    
-                </div>
-            }
-        >
+       <>
               
 
-            <Head title="Crear Contacto" />
+            <h3 className="text-center ">Crear Contacto</h3>
 
             <div className="container">
                 <div className="row">
@@ -779,8 +771,8 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
             </Modal>
 
           
-        </AuthenticatedLayout >
-      
+       
+            </>
     );
 };
 
