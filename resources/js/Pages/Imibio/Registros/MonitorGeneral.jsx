@@ -103,7 +103,24 @@ function MonitorGeneral() {
   return (
     <>
     
+    <div className="banner-container  " style={{ position: 'relative' }}>
 
+
+<>
+  <img
+    src={"/storage/20240724_141219.jpg"}
+    alt="Banner"
+    className="img-fluid w-100"
+    style={{ maxHeight: '200px', objectFit: 'cover' }}
+  />
+  <a className="texto-banner text-decoration-none" target="_blank" href='http://imibio.osconsultores.com.ar/' >
+    Instituto Misionero de Biodiversidad
+  </a>
+
+</>
+
+
+</div>
       <div className="container mt-4">
         <div className="row justify-content-center align-items-center mb-3">
           <div className="col-md-8 col-12 d-flex flex-wrap align-items-center justify-content-center">
@@ -226,8 +243,7 @@ function MonitorGeneral() {
               className="modal"
               overlayClassName="modal-overlay"
             >
-              <div className="modal-dialog modal-lg">
-                <div className="modal-content">
+             
                   <div className="modal-header bg-success">
                     <h5 className="modal-title text-black">Detalle de Registro</h5>
                     <button type="button" className="btn-close" onClick={handleCloseModal}></button>
@@ -240,8 +256,7 @@ function MonitorGeneral() {
                       Cerrar
                     </button>
                   </div>
-                </div>
-              </div>
+               
             </Modal>
      
     </>

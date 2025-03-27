@@ -82,7 +82,7 @@ const ActividadCapacitacion = ({ detalle }) => {
             </div>
             <br></br>
 
-            {verMapa ?
+            {verMapa && detalle.latitud && detalle.longitud !== 0 ?
                 <MapContainer
                     center={[detalle.latitud, detalle.longitud]}
                     zoom={6}
@@ -99,11 +99,12 @@ const ActividadCapacitacion = ({ detalle }) => {
                 </MapContainer>
                 : ""}
 
+{detalle.latitud && detalle.longitud !== 0 ?
             <div className="container">
                 <button className="btn btn-success m-2 float-start" onClick={handleMapa}>
                     Ubicación
                 </button>
-            </div>
+            </div> : ""}
 
 
 

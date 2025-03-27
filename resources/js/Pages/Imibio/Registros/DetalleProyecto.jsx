@@ -170,7 +170,7 @@ const { props } = usePage();
 
 
 
-    const urlImagenBanner = `/imagenes/${id}.jpg`;
+    const urlImagenBanner = `/storage/${id}.jpg`;
 
 
 
@@ -181,7 +181,7 @@ const { props } = usePage();
         <>
 
             <div>
-             {/*    <div className="banner-container  " style={{ position: 'relative' }}>
+               <div className="banner-container  " style={{ position: 'relative' }}>
 
 
                     <>
@@ -196,7 +196,7 @@ const { props } = usePage();
                     </>
 
 
-                </div> */}
+                </div>
                 <div className="container mt-5">
               
                     <div className="container ">

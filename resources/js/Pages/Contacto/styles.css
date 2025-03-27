@@ -21,6 +21,7 @@
     max-width: 1000px;
     width: 100%;
     max-height: 80vh;
+  
     overflow-y: auto;
     z-index: 1051; /* Asegura que el contenido del modal esté por encima del overlay */
 }

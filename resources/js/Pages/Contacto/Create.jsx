@@ -174,17 +174,17 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
     };
 
     return (
-       
-       <>
-              
+
+        <>
+
 
             <h3 className="text-center ">Crear Contacto</h3>
 
             <div className="container">
                 <div className="row">
-             
-           
-     
+
+
+
 
                     <main className="col-md-12  col-lg-12 ">
                         <div className="py-5">
@@ -563,7 +563,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                 </div>
             </div >
 
-           
+
             {/* Modal de búsqueda de países y regiones */}
             <Modal
                 isOpen={isPaisModalOpen || isRegionModalOpen || isProvinciaModalOpen}
@@ -588,8 +588,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                 }}
                 overlayClassName="modal-overlay"
             >
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
+               
                         <div className="modal-header">
                             <h5 className="modal-title">
                                 {isPaisModalOpen
@@ -765,14 +764,13 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                             ) : (
                                 ''
                             )}
-                        </div>
-                    </div>
+                      
                 </div>
             </Modal>
 
-          
-       
-            </>
+
+
+        </>
     );
 };
 

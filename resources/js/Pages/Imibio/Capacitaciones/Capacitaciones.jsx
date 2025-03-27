@@ -263,8 +263,7 @@ function CapacitacionGral() {
               className="modal"
               overlayClassName="modal-overlay"
             >
-              <div className="modal-dialog modal-lg">
-                <div className="modal-content">
+             
                   <div className="modal-header bg-success">
                     <h5 className="modal-title text-black">Detalle de Registro</h5>
                     <button type="button" className="btn-close" onClick={handleCloseModal}></button>
@@ -277,8 +276,7 @@ function CapacitacionGral() {
                       Cerrar
                     </button>
                   </div>
-                </div>
-              </div>
+               
             </Modal>
         </div>
       </div>
