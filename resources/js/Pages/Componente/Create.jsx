@@ -4,7 +4,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 
-const Create = ({ auth }) => {
+const CreateComponente = ({ closeModal }) => {
 
     const initialValues = {
         nombre: "",
@@ -18,29 +18,16 @@ const Create = ({ auth }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('componente.store'))
-        console.log(data);
+        post(route('componente.store'), {
+            onSuccess: () => {
+                closeModal();
+            },
+        });
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
 
-            header={
-                <div className=' d-flex justify-content-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Componente</h2>
-                    <a href={route('componente.vista')}>
-                        <button className='btn btn-primary'>Componentes</button>
-                    </a>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
-            <div className="py-5">
-                <div className="container">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <h1 className="mb-3">Nuevo Componente</h1>
+            <div className="py-3">
                             <div className="row">
                                 <div className="col">
                                     <div className="card">
@@ -135,11 +122,7 @@ const Create = ({ auth }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </AuthenticatedLayout>
     )
 }
 
-export default Create;
+export default CreateComponente;

@@ -4,6 +4,7 @@ namespace App\Http\Requests\Componente;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ComponenteUpdate extends FormRequest
 {
@@ -23,7 +24,14 @@ class ComponenteUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre'=>['required',
+            'regex:/^[\p{L}\p{N}\d\s\.\-]{1,180}$/u',
+            Rule::unique('componente','nombre')->ignore($this->componente->id)
+        ],
+            'descripcion'=>'regex:/^[\p{L}\p{N}\d\s\.\-]{1,100}$/u',
+            'informacion'=>'regex:/^[\p{L}\p{N}\d\s\.\-]{1,180}$/u',
+            'url'=>Rule::unique('componente','url')->ignore($this->componente->id),
+            'sn_activo'=>'boolean',
         ];
     }
 }

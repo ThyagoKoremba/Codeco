@@ -23,7 +23,10 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,45}$/u|unique:menus,nombre',
+            'abreviatura'=>'required|regex:/^[\p{L}\p{N}\d\s\.\-]{1,20}$/u|unique:menus,abreviatura',
+            'informacion'=>'nullable',
+            'sn_activo'=>'boolean',
         ];
     }
 }

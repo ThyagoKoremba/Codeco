@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_menu');
             $table->unsignedBigInteger('id_componente');
             $table->primary(['id_menu','id_componente']);
-            $table->boolean('activo')->default(false);
+            $table->boolean('sn_activo')->default(false);
             $table->integer('orden')->nullable();
             $table->timestamps();
             

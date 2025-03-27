@@ -4,6 +4,7 @@ namespace App\Http\Requests\Menu;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class MenuUpdate extends FormRequest
 {
@@ -23,7 +24,16 @@ class MenuUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre'=>['required',
+            'regex:/^[\p{L}\p{N}\d\s\.\-]{1,45}$/u',
+            Rule::unique('menus','nombre')->ignore($this->menu->id)
+        ],
+            'abreviatura'=>['required',
+            'regex:/^[\p{L}\p{N}\d\s\.\-]{1,20}$/u',
+            Rule::unique('menus','abreviatura')->ignore($this->menu->id)
+        ],
+            'informacion'=>'nullable',
+            'sn_activo'=>'boolean',
         ];
     }
 }
