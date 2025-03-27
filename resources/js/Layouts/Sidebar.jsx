@@ -1,16 +1,17 @@
 
-import { Link } from '@inertiajs/react';
+import { Link} from '@inertiajs/react';
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { motion } from 'framer-motion';
 import './styles.css';
 import Authenticated from './AuthenticatedLayout';
 
+
+
 export default function DashboardLayout({ children}) {
 
-
-
-
+   
+    
     const [sidebarVisible, setSidebarVisible] = useState(true);
     const user = JSON.parse(localStorage.getItem('user'));
 
