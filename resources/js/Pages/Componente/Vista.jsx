@@ -9,6 +9,10 @@ import EditComponente from './Edit';
 Modal.setAppElement('#app');
 
 const Vista = ({ auth, componentes }) => {
+
+
+    
+
     const [isVerModalOpen, setIsVerModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
 

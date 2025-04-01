@@ -10,7 +10,7 @@ class MenuComponente extends Model
     protected $fillable = [
         'id_menu',
         'id_componente',
-        'activo',
+        'sn_activo',
         'orden'
     ];
 }

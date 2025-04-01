@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import React from 'react';
+import { useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 const EditMenu = ({ menu, closeModal }) => {

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre',180)->unique();
             $table->string('descripcion',100)->nullable()->comment('Información del componente por ejemplo "Nuevo Contacto - Rapido" o "Pagina en blanco", "401: No autorizada"');
             $table->string('informacion',180)->nullable();
-            $table->text('url')->unique();
+            $table->text('url');
             $table->boolean('sn_activo')->default(false);
             $table->timestamps();
         });

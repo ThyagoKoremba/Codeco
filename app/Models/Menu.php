@@ -15,7 +15,9 @@ class Menu extends Model
     ];	
     public function componentes()
     {
-        return $this->belongsToMany(Componentes::class, 'menus_componentes', 'id_menu', 'id_componente')->wherePivot('activo', true)->withTimestamps();;
+        return $this->belongsToMany(Componentes::class, 'menus_componentes', 'id_menu', 'id_componente')
+            ->withPivot('sn_activo', 'orden')
+            ->withTimestamps();
     }
     
 }

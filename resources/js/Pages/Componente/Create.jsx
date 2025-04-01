@@ -103,7 +103,7 @@ const CreateComponente = ({ closeModal }) => {
                                                         name="sn_activo"
                                                         checked={data.sn_activo}
                                                         className="form-check-input mx-2"
-                                                        onChange={(e) => setData('activo', e.target.checked)}
+                                                        onChange={(e) => setData('sn_activo', e.target.checked)}
                                                     />
 
                                                     <InputError message={errors.sn_activo} className="mt-2" />
