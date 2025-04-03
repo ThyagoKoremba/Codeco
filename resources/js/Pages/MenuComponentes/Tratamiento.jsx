@@ -15,7 +15,24 @@ const Create = ({ auth }) => {
         componentesOrden: {}
     };
 
-    const { data, setData, post } = useForm(initialValues);
+    const [shouldReset, setShouldReset] = useState(false);
+    const [menuInformacion, setMenuInformacion] = useState('');
+    const [componenteInformacion, setComponenteInformacion] = useState('');
+    const [isComponenteModalOpen, setIsComponenteModalOpen] = useState(false);
+    const [componenteSearchQuery, setComponenteSearchQuery] = useState('');
+    const [componenteSearchResults, setComponenteSearchResults] = useState([]);
+    const [componenteCurrentPage, setComponenteCurrentPage] = useState(1);
+    const [componenteLastPage, setComponenteLastPage] = useState(1);
+    const [nombreComponente, setNombreComponente] = useState('');
+    const [componenteSeleccionado, setComponenteSeleccionado] = useState(null);
+    const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
+    const [menuSearchQuery, setMenuSearchQuery] = useState('');
+    const [menuSearchResults, setMenuSearchResults] = useState([]);
+    const [menuCurrentPage, setMenuCurrentPage] = useState(1);
+    const [menuLastPage, setMenuLastPage] = useState(1);
+    const [nombreMenu, setNombreMenu] = useState('');
+
+    const { data, setData, post, reset } = useForm(initialValues);
     //FUNCION PARA LLAMAR A LA RUTA QUE AGREGA EL COMPONENTE AL MENU
     const agregarComponenteAlMenu = () => {
         if (!componenteSeleccionado || !data.id_menu) return;
@@ -54,7 +71,7 @@ const Create = ({ auth }) => {
     //Guardar Cambios en las relacion menu-componentes
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         const dataToSend = {
             id_menu: data.id_menu,
             componentes: data.componentes.map(componente => ({
@@ -63,19 +80,45 @@ const Create = ({ auth }) => {
                 sn_activo: data.componentesActivos[componente.id] || false,
             })),
         };
-    
+
         post(route('menucomponentes.actualizar'), dataToSend, {
             preserveScroll: true,
-            onSuccess: () => {
-                setData(initialValues); // Limpia el estado de los datos
-                setNombreMenu(''); // Limpia el nombre del menú seleccionado
-                setNombreComponente(''); // Limpia el nombre del componente seleccionado
-                setComponenteSeleccionado(null); // Limpia el componente seleccionado
-                setMenuSearchResults([]); // Limpia los resultados de búsqueda del menú
-                setComponenteSearchResults([]); // Limpia los resultados de búsqueda del componente
-            },
         });
     };
+
+    const handleReset = () => {
+        setData(initialValues);
+        setNombreMenu('');
+        setComponenteSeleccionado(null);
+        setNombreComponente('');
+        setMenuInformacion('');
+        setComponenteInformacion('');
+    };
+
+
+    const handleGuardarCambios = (e) => {
+        e.preventDefault();
+
+        const dataToSend = {
+            id_menu: data.id_menu,
+            componentes: data.componentes.map(componente => ({
+                id: componente.id,
+                orden: data.componentesOrden[componente.id] || 0,
+                sn_activo: data.componentesActivos[componente.id] || false,
+            })),
+        };
+
+        post(route('menucomponentes.actualizar'), dataToSend)
+        setShouldReset(true)
+    };
+
+
+
+    if (shouldReset) {
+        handleReset();
+        setShouldReset(false)
+    }
+
 
 
     // FETCH para los componentes relacionados al MENU seleccionado
@@ -113,6 +156,7 @@ const Create = ({ auth }) => {
         setMenuSearchResults(data.data);
         setMenuCurrentPage(data.current_page);
         setMenuLastPage(data.last_page);
+        setMenuInformacion(data.menu_info)
     };
 
     // Función para manejar cambios en el campo de búsqueda de menu
@@ -125,6 +169,7 @@ const Create = ({ auth }) => {
     const handleSelectComponente = (componente) => {
         data.id_componente = componente.id;
         setNombreComponente(componente.nombre);
+        setComponenteInformacion(componente.informacion);
         setComponenteSeleccionado(componente); // Guardar el componente completo
         closeModal();
     };
@@ -139,24 +184,11 @@ const Create = ({ auth }) => {
     const handleSelectMenu = (menu) => {
         data.id_menu = menu.id; // Actualiza el campo del formulario
         setNombreMenu(menu.nombre);
+        setMenuInformacion(menu.informacion);
         fetchMenuComponentes(menu.id); // Obtén los componentes asociados
         closeModal(); // Cierra el modal
     };
-    //Selecciones
-    const [isComponenteModalOpen, setIsComponenteModalOpen] = useState(false);
-    const [componenteSearchQuery, setComponenteSearchQuery] = useState('');
-    const [componenteSearchResults, setComponenteSearchResults] = useState([]);
-    const [componenteCurrentPage, setComponenteCurrentPage] = useState(1);
-    const [componenteLastPage, setComponenteLastPage] = useState(1);
-    const [nombreComponente, setNombreComponente] = useState('');
-    const [componenteSeleccionado, setComponenteSeleccionado] = useState(null);
-    //Apertura y limpieza de los datos del modal
-    const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
-    const [menuSearchQuery, setMenuSearchQuery] = useState('');
-    const [menuSearchResults, setMenuSearchResults] = useState([]);
-    const [menuCurrentPage, setMenuCurrentPage] = useState(1);
-    const [menuLastPage, setMenuLastPage] = useState(1);
-    const [nombreMenu, setNombreMenu] = useState('');
+
 
     const openMenuModal = () => {
         setIsMenuModalOpen(true);
@@ -189,41 +221,56 @@ const Create = ({ auth }) => {
                 <div className="card">
                     <div className="card-body">
                         {/* BOTONES DE BUSQUEDA */}
-                        <div className="card col-5 mb-3">
-                            <h3 className='p-2'>Menú</h3>
-                            <div className="input-group mb-3 p-2">
-                                <input
-                                    id="Menu"
-                                    type="text"
-                                    name="Menu"
-                                    value={nombreMenu}
-                                    className="form-control"
-                                    readOnly
-                                // El campo es de solo lectura
-                                />
-                                <button className="btn btn-primary" onClick={openMenuModal}>Buscar</button>
+                        <div className='row d-flex justify-content-evenly'>
+                            <div className="card col-5 mb-3">
+                                <h3 className='p-2'>Menú</h3>
+                                <div className="input-group mb-3 p-2">
+                                    <input
+                                        id="Menu"
+                                        type="text"
+                                        name="Menu"
+                                        value={nombreMenu}
+                                        className="form-control"
+                                        readOnly
+                                    // El campo es de solo lectura
+                                    />
+                                    <button className="btn btn-primary" onClick={openMenuModal}>Buscar</button>
+                                </div>
+                            </div>
+                            <div className='card col-6 mb-3'>
+                                <div className='card-body'>
+                                    <h4>Información</h4>
+                                    {menuInformacion ? menuInformacion : <span className='text-muted'>Sin Selección.</span>}
+                                </div>
                             </div>
                         </div>
-                        <div className="card mb-3">
-                            <h3 className='p-2'>Componente</h3>
-                            <div className="input-group mb-3 p-2 ">
-                                <input
-                                    id="Componente"
-                                    type="text"
-                                    name="Componente"
-                                    value={nombreComponente}
-                                    className="form-control"
-                                    readOnly
-                                // El campo es de solo lectura
-                                />
-                                <button className="btn btn-primary" onClick={openComponenteModal}>Buscar</button>
+                        <div className='row mb-3 justify-content-evenly'>
+                            <div className="card col-5 mb-3">
+                                <h3 className='p-2'>Componente</h3>
+                                <div className="input-group mb-3 p-2 ">
+                                    <input
+                                        id="Componente"
+                                        type="text"
+                                        name="Componente"
+                                        value={nombreComponente}
+                                        className="form-control"
+                                        readOnly
+                                    />
+                                    <button className="btn btn-primary" onClick={openComponenteModal}>Buscar</button>
+                                </div>
+                            </div>
+                            <div className=' card col-6 mb-3'>
+                                <div className='card-body'>
+                                    <h4>Información</h4>
+                                    {componenteInformacion ? componenteInformacion : <span className='text-muted'>Sin Selección.</span>}
+                                </div>
                             </div>
                         </div>
 
                         {/* Vista del Componente seleccionado */}
                         <div className='card mb-3'>
                             <div className='card-header'>
-                                <h4>Componente - {nombreComponente || <span className='text-muted'> Sin selección</span>}</h4>
+                                <h4>{'Componente' || <span className='text-muted'> Sin selección</span>}</h4>
                             </div>
                             <div className='card-body'>
                                 {nombreComponente && componenteSeleccionado ? (
@@ -252,7 +299,7 @@ const Create = ({ auth }) => {
                                                             disabled={!data.id_menu ||
                                                                 data.componentes.some(c => c.id === componenteSeleccionado.id)}
                                                         >
-                                                            <i className="fas fa-plus"></i> Agregar al Menú
+                                                            Agregar
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -268,10 +315,10 @@ const Create = ({ auth }) => {
                         <form onSubmit={handleSubmit}>
                             <div className="card">
                                 <div className="card-header">
-                                    <h4>Menú - {nombreMenu || <span className='text-muted'> Sin selección</span>}</h4>
+                                    <h4>{nombreMenu || <span className='text-muted'> Sin selección</span>}</h4>
                                 </div>
                                 <div className="card-body">
-                                    <h5>Componentes Asociados:</h5>
+                                    <h5>Componentes Asociados</h5>
                                     {data.componentes.length > 0 ? (
                                         <>
                                             <table className="table table-striped table-hover align-middle">
@@ -314,14 +361,27 @@ const Create = ({ auth }) => {
                                                     ))}
                                                 </tbody>
                                             </table>
-                                            <div className="d-flex justify-content-end mt-3">
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary"
-                                                    disabled={!data.id_menu}
-                                                >
-                                                    Guardar Cambios
-                                                </button>
+                                            <div className="row d-flex justify-content-end mt-3">
+                                                <div className='col-6'>
+                                                    <button type="button" className="btn btn-secondary" onClick={handleReset}>
+                                                        Limpiar
+                                                    </button>
+                                                </div>
+                                                <div className='col-3'>
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-primary"
+                                                        disabled={!data.id_menu}
+                                                    >
+                                                        Aplicar
+                                                    </button>
+                                                </div>
+                                                <div className='col-3'>
+                                                    <button type='submit'
+                                                        className='btn btn-primary'
+                                                        disabled={!data.id_menu}
+                                                        onClick={handleGuardarCambios}>Guardar Cambios</button>
+                                                </div>
                                             </div>
                                         </>
                                     ) : (

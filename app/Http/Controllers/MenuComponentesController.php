@@ -26,7 +26,6 @@ class MenuComponentesController extends Controller
         $results = Menu::where('nombre', 'like', "%$query%")
             ->paginate(5, ['*'], 'page', $page)
             ->appends(['query' => $query]);
-
         return response()->json($results);
     }
     public function searchComponentes(Request $request)
@@ -83,9 +82,8 @@ public function actualizar(Request $request)
                 ]
             );
     }
-
-    return to_route('menucomponentes.tratamiento');
 }
+
 public function agregarComponente(Request $request)
 {
 

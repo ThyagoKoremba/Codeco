@@ -19,13 +19,13 @@ class PerfilMenuSeed extends Seeder
         PerfilMenu::create([
             'id_perfil' => Perfil::find(2)->id,
             'id_menu'   => Menu::find(1)->id,
-            'activo'    => true
+            'sn_activo'    => true
         ]);
         //Perfil: Facturador Menu: Facturador
         PerfilMenu::create([
             'id_perfil' => Perfil::find(1)->id,
             'id_menu'   => Menu::find(2)->id,
-            'activo'    => true
+            'sn_activo'    => true
         ]);
     }
 }

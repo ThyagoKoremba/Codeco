@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_perfil');
             $table->unsignedBigInteger('id_menu');
             $table->primary(['id_perfil','id_menu']);
-            $table->boolean('activo')->default(false);
+            $table->boolean('sn_activo')->default(false);
             $table->timestamps();
             
             $table->foreign('id_menu')->references('id')->on('menus')->onDelete('cascade');

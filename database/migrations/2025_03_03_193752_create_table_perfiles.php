@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre',50);
             $table->string('informacion',100)->comment('Cual es la función operativa del perfil y sus alcances');
             $table->string('abreviatura',45)->nullable();
-            $table->boolean('activo')->default(true);
+            $table->boolean('sn_activo')->default(true);
             $table->timestamps();
         });
     }

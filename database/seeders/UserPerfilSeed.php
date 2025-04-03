@@ -20,7 +20,7 @@ class UserPerfilSeed extends Seeder
             [
                 'id_user'    => User::find(2)->id,
                 'id_perfil'  => Perfil::find(1)->id,
-                'activo'     => true
+                'sn_activo'     => true
             ]
         );
         // Lucas perfil Usuario CRM
@@ -28,7 +28,7 @@ class UserPerfilSeed extends Seeder
             [
                 'id_user'    => User::find(3)->id,
                 'id_perfil'  => Perfil::find(2)->id,
-                'activo'     => true
+                'sn_activo'     => true
             ]
         );
         // Lucas perfil Facturador
@@ -36,7 +36,7 @@ class UserPerfilSeed extends Seeder
             [
                 'id_user'    => User::find(3)->id,
                 'id_perfil'  => Perfil::find(1)->id,
-                'activo'     => true
+                'sn_activo'     => true
             ]
         );
     }

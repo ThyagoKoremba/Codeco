@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_perfil');
             $table->primary(['id_user','id_perfil']);
-            $table->boolean('activo')->default(false);
+            $table->boolean('sn_activo')->default(false);
             $table->timestamps();
             
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\ComponenteController;
-use App\Http\Controllers\EtiquetasController;
 use App\Http\Controllers\MenusController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,5 +11,4 @@ Route::prefix('menu')->middleware('auth')->group(function () {
     Route::put('/update/{menu}',[MenusController::class,'update'])->name('menu.update');
     Route::get('/cambiarEstado/{menu}',[MenusController::class,'cambiarEstado'])->name('menu.cambiarEstado');
 
-    Route::get('/search-componentes', [MenusController::class, 'searchComponentes']);
 });

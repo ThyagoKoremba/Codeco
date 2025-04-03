@@ -17,19 +17,19 @@ class PerfilSeed extends Seeder
             'nombre'      => 'Facturador',
             'informacion' => '',
             'abreviatura' => 'Facturador',
-            'activo'      => true
+            'sn_activo'      => true
         ]);
         Perfil::create([
             'nombre'      => 'Usuario CRM',
             'informacion' => '',
             'abreviatura' => 'Usuario CRM',
-            'activo'      => true
+            'sn_activo'      => true
         ]);
         Perfil::create([
             'nombre'      => 'Administrador',
             'informacion' => '',
             'abreviatura' => 'Administrador',
-            'activo'      => true
+            'sn_activo'      => true
         ]);
     }
 }

@@ -20,12 +20,12 @@ class PerfilComponentesSeed extends Seeder
         PerfilComponente::create([
             'id_componente' => Componentes::find(1)->id,
             'id_perfil'     => $perfil->id,
-            'activo'        => true
+            'sn_activo'        => true
         ]);
         PerfilComponente::create([
             'id_componente' => Componentes::find(2)->id,
             'id_perfil'     => $perfil->id,
-            'activo'        => true
+            'sn_activo'        => true
         ]);
     }
 }

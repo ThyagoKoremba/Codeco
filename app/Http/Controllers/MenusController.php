@@ -11,12 +11,6 @@ use Inertia\Inertia;
 
 class MenusController extends Controller
 {
-    public function create()
-    {
-        $componentes = Componentes::all();
-        return Inertia::render('Menu/Create', compact('componentes'));
-    }
-
     public function store(MenuRequest $request)
     {
         $menu = new Menu;
@@ -44,14 +38,6 @@ class MenusController extends Controller
     {
         $menus = Menu::all();
         return Inertia::render('Menu/Vista', compact('menus'));
-    }
-
-    public function edit(Menu $menu)
-    {
-        $menu->load('componentes'); 
-        $componentes = Componentes::all();
-
-        return Inertia::render('Menu/Edit', compact('menu', 'componentes'));
     }
 
     public function update(MenuUpdate $request, Menu $menu)

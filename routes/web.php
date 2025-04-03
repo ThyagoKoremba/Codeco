@@ -52,6 +52,8 @@ require __DIR__.'/proyectocnfgnotificacion.php';
 require __DIR__.'/UsersRoute.php';
 require __DIR__.'/Componente.php';
 require __DIR__.'/Menu.php';
+require __DIR__.'/Perfil.php';
+
 require __DIR__.'/Configuraciones.php';
 
 
