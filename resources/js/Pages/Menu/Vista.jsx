@@ -25,7 +25,7 @@ const Vista = ({ auth, menus }) => {
     }
 
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    
+
     const openEditModal = (menu) => {
         setSelectedItem(menu); // Establece el menú seleccionado
         setIsEditModalOpen(true); // Abre el modal de edición
@@ -114,7 +114,7 @@ const Vista = ({ auth, menus }) => {
                                             </button>
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
 
-                                            <a
+                                                <a
                                                     className="dropdown-item"
                                                     onClick={() =>
                                                         openEditModal(menu)
@@ -122,7 +122,11 @@ const Vista = ({ auth, menus }) => {
                                                 >
                                                     Editar
                                                 </a>
-                                                <a className='dropdown-item' onClick={() => openVerModal(menu)}>Ver</a>
+                                                <a
+                                                    className='dropdown-item '
+                                                    onClick={() => openVerModal(menu)}>
+                                                    Ver
+                                                </a>
                                                 <a className="dropdown-item" href={route('menu.cambiarEstado', [menu])}>
                                                     {menu.sn_activo === 1 ? 'Desactivar' : 'Activar'}
                                                 </a>
@@ -166,7 +170,7 @@ const Vista = ({ auth, menus }) => {
                 </div>
 
                 <div className="mb-auto">
-                    <CreateMenu closeModal={closeModal}/>
+                    <CreateMenu closeModal={closeModal} />
                 </div>
             </Modal>
             <Modal
@@ -243,7 +247,7 @@ const Vista = ({ auth, menus }) => {
                         margin: '0 auto',
                         width: 'auto',
                         overflow: 'auto',
-                        inset:'unset',
+                        inset: 'unset',
                     },
                 }}
                 overlayClassName="modal-overlay"
