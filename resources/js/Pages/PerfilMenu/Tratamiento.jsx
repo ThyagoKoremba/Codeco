@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Asegúrate de importar useState desde React
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, router } from '@inertiajs/react';
 import Modal from 'react-modal';
 import './../../../css/app.css';
 
@@ -31,14 +31,15 @@ const Create = ({ auth }) => {
 
     const { data, setData, post } = useForm(initialValues);
 
+        const fetchData = async () => {
+            const response = await fetch('/configuracion/perfil-menu/perfil-menu-data');
+            const result = await response.json();
+            setPerfilMenuData(result.data);
+        };
 
-    const fetchData = async () => {
-        const response = await fetch('/configuracion/perfil-menu/perfil-menu-data');
-        const result = await response.json();
-        setPerfilMenuData(result.data);
-    };
-    fetchData();
-
+        useEffect(()=>{
+            fetchData();
+        },[])
 
     //Guardar Cambios en las relacion menu-componentes
     const handleSubmit = (e) => {
@@ -50,13 +51,11 @@ const Create = ({ auth }) => {
             sn_activoo: data.sn_activo,
         };
 
-        post(route('perfilmenu.store'), dataToSend, {
-            preserveScroll: true,
-        });
+        post(route('perfilmenu.store'), dataToSend)
+        fetchData();
     };
 
     const handleReset = () => {
-        setData(initialValues);
         setNombreMenu('');
         setPerfilSeleccionado(null);
         setNombrePerfil('');
@@ -107,7 +106,7 @@ const Create = ({ auth }) => {
     const handleSelectMenu = (menu) => {
         data.id_menu = menu.id;
         setNombreMenu(menu.nombre);
-        closeModal(); 
+        closeModal();
     };
 
     const openMenuModal = () => {
@@ -120,8 +119,8 @@ const Create = ({ auth }) => {
 
     const closeModal = () => {
         setIsMenuModalOpen(false);
-        setMenuSearchResults([]); 
-        setMenuSearchQuery(''); 
+        setMenuSearchResults([]);
+        setMenuSearchQuery('');
         setIsPerfilModalOpen(false);
         setPerfilSearchResults([]);
         setPerfilSearchQuery('');
@@ -190,10 +189,10 @@ const Create = ({ auth }) => {
                             </div>
                             <div className="mt-4 row">
                                 <div className="col-6">
-                                    
+
                                 </div>
                                 <div className="col-6 d-flex justify-content-between">
-                                <button
+                                    <button
                                         type="button"
                                         className="btn btn-secondary"
                                         onClick={(e) => {
@@ -203,7 +202,9 @@ const Create = ({ auth }) => {
                                     >
                                         Limpiar
                                     </button>
-                                    <button type="submit" className="btn btn-primary">Guardar</button>
+                                    <button type='submit'
+                                        className='btn btn-primary'
+                                        onClick={handleSubmit}>Guardar Cambios</button>
                                 </div>
                             </div>
                         </form>
