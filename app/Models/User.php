@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function perfiles()
+    {
+        return $this->belongsToMany(Perfil::class, 'users_perfiles', 'id_user', 'id_perfil')->wherePivot('activo', true);
+    }
+
+    public function componentesExcepcion()
+    {
+        return $this->belongsToMany(Componente::class, 'users_componentes_excepcion', 'id_user', 'id_componente');
+    }
 }

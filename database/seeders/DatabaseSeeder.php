@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,6 +29,19 @@ class DatabaseSeeder extends Seeder
         $this->call(FisicojuridicosSeeder::class);
         $this->call(GeoprovinciasregionesSeeder::class);
         $this->call(IdentidadesSeeder::class);
-        $this->call(userSeeder::class);
+        $this->call(UserSeeder::class);
+
+        //Seeders para configurar componentes-menu por usuario, sumar en orden. En el caso que se quiera crear otro usuario asegurarnos de tenerlo arriba o sumarlo en el seed
+        //NO PURAMENTE DESDE DB porque se rompen las relaciones
+        $this->call(PerfilSeed::class);
+        $this->call(ComponenteSeed::class);
+
+        $this->call(PerfilComponentesSeed::class); //por el momento no lo usamos
+        
+        $this->call(UserPerfilSeed::class);
+        $this->call(UserComponenteExcepcionSeed::class);
+        $this->call(MenuSeed::class);
+        $this->call(MenuComponenteSeed::class);
+        $this->call(PerfilMenuSeed::class);
     }
 }

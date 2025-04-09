@@ -36,6 +36,10 @@ npm run build
 
 Para reiniciar el desarrollo de vite: npm run dev
 
+-> Borrar el archivo manifest
+rm -f public/build/manifes.json
+npm run build
+
 ## Artisan
 Dentro del contenedor 
 php artisan key:generate

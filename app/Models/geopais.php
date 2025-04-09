@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Geopais extends Model
 {
-    use HasFactory;
     protected $table = "geopais";
+    
     protected $fillable = [
         'nombre',
         'abreviatura',
