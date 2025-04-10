@@ -1,5 +1,4 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
@@ -22,19 +21,16 @@ const Create = ({ auth }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
 
-            header={
-                <div className=' d-flex justify-content-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Etiqueta</h2>
-                    <a href={route('etiqueta.index')}>
-                        <button className='btn btn-primary'>Etiquetas</button>
-                    </a>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
+        <>
+            <div className=' d-flex justify-content-between'>
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Etiqueta</h2>
+                <a href={route('etiqueta.index')}>
+                    <button className='btn btn-primary'>Etiquetas</button>
+                </a>
+            </div>
+
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -47,34 +43,34 @@ const Create = ({ auth }) => {
                                             <form onSubmit={submit}>
                                                 <div className='mb-3 row'>
                                                     <div className='col-6'>
-                                                    <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
+                                                        <label htmlFor="etiquetanombre" className='form-label'>Nombre</label>
 
-                                                    <input
-                                                        id="etiquetanombre"
-                                                        type="text"
-                                                        name="etiquetanombre"
-                                                        value={data.etiquetanombre}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('etiquetanombre', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="etiquetanombre"
+                                                            type="text"
+                                                            name="etiquetanombre"
+                                                            value={data.etiquetanombre}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('etiquetanombre', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.etiquetanombre} className="mt-2" />
-                                                </div>
+                                                        <InputError message={errors.etiquetanombre} className="mt-2" />
+                                                    </div>
 
-                                                <div className='col-6'>
-                                                    <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
+                                                    <div className='col-6'>
+                                                        <label htmlFor="etiquetaabreviatura" className='form-label'>Abreviatura</label>
 
-                                                    <input
-                                                        id="etiquetaabreviatura"
-                                                        type="text"
-                                                        name="etiquetaabreviatura"
-                                                        value={data.etiquetaabreviatura}
-                                                        className="form-control"
-                                                        onChange={(e) => setData('etiquetaabreviatura', e.target.value)}
-                                                    />
+                                                        <input
+                                                            id="etiquetaabreviatura"
+                                                            type="text"
+                                                            name="etiquetaabreviatura"
+                                                            value={data.etiquetaabreviatura}
+                                                            className="form-control"
+                                                            onChange={(e) => setData('etiquetaabreviatura', e.target.value)}
+                                                        />
 
-                                                    <InputError message={errors.etiquetaabreviatura} className="mt-2" />
-                                                </div>
+                                                        <InputError message={errors.etiquetaabreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
                                                 <hr />
                                                 <div className='mb-3'>
@@ -108,10 +104,10 @@ const Create = ({ auth }) => {
                                                 </div>
                                                 <div className="mt-4 row">
                                                     <div className='col-6'>
-                                                    <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
+                                                        <button type="button" className="btn btn-secondary" onClick={() => reset()}>Limpiar</button>
                                                     </div>
                                                     <div className='col-6 d-flex justify-content-end'>
-                                                    <button type="submit" className="btn btn-primary">Guardar</button>
+                                                        <button type="submit" className="btn btn-primary">Guardar</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -125,7 +121,7 @@ const Create = ({ auth }) => {
                 </div>
             </div>
 
-        </AuthenticatedLayout>
+        </>
     )
 }
 

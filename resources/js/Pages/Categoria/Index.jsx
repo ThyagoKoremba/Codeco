@@ -1,5 +1,4 @@
-import {React, useState} from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { React, useState } from 'react'
 import { Head } from '@inertiajs/react';
 import './../../../css/app.css';
 import Modal from 'react-modal';
@@ -23,26 +22,20 @@ const Index = ({ auth, categorias }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
-                <div className='d-flex justify-content-between'>
-                    <h2 className="">Categorias</h2>
-                    <a href={route('categoria.create')}>
-                        <button className='btn btn-primary'>Nueva Categorias</button>
-                    </a>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
+        <        >
+            <div className='d-flex justify-content-between my-5'>
+                <h2 className="">Categorias</h2>
+                <a href={route('categoria.create')}>
+                    <button className='btn btn-primary'>Nueva Categorias</button>
+                </a>
+            </div>
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
                         <thead className="sticky-top">
                             <tr>
-                            <th scope="col">
+                                <th scope="col">
                                     ID
                                 </th>
                                 <th scope="col">
@@ -108,68 +101,68 @@ const Index = ({ auth, categorias }) => {
                 </div>
             </div>
             <Modal
-                            isOpen={isVerModalOpen}
-                            onRequestClose={closeVerModal}
-                            contentLabel={"Ver"}
-                            style={{
-                                content: {
-                                    backgroundColor: '#ffffff',
-                                    borderRadius: '10px',
-                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                                    padding: '20px',
-                                    maxWidth: '600px',
-                                    margin: '0 auto',
-                                    maxHeight: '70vh'
-                                }
-                            }}
-                            overlayClassName="modal-overlay"
-                        >
-                            <div className="modal-dialog modal-lg">
-                                <div className="modal-content h-100">
-                                    <div className="modal-header d-flex justify-content-between">
-                                        <h5 className="modal-title mb-3">
+                isOpen={isVerModalOpen}
+                onRequestClose={closeVerModal}
+                contentLabel={"Ver"}
+                style={{
+                    content: {
+                        backgroundColor: '#ffffff',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                        padding: '20px',
+                        maxWidth: '600px',
+                        margin: '0 auto',
+                        maxHeight: '70vh'
+                    }
+                }}
+                overlayClassName="modal-overlay"
+            >
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content h-100">
+                        <div className="modal-header d-flex justify-content-between">
+                            <h5 className="modal-title mb-3">
+                                {selectedCategoria && (
+                                    <p>Ver Categoria - {selectedCategoria.id}</p>
+
+                                )}
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                onClick={closeVerModal}
+                                aria-label="Cerrar"
+                            ></button>
+                        </div>
+                        <div className="modal-body h-100 d-flex flex-column">
+                            <div className='mb-auto'>
+                                <div className="card">
+                                    <div className="card-body">
                                         {selectedCategoria && (
-                                                <p>Ver Categoria - {selectedCategoria.id}</p>
-            
-                                            )}
-                                        </h5>
-                                        <button
-                                            type="button"
-                                            className="btn-close"
-                                            onClick={closeVerModal}
-                                            aria-label="Cerrar"
-                                        ></button>
-                                    </div>
-                                    <div className="modal-body h-100 d-flex flex-column">
-                                        <div className='mb-auto'>
-                                            <div className="card">
-                                                <div className="card-body">
-                                                {selectedCategoria && (
-                                                        <>
-                                                            <p>ID: <span className="text-muted">{selectedCategoria.id}</span></p>
-                                                            <div className="row">
-                                                            <p className="col-6">Descripción: <span className="text-muted">{selectedCategoria.descripcion}</span></p>
-                                                            <p className="col-6">Abreviatura: <span className="text-muted">{selectedCategoria.abreviatura}</span></p>
-                                                            </div>
-                                                            <hr />
-                                                            <div className="row">
-                                                            <p className="col-6">Registro en Sistema: <span className="text-muted">{selectedCategoria.sn_registrosistema == 1 ? "Si":"No"}</span></p>
-                                                            </div>
-                                                            <hr />
-                                                            <p>Activo: <span className="text-muted">{selectedCategoria.sn_activo === 1 ? 'Si' : 'No'}</span></p>
-                                                        </>
-                                                    )}
+                                            <>
+                                                <p>ID: <span className="text-muted">{selectedCategoria.id}</span></p>
+                                                <div className="row">
+                                                    <p className="col-6">Descripción: <span className="text-muted">{selectedCategoria.descripcion}</span></p>
+                                                    <p className="col-6">Abreviatura: <span className="text-muted">{selectedCategoria.abreviatura}</span></p>
                                                 </div>
-                                            </div>
-                                            <div className="d-flex justify-content-end">
-                                            <button onClick={closeVerModal} className="btn btn-secondary mt-3">Cerrar</button>
-                                            </div>
-                                        </div>
+                                                <hr />
+                                                <div className="row">
+                                                    <p className="col-6">Registro en Sistema: <span className="text-muted">{selectedCategoria.sn_registrosistema == 1 ? "Si" : "No"}</span></p>
+                                                </div>
+                                                <hr />
+                                                <p>Activo: <span className="text-muted">{selectedCategoria.sn_activo === 1 ? 'Si' : 'No'}</span></p>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
+                                <div className="d-flex justify-content-end">
+                                    <button onClick={closeVerModal} className="btn btn-secondary mt-3">Cerrar</button>
+                                </div>
                             </div>
-                        </Modal>
-        </AuthenticatedLayout >
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+        </>
     )
 }
 

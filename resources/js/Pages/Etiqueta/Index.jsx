@@ -23,19 +23,17 @@ const Index = ({ auth, etiquetas }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
+        <>
 
-            header={
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Etiquetas</h2>
                     <a href={route('etiqueta.create')}>
                         <button className='btn btn-primary'>Nueva Etiqueta</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
+
+
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -162,7 +160,7 @@ const Index = ({ auth, etiquetas }) => {
                                 </div>
                             </div>
                         </Modal>
-        </AuthenticatedLayout >
+                        </>
     )
 }
 

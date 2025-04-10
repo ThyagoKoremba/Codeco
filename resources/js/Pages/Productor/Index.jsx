@@ -24,19 +24,13 @@ const Index = ({ auth, productores }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Productor</h2>
                     <a href={route('productor.create')}>
                         <button className='btn btn-primary'>Nuevo Productor</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -173,7 +167,7 @@ const Index = ({ auth, productores }) => {
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+            </>
     )
 }
 

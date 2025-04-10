@@ -1,24 +1,17 @@
-
-import "./../../css/app.css";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Guest({ children }) {
     return (
-        <div className="py-4">
-            <div>
-
-
-
-                <div className="container position-relative">
-                    <div className='row justify-content-center'>
-                        <div className='col-md-6'>
-                            <div className='card'>
-                                <div className='card-header'>Iniciar Sesión</div>
-
-                                <div className='card-body'>
-                                <img src="img/Imibio cosas-02.png" className="logo-img img-fluid mx-auto d-block mb-4" alt="Logo" />
-                                    {children}
-                                </div>
-                            </div>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card mt-5">
+                        <div className="card-header">
+                            <h3>Iniciar Sesión</h3>
+                        </div>
+                        <div className="card-body">
+                            {children}
                         </div>
                     </div>
                 </div>

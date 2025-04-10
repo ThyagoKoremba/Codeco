@@ -7,19 +7,13 @@ import './../../../css/app.css';
 const Index = ({ auth, usuariosapp }) => {
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Usuarios App</h2>
                     <a href={route('usuarioapp.create')}>
                         <button className='btn btn-primary'>Nuevo Usuario</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -96,7 +90,7 @@ const Index = ({ auth, usuariosapp }) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+            </>
     )
 }
 

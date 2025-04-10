@@ -1,6 +1,5 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 
@@ -18,22 +17,17 @@ const Edit = ({ auth, categoria }) => {
     const submit = (e) => {
         e.preventDefault();
         put(route('categoria.update', categoria))
-        console.log(data);
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <>
+            <div className=' d-flex justify-content-between'>
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Categoria</h2>
+                <a href={route('categoria.index')}>
+                    <button className='btn btn-primary'>Categorias</button>
+                </a>
+            </div>
 
-            header={
-                <div className=' d-flex justify-content-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Categoria</h2>
-                    <a href={route('categoria.index')}>
-                        <button className='btn btn-primary'>Categorias</button>
-                    </a>
-                </div>
-            }
-        >
             <Head title="Dashboard" />
             <div className="py-5">
                 <div className="container">
@@ -118,7 +112,7 @@ const Edit = ({ auth, categoria }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     )
 }
 

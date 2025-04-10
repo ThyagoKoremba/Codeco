@@ -21,17 +21,13 @@ const Index = ({ auth, actividades }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className='d-flex justify-content-between'>
-                    <h2 className="">Actividades</h2>
-                    <a href={route('actividad.create')}>
-                        <button className='btn btn-primary'>Nueva Actividad</button>
-                    </a>
-                </div>
-            }
-        >
+        <>
+        <div className='d-flex justify-content-between'>
+        <h2 className="">Actividades</h2>
+        <a href={route('actividad.create')}>
+            <button className='btn btn-primary'>Nueva Actividad</button>
+        </a>
+    </div>
             <Head title="Dashboard" />
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -143,7 +139,7 @@ const Index = ({ auth, actividades }) => {
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout>
+        </>
     )
 }
 

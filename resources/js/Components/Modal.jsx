@@ -17,13 +17,13 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
     }[maxWidth];
 
     return (
-        <Transition show={show} as={Fragment} leave="duration-200">
-            <Dialog
+        <Transition show={show} as={Fragment}>
+            <Dialog 
                 as="div"
-                id="modal"
-                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all"
+                className="fixed inset-0 flex items-center justify-center z-50"
                 onClose={close}
             >
+                {/* Fondo Oscuro */}
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -33,9 +33,10 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="absolute inset-0 bg-gray-500/75" />
+                    <div className="absolute inset-0 bg-black bg-opacity-50" />
                 </Transition.Child>
 
+                {/* Panel del Modal */}
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -46,7 +47,7 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                     <Dialog.Panel
-                        className={`mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass}`}
+                        className={`bg-white rounded-lg shadow-xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass} p-4`}
                     >
                         {children}
                     </Dialog.Panel>

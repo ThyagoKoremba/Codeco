@@ -208,14 +208,12 @@ const Create = ({ auth }) => {
     };
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
+        <>
                 <div className="d-flex justify-content-between">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Menús - Componentes</h2>
                 </div>
-            }
-        >
+
+
             <Head title="Dashboard" />
             <div className='container'>
                 <div className="card">
@@ -558,7 +556,7 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout>
+            </>
     );
 };
 

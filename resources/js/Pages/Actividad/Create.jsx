@@ -26,10 +26,8 @@ const Create = ({ auth }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <>
 
-            header={
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Actividad</h2>
                     <a href={route('actividad.index')}>
@@ -38,8 +36,7 @@ const Create = ({ auth }) => {
                         </button>
                     </a>
                 </div>
-            }
-        >
+
 
             <Head title="Crear Actividad" />
 
@@ -194,7 +191,7 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     )
 }
 

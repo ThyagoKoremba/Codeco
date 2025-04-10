@@ -47,10 +47,9 @@ const Vista = ({ auth, menus }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
+        <>
 
-            header={
+
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Menús</h2>
                     <button
@@ -61,10 +60,10 @@ const Vista = ({ auth, menus }) => {
                         Agregar Menú
                     </button>
                 </div>
-            }
 
-        >
-            <Head title="Dashboard" />
+
+
+
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
@@ -269,7 +268,7 @@ const Vista = ({ auth, menus }) => {
                     />
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+            </>
     )
 }
 

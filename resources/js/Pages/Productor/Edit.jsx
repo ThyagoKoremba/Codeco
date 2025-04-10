@@ -23,10 +23,7 @@ const Edit = ({ auth, productor }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Productor</h2>
                     <a href={route('productor.index')}>
@@ -35,10 +32,6 @@ const Edit = ({ auth, productor }) => {
                         </button>
                     </a>
                 </div>
-            }
-        >
-
-            <Head title="Editar Productor" />
 
             <div className="py-5">
                 <div className="container">
@@ -133,7 +126,7 @@ const Edit = ({ auth, productor }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </>
     )
 }
 

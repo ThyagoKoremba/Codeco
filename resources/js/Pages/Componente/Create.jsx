@@ -1,6 +1,5 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 
 

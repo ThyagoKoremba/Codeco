@@ -22,19 +22,15 @@ const Edit = ({ auth, etiqueta }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <>
 
-            header={
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Etiqueta</h2>
                     <a href={route('etiqueta.index')}>
                         <button className='btn btn-primary'>Etiquetas</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -120,7 +116,7 @@ const Edit = ({ auth, etiqueta }) => {
                 </div>
             </div>
 
-        </AuthenticatedLayout>
+            </>
     )
 }
 

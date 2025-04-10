@@ -1,6 +1,4 @@
 import { React, useState } from 'react';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
 import './../../../css/app.css';
 import CreateComponente from './Create';
 import Modal from 'react-modal';
@@ -11,7 +9,7 @@ Modal.setAppElement('#app');
 const Vista = ({ auth, componentes }) => {
 
 
-    
+
 
     const [isVerModalOpen, setIsVerModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -50,22 +48,17 @@ const Vista = ({ auth, componentes }) => {
     };
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className="d-flex justify-content-between">
-                    <h2 className="">Componentes</h2>
-                    <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={openModal}
-                    >
-                        Agregar Componente
-                    </button>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
+        <>
+            <div className="d-flex justify-content-between my-5">
+                <h2 className="">Componentes</h2>
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={openModal}
+                >
+                    Agregar Componente
+                </button>
+            </div>
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -300,7 +293,7 @@ const Vista = ({ auth, componentes }) => {
                     />
                 </div>
             </Modal>
-        </AuthenticatedLayout>
+        </>
     );
 };
 

@@ -24,20 +24,13 @@ const Index = ({ auth, proyectosnotif, proyectos }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Configuración Notificación</h2>
                     <a href={route('proyectocnfgnotificacion.create')}>
                         <button className='btn btn-primary'>Nueva Configuración</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
-
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
@@ -186,7 +179,7 @@ const Index = ({ auth, proyectosnotif, proyectos }) => {
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+            </>
     )
 }
 

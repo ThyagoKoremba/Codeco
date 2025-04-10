@@ -26,10 +26,10 @@ const Edit = ({ auth, actividad}) => {
     }
 
     return (
-        <AuthenticatedLayout
+        <>
             user={auth.user}
 
-            header={
+
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Actividad</h2>
                     <a href={route('actividad.index')}>
@@ -38,8 +38,8 @@ const Edit = ({ auth, actividad}) => {
                         </button>
                     </a>
                 </div>
-            }
-        >
+
+
 
             <Head title="Crear Actividad" />
 
@@ -189,7 +189,7 @@ const Edit = ({ auth, actividad}) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </>
     )
 }
 

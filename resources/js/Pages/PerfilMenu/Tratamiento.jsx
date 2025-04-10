@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'; // Asegúrate de importar useState desde React
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm, router } from '@inertiajs/react';
+import {  useForm } from '@inertiajs/react';
 import Modal from 'react-modal';
 import './../../../css/app.css';
 
@@ -31,15 +30,15 @@ const Create = ({ auth }) => {
 
     const { data, setData, post } = useForm(initialValues);
 
-        const fetchData = async () => {
-            const response = await fetch('/configuracion/perfil-menu/perfil-menu-data');
-            const result = await response.json();
-            setPerfilMenuData(result.data);
-        };
+    const fetchData = async () => {
+        const response = await fetch('/configuracion/perfil-menu/perfil-menu-data');
+        const result = await response.json();
+        setPerfilMenuData(result.data);
+    };
 
-        useEffect(()=>{
-            fetchData();
-        },[])
+    useEffect(() => {
+        fetchData();
+    }, [])
 
     //Guardar Cambios en las relacion menu-componentes
     const handleSubmit = (e) => {
@@ -127,15 +126,9 @@ const Create = ({ auth }) => {
     };
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className="d-flex justify-content-between">
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Perfil - Menú</h2>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
+        <>
+
+            <h3 className="text-center ">Perfil - Menu</h3>
             <div className='container'>
                 <div className="card">
                     <div className="card-body">
@@ -411,7 +404,7 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout>
+        </>
     );
 };
 

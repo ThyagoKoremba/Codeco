@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Bouncer;
 
 class userSeeder extends Seeder
 {
@@ -32,5 +33,11 @@ class userSeeder extends Seeder
             'password'=>'654321',
             'activo'  => true,
         ]);
-    }
+        User::create([
+            'name'=>'User',
+            'email'=>'codeco@user.com',
+            'password'=>'codeco',
+        ]);
+
+}
 }

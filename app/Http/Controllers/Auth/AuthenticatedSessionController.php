@@ -25,6 +25,13 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 
+    public function getSessionData(Request $request)
+    {
+        return response()->json([
+            'abilities' => $request->session()->get('abilities'),
+        ]);
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -34,7 +41,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Redirigir a HOME
+        return redirect()->route('dashboard');
     }
 
     /**

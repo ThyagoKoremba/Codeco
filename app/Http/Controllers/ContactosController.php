@@ -12,9 +12,9 @@ use App\Models\geopais;
 use App\Models\Identidades;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
-use App\Models\GeoLugares;
-use App\Models\GeoProvinciasRegiones;
-use App\Models\vista_contactos;
+use App\Models\geolugares;
+use App\Models\geoprovinciasregiones;
+
 
 class ContactosController extends Controller
 {
@@ -67,15 +67,15 @@ class ContactosController extends Controller
         $radicaciones->nota=$contacto->observacion;
         $radicaciones->save();
 
-        return to_route('contacto.create');
+        return to_route('contacto.index');
     }
 
 
 
     public function index () {
         
-        $contactos=vista_contactos::orderby('id')->get();
-        return Inertia::render('/Contacto/Index',['contactos'=>$contactos,]);
+        $contactos=contactos::orderBy('id')->get();
+        return Inertia::render('/Contacto/Index',compact('contactos'));
     }
 
     public function edit (contactos $contacto) {

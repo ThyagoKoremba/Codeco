@@ -27,19 +27,14 @@ const Create = ({ auth, usuarioapp }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Usuario App</h2>
                     <a href={route('usuarioapp.index')}>
                         <button className='btn btn-primary'>Usuarios App</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -192,7 +187,7 @@ const Create = ({ auth, usuarioapp }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </>
     )
 }
 

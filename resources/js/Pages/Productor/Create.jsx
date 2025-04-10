@@ -19,14 +19,11 @@ const Create = ({ auth }) => {
     const submit = (e) => {
         e.preventDefault();
         post(route('productor.store'));
-        console.log(data);
+
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <>
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Productor</h2>
                     <a href={route('productor.index')}>
@@ -35,10 +32,7 @@ const Create = ({ auth }) => {
                         </button>
                     </a>
                 </div>
-            }
-        >
 
-            <Head title="Crear Productor" />
 
             <div className="py-5">
                 <div className="container">
@@ -153,7 +147,7 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </>
     )
 }
 
