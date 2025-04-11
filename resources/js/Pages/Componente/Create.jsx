@@ -2,6 +2,7 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 
 const CreateComponente = ({ closeModal }) => {
@@ -26,7 +27,6 @@ const CreateComponente = ({ closeModal }) => {
     }
 
     return (
-
             <div className="py-3">
                             <div className="row">
                                 <div className="col">

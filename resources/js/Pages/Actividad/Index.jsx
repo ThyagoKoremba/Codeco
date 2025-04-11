@@ -1,23 +1,20 @@
 import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head} from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
+
+import DashboardLayout from '@/Layouts/Sidebar';
 
 
 const Index = ({ auth, actividades }) => {
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
-                <div className='d-flex justify-content-between'>
-                    <h2 className="">Actividades</h2>
-                    <a href={route('actividad.create')}>
-                        <button className='btn btn-primary'>Nueva Actividad</button>
-                    </a>
-                </div>
-            }
-        >
+        <DashboardLayout>
+            <div className='d-flex justify-content-between'>
+                <h2 className="">Actividades</h2>
+                <a href={route('actividad.create')}>
+                    <button className='btn btn-primary'>Nueva Actividad</button>
+                </a>
+            </div>
             <Head title="Dashboard" />
 
             <div className="tabla-index">
@@ -25,7 +22,7 @@ const Index = ({ auth, actividades }) => {
                     <table className="table table-striped table-hover align-middle">
                         <thead className="sticky-top">
                             <tr>
-                            <th scope="col">
+                                <th scope="col">
                                     ID
                                 </th>
                                 <th scope="col">
@@ -89,7 +86,7 @@ const Index = ({ auth, actividades }) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+        </DashboardLayout>
     )
 }
 

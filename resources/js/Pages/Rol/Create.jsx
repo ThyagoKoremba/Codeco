@@ -2,6 +2,7 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 
 const Create = ({ auth }) => {
@@ -22,19 +23,14 @@ const Create = ({ auth }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Rol</h2>
                     <a href={route('rol.index')}>
                     <button className='btn btn-primary'>Roles</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -123,7 +119,8 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </DashboardLayout>
+   
     )
 }
 

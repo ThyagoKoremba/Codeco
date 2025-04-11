@@ -8,19 +8,15 @@ const Index = ({ auth, proyectosnotif, proyectos}) => {
     console.log("Proyectos:", proyectos);
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
 
-            header={
+        <DashboardLayout>
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Configuración Notificación</h2>
                     <a href={route('proyectocnfgnotificacion.create')}>
                         <button className='btn btn-primary'>Nueva Configuración</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -98,7 +94,8 @@ const Index = ({ auth, proyectosnotif, proyectos}) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+            </DashboardLayout>
+   
     )
 }
 

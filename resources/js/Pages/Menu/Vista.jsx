@@ -1,10 +1,9 @@
 import { React, useState } from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
 import './../../../css/app.css';
 import Modal from 'react-modal';
 import CreateMenu from './Create';
 import EditMenu from './Edit';
+import DashboardLayout from '@/Layouts/Sidebar';
 Modal.setAppElement('#app');
 
 
@@ -46,11 +45,8 @@ const Vista = ({ auth, menus }) => {
     }
 
     return (
+    <DashboardLayout>
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Menús</h2>
                     <button
@@ -61,10 +57,7 @@ const Vista = ({ auth, menus }) => {
                         Agregar Menú
                     </button>
                 </div>
-            }
 
-        >
-            <Head title="Dashboard" />
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
@@ -269,7 +262,8 @@ const Vista = ({ auth, menus }) => {
                     />
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+            </DashboardLayout>
+   
     )
 }
 

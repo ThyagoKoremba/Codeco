@@ -4,6 +4,7 @@ import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 import Modal from 'react-modal';
 import './../../../css/app.css';
+import DashboardLayout from '@/Layouts/Sidebar';
 Modal.setAppElement('#app');
 
 const Create = ({ auth }) => {
@@ -85,19 +86,15 @@ const Create = ({ auth }) => {
     };
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
+   
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Configuración</h2>
                     <a href={route('proyectocnfgnotificacion.index')}>
                         <button className='btn btn-primary'>Configuraciones</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -333,7 +330,8 @@ const Create = ({ auth }) => {
                                 </div>
                             </div>
                         </Modal>
-        </AuthenticatedLayout>
+                        </DashboardLayout>
+   
     )
 }
 

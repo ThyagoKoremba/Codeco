@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Modal from 'react-modal';
 import './styles.css';
+import DashboardLayout from '@/Layouts/Sidebar';
 Modal.setAppElement('#app');
 
 const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributarias }) => {
@@ -21,7 +22,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         id_condiciontributaria: '',
         id_identidadtributaria: '',
         id_identidadtributaria_dato: 'a',
-        
+
         mail_direccion: '',
         telefono_numero: '',
         telefono_sn_movil: false,
@@ -30,9 +31,9 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
         id_subregion: '',
         direccion_calle: '',
         codigo_postal: '',
-        
-        
-        };
+
+
+    };
 
     const { data, errors, setData, post, reset } = useForm(initialValues);
 
@@ -62,8 +63,8 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
     const [regionCurrentPage, setRegionCurrentPage] = useState(1);
     const [regionLastPage, setRegionLastPage] = useState(1);
     const [nombreRegion, setNombreRegion] = useState(''); // Estado para el nombre de la región
-    
-    
+
+
     // Estado para el modal de búsqueda de provincias
     const [isProvinciaModalOpen, setIsProvinciaModalOpen] = useState(false);
     const [provinciaSearchQuery, setProvinciaSearchQuery] = useState('');
@@ -194,16 +195,12 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
 
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className="d-flex justify-content-between align-items-center">
-                    <h2 className="font-weight-bold">Crear Contacto</h2>
-                    <Link href={route('contacto.index')} className="btn btn-primary">Contactos</Link>
-                </div>
-            }
-        >
-            <Head title="Crear Contacto" />
+        <DashboardLayout>
+            <div className="d-flex justify-content-between align-items-center">
+                <h2 className="font-weight-bold">Crear Contacto</h2>
+                <Link href={route('contacto.index')} className="btn btn-primary">Contactos</Link>
+            </div>
+
 
             <div className="py-5">
                 <div className="container">
@@ -285,7 +282,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                 </div>
 
 
-                             {/*    <div className="col-md-6">
+                                {/*    <div className="col-md-6">
                                     <label htmlFor="foto" className="form-label">Foto  </label>
                                     <input
                                         id="foto"
@@ -812,7 +809,8 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                     </div>
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+        </DashboardLayout>
+
     );
 };
 

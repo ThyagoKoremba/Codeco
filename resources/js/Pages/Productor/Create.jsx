@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 
 const Create = ({ auth }) => {
@@ -23,10 +24,8 @@ const Create = ({ auth }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
+   
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Productor</h2>
                     <a href={route('productor.index')}>
@@ -35,10 +34,7 @@ const Create = ({ auth }) => {
                         </button>
                     </a>
                 </div>
-            }
-        >
 
-            <Head title="Crear Productor" />
 
             <div className="py-5">
                 <div className="container">
@@ -153,7 +149,8 @@ const Create = ({ auth }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </DashboardLayout>
+   
     )
 }
 

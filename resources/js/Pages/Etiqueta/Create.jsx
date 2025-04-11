@@ -22,19 +22,14 @@ const Create = ({ auth }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <dashboardLayout>
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Crear Etiqueta</h2>
                     <a href={route('etiqueta.index')}>
                         <button className='btn btn-primary'>Etiquetas</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -125,7 +120,7 @@ const Create = ({ auth }) => {
                 </div>
             </div>
 
-        </AuthenticatedLayout>
+        </dashboardLayout>
     )
 }
 

@@ -2,11 +2,11 @@ import React from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
-
+import DashboardLayout from '@/Layouts/Sidebar';
 import InputError from '@/Components/InputError';
 
 
-const Edit = ({ auth, actividad}) => {
+const Edit = ({ auth, actividad }) => {
 
     const initialValues = {
         actividadnombre: actividad.actividadnombre,
@@ -21,27 +21,20 @@ const Edit = ({ auth, actividad}) => {
     const { data, errors, setData, put } = useForm(initialValues)
     const submit = (e) => {
         e.preventDefault();
-        put(route('actividad.update',actividad));
+        put(route('actividad.update', actividad));
         console.log(data);
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
-                <div className=' d-flex justify-content-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Actividad</h2>
-                    <a href={route('actividad.index')}>
-                        <button className='btn btn-primary'>
-                            Actividades
-                        </button>
-                    </a>
-                </div>
-            }
-        >
-
-            <Head title="Crear Actividad" />
+        <DashboardLayout>
+            <div className=' d-flex justify-content-between'>
+                <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Actividad</h2>
+                <a href={route('actividad.index')}>
+                    <button className='btn btn-primary'>
+                        Actividades
+                    </button>
+                </a>
+            </div>
 
             <div className="py-5">
                 <div className="container">
@@ -53,46 +46,46 @@ const Edit = ({ auth, actividad}) => {
                                     <div className="card">
                                         <div className="card-body">
                                             <form onSubmit={submit}>
-                                            <div className='row mb-3'>
-                                                <div className="col-6">
-                                                    <label htmlFor="nombre" className="form-label">Nombre</label>
-                                                    <input
-                                                        id='nombre'
-                                                        type='text'
-                                                        name='nombre'
-                                                        value={data.actividadnombre}
-                                                        className='form-control'
-                                                        onChange={(e) => setData('actividadnombre', e.target.value)}
-                                                    />
-                                                    <InputError message={errors.actividadnombre} className="mt-2" />
-                                                </div>
+                                                <div className='row mb-3'>
+                                                    <div className="col-6">
+                                                        <label htmlFor="nombre" className="form-label">Nombre</label>
+                                                        <input
+                                                            id='nombre'
+                                                            type='text'
+                                                            name='nombre'
+                                                            value={data.actividadnombre}
+                                                            className='form-control'
+                                                            onChange={(e) => setData('actividadnombre', e.target.value)}
+                                                        />
+                                                        <InputError message={errors.actividadnombre} className="mt-2" />
+                                                    </div>
 
-                                                <div className="col-6">
-                                                    <label htmlFor="abreviatura" className="form-label">Abreviatura</label>
-                                                    <input
-                                                        id='abreviatura'
-                                                        type='text'
-                                                        name='abreviatura'
-                                                        value={data.actividadabreviatura}
-                                                        className='form-control'
-                                                        onChange={(e) => setData('actividadabreviatura', e.target.value)}
-                                                    />
-                                                    <InputError message={errors.actividadabreviatura} className="mt-2" />
-                                                </div>
+                                                    <div className="col-6">
+                                                        <label htmlFor="abreviatura" className="form-label">Abreviatura</label>
+                                                        <input
+                                                            id='abreviatura'
+                                                            type='text'
+                                                            name='abreviatura'
+                                                            value={data.actividadabreviatura}
+                                                            className='form-control'
+                                                            onChange={(e) => setData('actividadabreviatura', e.target.value)}
+                                                        />
+                                                        <InputError message={errors.actividadabreviatura} className="mt-2" />
+                                                    </div>
                                                 </div>
                                                 <div className='mb-6'>
-                                                        <label htmlFor="actividaddsc" className='form-label'>Descripción</label>
-                                                        <textarea 
+                                                    <label htmlFor="actividaddsc" className='form-label'>Descripción</label>
+                                                    <textarea
                                                         id="actividaddsc"
                                                         type="Text"
                                                         name='actividaddsc'
                                                         value={data.actividaddsc}
                                                         className='form-control mb-3'
-                                                        onChange={(e)=>setData('actividaddsc', e.target.value)}
+                                                        onChange={(e) => setData('actividaddsc', e.target.value)}
                                                         row='5'
-                                                        />
-                                                    </div>
-                                                    <hr />
+                                                    />
+                                                </div>
+                                                <hr />
                                                 <div className='row mb-3'>
                                                     <div className='col-2 d-flex justify-content-end'>
                                                         <label htmlFor="isdefaultvalue" className='form-label'>Predeterminado</label>
@@ -106,7 +99,7 @@ const Edit = ({ auth, actividad}) => {
                                                             className='form-check-input'
                                                             onChange={(e) => setData('isdefaultvalue', e.target.checked)}
                                                         />
-                                                    <InputError message={errors.isdefaultvalue} className="mt-2" />
+                                                        <InputError message={errors.isdefaultvalue} className="mt-2" />
 
                                                     </div>
 
@@ -127,20 +120,20 @@ const Edit = ({ auth, actividad}) => {
                                                         <InputError message={errors.titulosn} className="mt-2" />
 
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <div className='row mb-3'>
                                                     <div className='col-2 d-flex justify-content-end'>
                                                         <label htmlFor="informacionsn">Información</label>
                                                     </div>
                                                     <div className='col-3'>
-                                                        <input 
-                                                        id="informacionsn"
-                                                        type="checkbox"
-                                                        name='informacionsn'
-                                                        checked={data.informacionsn}
-                                                        className='form-check-input'
-                                                        onChange={(e)=>setData('informacionsn', e.target.checked)}
+                                                        <input
+                                                            id="informacionsn"
+                                                            type="checkbox"
+                                                            name='informacionsn'
+                                                            checked={data.informacionsn}
+                                                            className='form-check-input'
+                                                            onChange={(e) => setData('informacionsn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.informacionsn} className="mt-2" />
 
@@ -149,13 +142,13 @@ const Edit = ({ auth, actividad}) => {
                                                         <label htmlFor="etiquetasn">Etiqueta</label>
                                                     </div>
                                                     <div className='col-3'>
-                                                        <input 
-                                                        id="etiquetasn"
-                                                        type="checkbox"
-                                                        name='etiquetasn'
-                                                        className='form-check-input'
-                                                        checked={data.etiquetasn}
-                                                        onChange={(e)=>setData('etiquetasn', e.target.checked)}
+                                                        <input
+                                                            id="etiquetasn"
+                                                            type="checkbox"
+                                                            name='etiquetasn'
+                                                            className='form-check-input'
+                                                            checked={data.etiquetasn}
+                                                            onChange={(e) => setData('etiquetasn', e.target.checked)}
                                                         />
                                                         <InputError message={errors.etiquetasn} className="mt-2" />
 
@@ -163,23 +156,23 @@ const Edit = ({ auth, actividad}) => {
                                                 </div>
                                                 <hr />
                                                 <div className='col-6'>
-                                                        <label htmlFor="etiquetasn">Activo</label>
-                                                        <input 
+                                                    <label htmlFor="etiquetasn">Activo</label>
+                                                    <input
                                                         id="activosn"
                                                         type="checkbox"
                                                         name='activosn'
                                                         className='form-check-input mb-3 mx-2'
                                                         checked={data.activosn}
-                                                        onChange={(e)=>setData('activosn', e.target.checked)}
-                                                        />
-                                                        <InputError message={errors.activosn} className="mt-2" />
+                                                        onChange={(e) => setData('activosn', e.target.checked)}
+                                                    />
+                                                    <InputError message={errors.activosn} className="mt-2" />
 
-                                                    </div>
+                                                </div>
 
                                                 <div className="mt-4 d-flex justify-content-end">
                                                     <button type="submit" className="btn btn-primary">Guardar</button>
                                                 </div>
-                                                
+
                                             </form>
                                         </div>
                                     </div>
@@ -189,7 +182,7 @@ const Edit = ({ auth, actividad}) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </DashboardLayout>
     )
 }
 

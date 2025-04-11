@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 const Edit = ({ auth, proyecto }) => {
 
@@ -22,18 +23,15 @@ const Edit = ({ auth, proyecto }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
+   
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Proyecto</h2>
                     <a href={route('proyecto.index')}>
                     <button className='btn btn-primary'>Proyectos</button>
                     </a>
                 </div>
-            }
-        >
+
             <div className="py-5">
                 <div className="container">
                     <div className="card shadow-sm">
@@ -142,7 +140,8 @@ const Edit = ({ auth, proyecto }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+            </DashboardLayout>
+   
     )
 }
 

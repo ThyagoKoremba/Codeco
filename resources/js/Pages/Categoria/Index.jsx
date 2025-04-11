@@ -7,26 +7,20 @@ import './../../../css/app.css';
 const Index = ({ auth, categorias }) => {
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
+        <DashboardLayout>             <div className='d-flex justify-content-between'>
+            <h2 className="">Categorias</h2>
+            <a href={route('categoria.create')}>
+                <button className='btn btn-primary'>Nueva Categorias</button>
+            </a>
+        </div>
 
-            header={
-                <div className='d-flex justify-content-between'>
-                    <h2 className="">Categorias</h2>
-                    <a href={route('categoria.create')}>
-                        <button className='btn btn-primary'>Nueva Categorias</button>
-                    </a>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
                         <thead className="sticky-top">
                             <tr>
-                            <th scope="col">
+                                <th scope="col">
                                     ID
                                 </th>
                                 <th scope="col">
@@ -90,7 +84,8 @@ const Index = ({ auth, categorias }) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+        </DashboardLayout>
+
     )
 }
 

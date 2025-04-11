@@ -1,25 +1,20 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head} from '@inertiajs/react';
+
 import './../../../css/app.css';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 
 const Index = ({ auth, etiquetas }) => {
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
+   
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Etiquetas</h2>
                     <a href={route('etiqueta.create')}>
                         <button className='btn btn-primary'>Nueva Etiqueta</button>
                     </a>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -84,7 +79,8 @@ const Index = ({ auth, etiquetas }) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+            </DashboardLayout>
+   
     )
 }
 

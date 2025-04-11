@@ -47,10 +47,8 @@ const Vista = ({ auth, perfiles }) => {
 
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
+        <DashboardLayout>
+   
                 <div className='d-flex justify-content-between'>
                     <h2 className="">Perfiles</h2>
                     <button
@@ -61,10 +59,7 @@ const Vista = ({ auth, perfiles }) => {
                         Agregar Perfil
                     </button>
                 </div>
-            }
 
-        >
-            <Head title="Dashboard" />
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
                     <table className="table table-striped table-hover align-middle">
@@ -265,7 +260,8 @@ const Vista = ({ auth, perfiles }) => {
                     />
                 </div>
             </Modal>
-        </AuthenticatedLayout >
+            </DashboardLayout>
+   
     )
 }
 

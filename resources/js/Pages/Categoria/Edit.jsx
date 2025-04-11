@@ -22,18 +22,16 @@ const Edit = ({ auth, categoria }) => {
     }
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
+        <DashboardLayout>
 
-            header={
                 <div className=' d-flex justify-content-between'>
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">Editar Categoria</h2>
                     <a href={route('categoria.index')}>
                         <button className='btn btn-primary'>Categorias</button>
                     </a>
                 </div>
-            }
-        >
+
+        
             <Head title="Dashboard" />
             <div className="py-5">
                 <div className="container">
@@ -118,7 +116,7 @@ const Edit = ({ auth, categoria }) => {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </DashboardLayout>
     )
 }
 

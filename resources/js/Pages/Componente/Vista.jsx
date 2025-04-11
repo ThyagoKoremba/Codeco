@@ -5,6 +5,7 @@ import './../../../css/app.css';
 import CreateComponente from './Create';
 import Modal from 'react-modal';
 import EditComponente from './Edit';
+import DashboardLayout from '@/Layouts/Sidebar';
 
 Modal.setAppElement('#app');
 
@@ -50,10 +51,9 @@ const Vista = ({ auth, componentes }) => {
     };
 
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <div className="d-flex justify-content-between">
+        <DashboardLayout>
+   
+                <div className="d-flex justify-content-between mb-5">
                     <h2 className="">Componentes</h2>
                     <button
                         type="button"
@@ -63,9 +63,7 @@ const Vista = ({ auth, componentes }) => {
                         Agregar Componente
                     </button>
                 </div>
-            }
-        >
-            <Head title="Dashboard" />
+
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -300,7 +298,7 @@ const Vista = ({ auth, componentes }) => {
                     />
                 </div>
             </Modal>
-        </AuthenticatedLayout>
+            </DashboardLayout>
     );
 };
 
