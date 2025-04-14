@@ -188,15 +188,17 @@ export default function DashboardLayout({ children }) {
       >
         {!sidebarVisible && (
           <button
-            className="btn btn-light mb-3"
-            style={{ border: "none", background: "none", position: "sticky", top: 0, fontSize: "1.5rem" }}
+            className="btn btn-light mt-3"
+            style={{ border: "none", background: "none", position: "fixed", top: 0, fontSize: "1.5rem" }}
             onClick={() => setSidebarVisible(!sidebarVisible)}
             title={sidebarVisible ? "Cerrar menú" : "Abrir menú"}
           >
             &#9776;
           </button>
         )}
+        <div className="container">
         {children}
+        </div>
       </motion.div>
     </div>
   );
