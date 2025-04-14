@@ -77,9 +77,7 @@ class ContactosController extends Controller
         $contactos = vista_contactos::orderby('id_contacto')->get();
         return Inertia::render('Contacto/Index', [
             'contactos' => $contactos,
-            'permissions' => [
-                'CrearContacto' => Auth::user()->can('crear-contacto'),
-            ],
+            
         ]);
     } 
 
