@@ -6,19 +6,8 @@ import { Head} from '@inertiajs/react';
 const Index = ({ auth, categorias }) => {
     return (
 
-        <AuthenticatedLayout
-            user={auth.user}
-
-            header={
-                <div className='d-flex justify-content-between'>
-                    <h2 className="">Categorias</h2>
-                    <a href={route('categoria.create')}>
-                        <button className='btn btn-primary'>Nueva Categorias</button>
-                    </a>
-                </div>
-            }
-        >
-            <Head title="Dashboard" />
+       
+   
 
             <div className="tabla-index">
                 <div className="table-responsive overflow-visible">
@@ -83,7 +72,7 @@ const Index = ({ auth, categorias }) => {
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout >
+     
     )
 }
 

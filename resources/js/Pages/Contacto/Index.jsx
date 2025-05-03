@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 
 import './styles.css';
 import Swal from 'sweetalert2';
-
+import CategoriaContacto from './../Categoria/CategoriaContacto';
 import { Dropdown } from 'react-bootstrap';
 
 Modal.setAppElement('#app');
@@ -14,6 +14,7 @@ const Index = ({ contactos }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [contacts, setContacts] = useState(contactos);
     const [modal, setModal] = useState(false);
+    const [modalCategoria, setModalCategoria] = useState(false);
     const [selectedContact, setSelectedContact] = useState(null);
 
     const openModal = (contact) => {
@@ -25,27 +26,16 @@ const Index = ({ contactos }) => {
         setModal(false);
         setSelectedContact(null);
     }
+    const openModalCategoria = (contact) => {
+        setSelectedContact(contact);
+        setModalCategoria(true);
+    }
+    const closeModalCategoria = () => {
+        setModalCategoria(false);
+        setSelectedContact(null);
+    }
 
-    const deleteContact = (id) => {
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "Esta acción no se puede deshacer",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const updatedContacts = contacts.filter(contact => contact.id_contacto !== id);
-                setContacts(updatedContacts);
-                Inertia.delete(`/contacto/${id}`);
-                Swal.fire('Eliminado', 'El contacto ha sido eliminado.', 'success');
-            }
-        });
-    };
-
+   
     const filteredContacts = contacts?.filter(contact =>
         contact.nombrefantasia.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -75,7 +65,7 @@ const Index = ({ contactos }) => {
                 </div>
                 <div className="table-responsive" style={{ maxHeight: '500px', minHeight: '500px', overflowY: 'auto' }}>
                     <table className="table table-striped">
-                        <thead className="thead-dark" style={{ position: 'sticky', top: 0 }}>
+                        <thead className="thead-dark" style={{ position: 'sticky', top: 0  , zIndex:10}}>
                             <tr>
                                 <th>Apellido / Razon Social</th>
                                 <th>Nombre / Nombre Fantasia</th>
@@ -94,7 +84,7 @@ const Index = ({ contactos }) => {
                                     <td>{contact.fisicojuridico == 'JURIDICO' ? (contact.identidad_tributaria + ' ' + contact.id_identidadtributaria_dato) : (contact.identidad_personal + ' ' + contact.id_personal_dato)}</td>
                                     <td>{contact.mail_direccion}</td>
                                     <td>
-                                        <Dropdown>
+                                        <Dropdown > 
                                             <Dropdown.Toggle variant="dark" size="sm" className="w-100"></Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>
@@ -103,9 +93,10 @@ const Index = ({ contactos }) => {
                                                 <Dropdown.Item as={Link} href={`/contacto/${contact.id_contacto}/edit`}>
                                                     <button className="btn w-100">Editar</button>
                                                 </Dropdown.Item>
-                                                <Dropdown.Item onClick={() => deleteContact(contact.id_contacto)}>
-                                                    <button className="btn w-100">Eliminar</button>
+                                                <Dropdown.Item >
+                                                    <button className="btn w-100" onClick={() => openModalCategoria(contact)} >Categoria</button>
                                                 </Dropdown.Item>
+                                                
                                                 <Dropdown.Item as={Link} href={`/contacto/${contact.id_contacto}/radicaciones`}>
                                                     <button className="btn w-100">Radicaciones</button>
                                                 </Dropdown.Item>
@@ -119,7 +110,26 @@ const Index = ({ contactos }) => {
                 </div>
             </div>
 
-
+            <Modal
+                isOpen={modalCategoria}
+                onRequestClose={closeModalCategoria}
+                contentLabel={selectedContact?.nombrefantasia}
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                  <div className="modal-header">
+                    <h5 className="modal-title">{selectedContact?.apellidoynombre} - Categoría</h5>
+                    <button
+                        type="button"
+                        className="btn-close"
+                        onClick={closeModalCategoria}
+                        aria-label="Cerrar"
+                    ></button>
+                </div>
+                <div className="modal-body " >
+                    <CategoriaContacto userId={selectedContact?.id_contacto} />
+                </div>
+</Modal>
 
             <Modal
                 isOpen={modal}
@@ -128,6 +138,8 @@ const Index = ({ contactos }) => {
                 className="modal"
                 overlayClassName="modal-overlay"
             >
+
+
 
                 <div className="modal-header">
                     <h5 className="modal-title">{selectedContact?.apellidoynombre}</h5>

@@ -13,17 +13,17 @@ import Swal from 'sweetalert2';
 const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributarias }) => {
 
     const initialValues = {
-        id_fisicojuridico: '',
+        id_fisicojuridico: '0',
         id_pais: '',
         car: '',
         apellidorazonsocial: '',
         nombrefantasia: '',
         nombresegundo: '',
-        id_personal: 1,
+        id_personal: '',
         id_personal_dato: '0',
         id_condiciontributaria: '',
         id_identidadtributaria: '',
-        id_identidadtributaria_dato: 'a',
+        id_identidadtributaria_dato: '0',
         mail_direccion: '',
         telefono_numero: '',
         telefono_sn_movil: false,
@@ -332,7 +332,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                                             {identidad.descripcion}
                                                         </option>
                                                     ))
-                                                    : identidades.filter(identidad => identidad.sn_juridica == 0).map((identidad) => (
+                                                    : identidades.filter(identidad => identidad.sn_identidadtributaria == 0).map((identidad) => (
                                                         <option key={identidad.id} value={identidad.id}>
                                                             {identidad.descripcion}
                                                         </option>
@@ -345,6 +345,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                         <div className="col-md-6">
                                             <label htmlFor="valorIdTributaria" className="form-label">Valor</label>
                                             <input
+                                                
                                                 id="valorIdTributaria"
                                                 type="text"
                                                 placeholder={mascaraTributaria}
@@ -353,7 +354,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                                 value={data.id_identidadtributaria_dato}
                                                 className="form-control"
                                                 onChange={(e) => setData('id_identidadtributaria_dato', e.target.value)}
-                                                disabled={data.id_identidadtributaria === "1"}
+                                                disabled={data.id_identidadtributaria === "1" || data.id_identidadtributaria === ""}
                                             />
                                             {errors.id_identidadtributaria_dato && <div className="text-danger mt-1">{errors.id_identidadtributaria_dato}</div>}
                                         </div>
@@ -400,7 +401,7 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                                 value={data.id_personal_dato}
                                                 className="form-control"
                                                 onChange={(e) => setData('id_personal_dato', e.target.value)}
-                                                disabled={data.id_fisicojuridico == '2'}
+                                                disabled={data.id_fisicojuridico == '2' || data.id_personal === ""}
                                             />
                                             {errors.id_personal_dato && <div className="text-danger mt-1">{errors.id_personal_dato}</div>}
                                         </div>
@@ -413,7 +414,8 @@ const CreateContact = ({ auth, fisicojuridico, identidades, condicionestributari
                                             <label htmlFor="codigoAccesoRapido" className="form-label">Código de Acceso Rápido</label>
                                             <input
                                                 id="codigoAccesoRapido"
-                                                type="text"
+                                                type="number"
+                                                maxLength="5"
                                                 name="codigoAccesoRapido"
                                                 value={data.car}
                                                 className="form-control"
