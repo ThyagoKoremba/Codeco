@@ -118,7 +118,7 @@ const Index = ({ contactos }) => {
                 overlayClassName="modal-overlay"
             >
                   <div className="modal-header">
-                    <h5 className="modal-title">{selectedContact?.apellidoynombre} - Categoría</h5>
+                    <h5 className="modal-title">{selectedContact?.apellidoynombre}</h5>
                     <button
                         type="button"
                         className="btn-close"
@@ -126,7 +126,7 @@ const Index = ({ contactos }) => {
                         aria-label="Cerrar"
                     ></button>
                 </div>
-                <div className="modal-body " >
+                <div className="container" >
                     <CategoriaContacto userId={selectedContact?.id_contacto} />
                 </div>
 </Modal>

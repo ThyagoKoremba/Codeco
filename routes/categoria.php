@@ -10,5 +10,5 @@ Route::prefix('categoria')->middleware('auth')->group(function () {
     Route::get('/edit/{categoria}',[CategoriasController::class,'edit'])->name('categoria.edit');
     Route::put('/update/{categoria}',[CategoriasController::class,'update'])->name('categoria.update');
     Route::get('/cambiarEstado/{categoria}',[CategoriasController::class,'cambiarEstado'])->name('categoria.cambiarEstado');
-    Route::get('/getCategoriasByUserId/{userId}',[CategoriasController::class,'getCategoriasByUserId'])->name('categoria.getCategoriasByUserId');
+    
 });
