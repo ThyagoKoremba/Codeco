@@ -143,5 +143,26 @@ public function searchProv(Request $request)
 }
 
 
+public function categorias()
+{
+    return $this->belongsToMany(Categorias::class, 'contactocategorias', 'id_contacto', 'id_categoria')
+                ->withTimestamps(); // Si deseas gestionar las marcas de tiempo
+}
 
+
+public function search(Request $request)
+{
+    $term = $request->query('term');
+
+    if (strlen($term) < 5) {
+        return response()->json([]); // O un mensaje de error si lo prefieres
+    }
+
+    $contacts = Contactos::where('apellidorazonsocial', 'like', '%' . $term . '%')
+                       ->orWhere('car', 'like', '%' . $term . '%') // Ajusta los campos de búsqueda según tus necesidades
+                       ->limit(10) // Limita el número de resultados
+                       ->get(['id', 'apellidorazonsocial', 'car']); // Selecciona solo los campos necesarios
+
+    return response()->json($contacts);
+}
 }

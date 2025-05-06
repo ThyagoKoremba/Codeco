@@ -10,5 +10,10 @@ Route::prefix('categoria')->middleware('auth')->group(function () {
     Route::get('/edit/{categoria}',[CategoriasController::class,'edit'])->name('categoria.edit');
     Route::put('/update/{categoria}',[CategoriasController::class,'update'])->name('categoria.update');
     Route::get('/cambiarEstado/{categoria}',[CategoriasController::class,'cambiarEstado'])->name('categoria.cambiarEstado');
-    
+    Route::get('/getCategoriasByUserId/{userId}',[CategoriasController::class,'getCategoriasByUserId'])->name('categoria.getCategoriasByUserId');
+// Ruta para obtener todas las categorías
+Route::get('/list', [CategoriasController::class, 'listar']);
+
+// Ruta para asignar una categoría a un usuario
+Route::post('/asignarCategoria', [CategoriasController::class, 'assignCategoryToUser']);
 });

@@ -12,6 +12,5 @@ Route::prefix('api')->middleware('auth')->group(function () {
     Route::get('/pais',[GeopaisController::class,'index'])->name('geopais.index');
     Route::get('/identidades',[IdentidadesController::class,'index'])->name('identidades.index');
     Route::get('/condiciontributarias',[CondiciontributariasController::class,'index'])->name('condiciontributarias.index');
-    Route::get('/getCategoriasByUserId/{userId}',[CategoriasController::class,'getCategoriasByUserId'])->name('categoria.getCategoriasByUserId');
 });
 

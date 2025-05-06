@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Categoria\CategoriaRequest;
 use App\Http\Requests\Categoria\CategoriaUpdate;
+
+use App\Models\Contactos;
 use App\Models\Categorias;
 use App\Models\ContactoCategorias;
 use Inertia\Inertia;
@@ -55,5 +57,32 @@ class CategoriasController extends Controller
             });
 
         return response()->json($categorias);
+    }
+
+    public function listar()
+    {
+        $categories = Categorias::all();
+        return response()->json($categories);
+    }
+
+    
+    public function assignCategoryToUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userId' => 'required|exists:contactos,id', // Asegúrate que 'id' es la clave primaria de Contactos
+            'category' => 'required|exists:categorias,id', // Asegúrate que 'id' es la clave primaria de Categorias
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $contacto = Contactos::findOrFail($request->userId);
+        $categoryId = $request->category;
+
+        // Asigna la categoría al contacto utilizando la relación many-to-many
+        $contacto->categorias()->attach($categoryId);
+
+        return response()->json(['message' => 'Categoría asignada correctamente al contacto']);
     }
 }
